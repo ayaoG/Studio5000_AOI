@@ -703,7 +703,7 @@ then within tier: Cfg_Prio desc, Wrk_UnitPos asc, Cfg_Pref desc, index asc.]]></
       <Line Number="220"><![CDATA[            IF (Wrk_J <> Wrk_I) AND Wrk_UnitEligible.[Wrk_J] THEN]]></Line>
       <Line Number="221"><![CDATA[                IF Ref_Units[Wrk_J].Sts_Running AND NOT Ref_Units[Wrk_I].Sts_Running THEN
                     Wrk_Rank := Wrk_Rank + 1;
-                ELSIF Ref_Units[Wrk_J].Sts_Running = Ref_Units[Wrk_I].Sts_Running THEN
+                ELSIF NOT (Ref_Units[Wrk_J].Sts_Running XOR Ref_Units[Wrk_I].Sts_Running) THEN
                     IF Ref_Units[Wrk_J].Cfg_Prio > Ref_Units[Wrk_I].Cfg_Prio THEN]]></Line>
       <Line Number="222"><![CDATA[                    Wrk_Rank := Wrk_Rank + 1;]]></Line>
       <Line Number="223"><![CDATA[                ELSIF Ref_Units[Wrk_J].Cfg_Prio = Ref_Units[Wrk_I].Cfg_Prio THEN]]></Line>
