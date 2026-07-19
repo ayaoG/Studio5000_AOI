@@ -496,8 +496,11 @@
       <Line Number="20"><![CDATA[    On valve or VSD fault: user's ladder drops Sts_Available]]></Line>
       <Line Number="21"><![CDATA[]]></Line>
       <Line Number="22"><![CDATA[Ranking:]]></Line>
-      <Line Number="23"><![CDATA[  Cfg_Prio (0-31) desc, then cyclic rotation position, then Cfg_Pref desc,]]></Line>
-      <Line Number="24"><![CDATA[  then unit index. Only Sts_Available AND NOT Cfg_Disable units are ranked.]]></Line>
+      <Line Number="23"><![CDATA[  Sticky: currently-running units rank ahead of idle ones, so a unit
+  that returns to available does not bump one already running to cover
+  for it. Within each tier: Cfg_Prio (0-31) desc, then cyclic rotation
+  position, then Cfg_Pref desc, then unit index.]]></Line>
+      <Line Number="24"><![CDATA[  Only Sts_Available AND NOT Cfg_Disable units are ranked.]]></Line>
       <Line Number="25"><![CDATA[  Val_Rank = 0 for unavailable / disabled units.]]></Line>
       <Line Number="26"><![CDATA[]]></Line>
       <Line Number="27"><![CDATA[Demand:]]></Line>
@@ -511,7 +514,9 @@
       <Line Number="35"><![CDATA[]]></Line>
       <Line Number="36"><![CDATA[Auto-promote:]]></Line>
       <Line Number="37"><![CDATA[  Handled naturally by ranking - when a running unit's Sts_Available drops,]]></Line>
-      <Line Number="38"><![CDATA[  Val_Rank becomes 0 and the next-ranked standby inherits its slot.]]></Line>
+      <Line Number="38"><![CDATA[  Val_Rank becomes 0 and the next-ranked standby inherits its slot. Because
+  ranking is sticky, that standby keeps running even after the original
+  unit becomes available again - it only gives the slot back on rotation.]]></Line>
       <Line Number="39"><![CDATA[=============================================================================]]></Line>
       <Line Number="40"><![CDATA[*)]]></Line>
       <Line Number="41"><![CDATA[]]></Line>
@@ -686,7 +691,9 @@
       <Line Number="210"><![CDATA[========================================]]></Line>
       <Line Number="211"><![CDATA[Rank each eligible unit]]></Line>
       <Line Number="212"><![CDATA[For unit i, rank = 1 + count of eligible units j that outrank i.]]></Line>
-      <Line Number="213"><![CDATA[Ordering: Cfg_Prio desc, Wrk_UnitPos asc, Cfg_Pref desc, index asc.]]></Line>
+      <Line Number="213"><![CDATA[Ordering: Sts_Running desc (sticky tier - running units always outrank
+idle ones so a returning unit can't bump one already covering for it),
+then within tier: Cfg_Prio desc, Wrk_UnitPos asc, Cfg_Pref desc, index asc.]]></Line>
       <Line Number="214"><![CDATA[========================================]]></Line>
       <Line Number="215"><![CDATA[*)]]></Line>
       <Line Number="216"><![CDATA[FOR Wrk_I := 0 TO Wrk_ClampedNumUnits - 1 DO]]></Line>
@@ -694,7 +701,10 @@
       <Line Number="218"><![CDATA[        Wrk_Rank := 1;]]></Line>
       <Line Number="219"><![CDATA[        FOR Wrk_J := 0 TO Wrk_ClampedNumUnits - 1 DO]]></Line>
       <Line Number="220"><![CDATA[            IF (Wrk_J <> Wrk_I) AND Wrk_UnitEligible.[Wrk_J] THEN]]></Line>
-      <Line Number="221"><![CDATA[                IF Ref_Units[Wrk_J].Cfg_Prio > Ref_Units[Wrk_I].Cfg_Prio THEN]]></Line>
+      <Line Number="221"><![CDATA[                IF Ref_Units[Wrk_J].Sts_Running AND NOT Ref_Units[Wrk_I].Sts_Running THEN
+                    Wrk_Rank := Wrk_Rank + 1;
+                ELSIF Ref_Units[Wrk_J].Sts_Running = Ref_Units[Wrk_I].Sts_Running THEN
+                    IF Ref_Units[Wrk_J].Cfg_Prio > Ref_Units[Wrk_I].Cfg_Prio THEN]]></Line>
       <Line Number="222"><![CDATA[                    Wrk_Rank := Wrk_Rank + 1;]]></Line>
       <Line Number="223"><![CDATA[                ELSIF Ref_Units[Wrk_J].Cfg_Prio = Ref_Units[Wrk_I].Cfg_Prio THEN]]></Line>
       <Line Number="224"><![CDATA[                    IF Wrk_UnitPos[Wrk_J] < Wrk_UnitPos[Wrk_I] THEN]]></Line>
@@ -707,7 +717,8 @@
       <Line Number="231"><![CDATA[                            Wrk_Rank := Wrk_Rank + 1;]]></Line>
       <Line Number="232"><![CDATA[                        END_IF;]]></Line>
       <Line Number="233"><![CDATA[                    END_IF;]]></Line>
-      <Line Number="234"><![CDATA[                END_IF;]]></Line>
+      <Line Number="234"><![CDATA[                END_IF;
+                END_IF;]]></Line>
       <Line Number="235"><![CDATA[            END_IF;]]></Line>
       <Line Number="236"><![CDATA[        END_FOR;]]></Line>
       <Line Number="237"><![CDATA[        Ref_Units[Wrk_I].Val_Rank := Wrk_Rank;]]></Line>
