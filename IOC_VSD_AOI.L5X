@@ -1,0 +1,3687 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--IOC VSD AOI-->
+<RSLogix5000Content SchemaRevision="1.0" SoftwareRevision="34.01" TargetName="IOC_VSD" TargetType="AddOnInstructionDefinition" TargetClass="Standard" TargetRevision="1.0 " TargetLastEdited="2026-07-18T11:32:36.823Z" ContainsContext="true" ExportDate="Sun Jul 19 19:14:49 2026" ExportOptions="References NoRawData L5KData DecoratedData Context Dependencies ForceProtectedEncoding AllProjDocTrans">
+<Controller Use="Context" Name="Ozone_Barkery">
+<DataTypes Use="Context">
+</DataTypes>
+<AddOnInstructionDefinitions Use="Context">
+<AddOnInstructionDefinition Use="Target" Name="IOC_VSD" Class="Standard" Revision="1.0" ExecutePrescan="false" ExecutePostscan="false" ExecuteEnableInFalse="false" CreatedDate="2026-06-24T20:59:57.000Z" CreatedBy="Not Available" EditedDate="2026-07-18T11:32:36.823Z" EditedBy="DESKTOP-NJSBGN7\ICE_6"
+ SoftwareRevision="v34.01">
+<Description>
+<![CDATA[IOC VSD AOI]]>
+</Description>
+<Parameters>
+<Parameter Name="EnableIn" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read Only">
+<Description>
+<![CDATA[Enable Input - System Defined Parameter]]>
+</Description>
+</Parameter>
+<Parameter Name="EnableOut" TagType="Base" DataType="BOOL" Usage="Output" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read Only">
+<Description>
+<![CDATA[Enable Output - System Defined Parameter]]>
+</Description>
+</Parameter>
+<Parameter Name="Cmd_Prog" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[Momentary - command Program mode]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Cmd_Oper" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[Momentary - command Operator mode (wins over Cmd_Prog)]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="PCmd_Fwd" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[Program command Forward (momentary, self-cleared)]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="PCmd_Rev" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[Program command Reverse (momentary, self-cleared)]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="PCmd_Stop" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[Program command Stop (momentary, self-cleared)]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="PCmd_Reset" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[Program command Reset (momentary, self-cleared)]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="OCmd_Fwd" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[Operator command Forward (momentary, self-cleared)]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="OCmd_Rev" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[Operator command Reverse (momentary, self-cleared)]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="OCmd_Stop" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[Operator command Stop (momentary, self-cleared)]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="OCmd_Reset" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[Operator command Reset (momentary, self-cleared)]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="PSet_SpeedRef" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[Program setpoint - Speed Ref (EU)]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0.00000000e+000]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="REAL" Radix="Float" Value="0.0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="OSet_SpeedRef" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[Operator setpoint - Speed Ref (EU)]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0.00000000e+000]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="REAL" Radix="Float" Value="0.0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="PSet_OutDatalink" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[Program setpoint - Output Datalink (EU)]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0.00000000e+000]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="REAL" Radix="Float" Value="0.0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="OSet_OutDatalink" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[Operator setpoint - Output Datalink (EU)]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0.00000000e+000]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="REAL" Radix="Float" Value="0.0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Inp_Ready" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[Drive ready]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Inp_Running" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[Drive running]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Inp_Fault" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[Drive fault]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Inp_IOFault" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read/Write">
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Inp_Alarm" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[Drive alarm/warning]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Inp_Hand" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[Drive in Hand / local mode]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Inp_AtSpeed" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[Drive at commanded speed]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Inp_Accelerating" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[Drive accelerating]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Inp_Decelerating" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[Drive decelerating]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Inp_ActualDir" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[Actual direction (1=Fwd, 0=Rev)]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Inp_IntlkOK" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[Interlock OK - drop trips drive (default TRUE if unwired)]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[1]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="1"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Inp_FwdPermOK" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[Forward permissive OK - blocks starting Fwd (default TRUE if unwired)]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[1]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="1"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Inp_RevPermOK" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[Reverse permissive OK - blocks starting Rev (default TRUE if unwired)]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[1]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="1"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Inp_SpeedFdbk" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[Speed feedback - raw from drive]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0.00000000e+000]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="REAL" Radix="Float" Value="0.0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Inp_Datalink" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[Input Datalink - raw from drive]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0.00000000e+000]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="REAL" Radix="Float" Value="0.0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Cfg_HasRev" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[1 = reverse direction enabled]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Cfg_BumplessEnable" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[1 = enable setpoint bumpless on mode change]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Cfg_HasOutDatalink" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[1 = output Datalink connected/used]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[1]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="1"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Cfg_HasInpDatalink" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[1 = input Datalink connected/used]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Cfg_HasRunFdbk" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[1 = drive provides run feedback; 0 = no fail-to-start/stop monitoring]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[1]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="1"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Cfg_HasSpeedFdbk" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[1 = drive provides speed feedback; 0 = skip SpeedFdbk scaling]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Cfg_HasIOFaultAlm" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Cfg_HasDriveFaultAlm" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[1 = latch Alm_DriveFault on Inp_Fault]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Cfg_HasFailToStartAlm" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[1 = latch Alm_FailToStart on Sts_FailToStart]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Cfg_HasFailToStopAlm" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[1 = latch Alm_FailToStop on Sts_FailToStop]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Cfg_HasIntlkTripAlm" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[1 = latch Alm_IntlkTrip on Sts_IntlkTrip]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Cfg_StartFbTime" TagType="Base" DataType="DINT" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[Fail-to-start timeout (seconds)]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[10]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="DINT" Radix="Decimal" Value="10"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Cfg_StopFbTime" TagType="Base" DataType="DINT" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[Fail-to-stop timeout (seconds)]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[10]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="DINT" Radix="Decimal" Value="10"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Cfg_SpeedRefEUMin" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[Speed Ref - EU at scaling minimum]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0.00000000e+000]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="REAL" Radix="Float" Value="0.0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Cfg_SpeedRefEUMax" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[Speed Ref - EU at scaling maximum]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[1.00000000e+002]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="REAL" Radix="Float" Value="100.0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Cfg_SpeedRefRawMin" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[Speed Ref - raw value at scaling minimum]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0.00000000e+000]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="REAL" Radix="Float" Value="0.0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Cfg_SpeedRefRawMax" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[Speed Ref - raw value at scaling maximum]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[8.00000000e+003]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="REAL" Radix="Float" Value="8000.0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Cfg_SpeedRefBumpTol" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[Speed Ref - bumpless match tolerance (EU)]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0.00000000e+000]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="REAL" Radix="Float" Value="0.0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Cfg_MinSpdRef" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[Speed Ref - operational minimum (EU)]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[2.00000000e+001]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="REAL" Radix="Float" Value="20.0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Cfg_MaxSpdRef" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[Speed Ref - operational maximum (EU)]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[1.00000000e+002]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="REAL" Radix="Float" Value="100.0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Cfg_SpeedFdbkEUMin" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[Speed Fdbk - EU at scaling minimum]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0.00000000e+000]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="REAL" Radix="Float" Value="0.0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Cfg_SpeedFdbkEUMax" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[Speed Fdbk - EU at scaling maximum]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[1.00000000e+002]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="REAL" Radix="Float" Value="100.0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Cfg_SpeedFdbkRawMin" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[Speed Fdbk - raw value at scaling minimum]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0.00000000e+000]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="REAL" Radix="Float" Value="0.0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Cfg_SpeedFdbkRawMax" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[Speed Fdbk - raw value at scaling maximum]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[8.00000000e+003]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="REAL" Radix="Float" Value="8000.0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Cfg_OutDatalinkEUMin" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[Out Datalink - EU at scaling minimum]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0.00000000e+000]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="REAL" Radix="Float" Value="0.0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Cfg_OutDatalinkEUMax" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[Out Datalink - EU at scaling maximum]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[1.00000000e+002]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="REAL" Radix="Float" Value="100.0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Cfg_OutDatalinkRawMin" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[Out Datalink - raw value at scaling minimum]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0.00000000e+000]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="REAL" Radix="Float" Value="0.0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Cfg_OutDatalinkRawMax" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[Out Datalink - raw value at scaling maximum]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[3.20000000e+003]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="REAL" Radix="Float" Value="3200.0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Cfg_OutDatalinkBumpTol" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[Out Datalink - bumpless match tolerance (EU)]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0.00000000e+000]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="REAL" Radix="Float" Value="0.0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Cfg_OutDatalinkMin" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[Out Datalink - operational minimum (EU)]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[5.00000000e+001]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="REAL" Radix="Float" Value="50.0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Cfg_OutDatalinkMax" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[Out Datalink - operational maximum (EU)]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[1.00000000e+002]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="REAL" Radix="Float" Value="100.0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Cfg_InpDatalinkEUMin" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[Inp Datalink - EU at scaling minimum]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0.00000000e+000]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="REAL" Radix="Float" Value="0.0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Cfg_InpDatalinkEUMax" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[Inp Datalink - EU at scaling maximum]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[1.00000000e+002]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="REAL" Radix="Float" Value="100.0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Cfg_InpDatalinkRawMin" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[Inp Datalink - raw value at scaling minimum]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0.00000000e+000]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="REAL" Radix="Float" Value="0.0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Cfg_InpDatalinkRawMax" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="false" ExternalAccess="Read/Write">
+<Description>
+<![CDATA[Inp Datalink - raw value at scaling maximum]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[3.20000000e+003]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="REAL" Radix="Float" Value="3200.0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Out_Fwd" TagType="Base" DataType="BOOL" Usage="Output" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read Only">
+<Description>
+<![CDATA[Command drive Forward]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Out_Rev" TagType="Base" DataType="BOOL" Usage="Output" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read Only">
+<Description>
+<![CDATA[Command drive Reverse]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Out_Run" TagType="Base" DataType="BOOL" Usage="Output" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read Only">
+<Description>
+<![CDATA[Drive Run (Fwd or Rev)]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Out_Stop" TagType="Base" DataType="BOOL" Usage="Output" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read Only">
+<Description>
+<![CDATA[Command drive Stop]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Out_Reset" TagType="Base" DataType="BOOL" Usage="Output" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read Only">
+<Description>
+<![CDATA[Reset pulse to drive]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Out_SpeedRef" TagType="Base" DataType="REAL" Usage="Output" Radix="Float" Required="false" Visible="true" ExternalAccess="Read Only">
+<Description>
+<![CDATA[Speed Ref to drive (raw)]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0.00000000e+000]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="REAL" Radix="Float" Value="0.0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Out_Datalink" TagType="Base" DataType="REAL" Usage="Output" Radix="Float" Required="false" Visible="true" ExternalAccess="Read Only">
+<Description>
+<![CDATA[Output Datalink to drive (raw)]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0.00000000e+000]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="REAL" Radix="Float" Value="0.0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Sts_Prog" TagType="Base" DataType="BOOL" Usage="Output" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read Only">
+<Description>
+<![CDATA[1 = Program mode active]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Sts_Oper" TagType="Base" DataType="BOOL" Usage="Output" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read Only">
+<Description>
+<![CDATA[1 = Operator mode active]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Sts_Ready" TagType="Base" DataType="BOOL" Usage="Output" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read Only">
+<Description>
+<![CDATA[Drive ready (no trip)]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Sts_NotRdy" TagType="Base" DataType="BOOL" Usage="Output" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read Only">
+<Description>
+<![CDATA[Drive not ready / inhibited (combined)]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Sts_Available" TagType="Base" DataType="BOOL" Usage="Output" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read Only">
+<Description>
+<![CDATA[Available for automation (Prog mode and ready)]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Sts_RdyReset" TagType="Base" DataType="BOOL" Usage="Output" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read Only">
+<Description>
+<![CDATA[Latched alarm ready to be reset]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Sts_Alarm" TagType="Base" DataType="BOOL" Usage="Output" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read Only">
+<Description>
+<![CDATA[Drive alarm (from Inp_Alarm)]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Sts_Hand" TagType="Base" DataType="BOOL" Usage="Output" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read Only">
+<Description>
+<![CDATA[Drive in Hand mode]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Sts_AtSpeed" TagType="Base" DataType="BOOL" Usage="Output" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read Only">
+<Description>
+<![CDATA[Drive at commanded speed]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Sts_Accelerating" TagType="Base" DataType="BOOL" Usage="Output" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read Only">
+<Description>
+<![CDATA[Drive accelerating]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Sts_Decelerating" TagType="Base" DataType="BOOL" Usage="Output" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read Only">
+<Description>
+<![CDATA[Drive decelerating]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Sts_RunningFwd" TagType="Base" DataType="BOOL" Usage="Output" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read Only">
+<Description>
+<![CDATA[Running forward]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Sts_RunningRev" TagType="Base" DataType="BOOL" Usage="Output" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read Only">
+<Description>
+<![CDATA[Running reverse]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Sts_StartingFwd" TagType="Base" DataType="BOOL" Usage="Output" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read Only">
+<Description>
+<![CDATA[Starting forward]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Sts_StartingRev" TagType="Base" DataType="BOOL" Usage="Output" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read Only">
+<Description>
+<![CDATA[Starting reverse]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Sts_Stopping" TagType="Base" DataType="BOOL" Usage="Output" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read Only">
+<Description>
+<![CDATA[Stopping]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Sts_Stopped" TagType="Base" DataType="BOOL" Usage="Output" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read Only">
+<Description>
+<![CDATA[Stopped]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Sts_BumplessActive" TagType="Base" DataType="BOOL" Usage="Output" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read Only">
+<Description>
+<![CDATA[Bumpless setpoint hold active]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Sts_CommandConflict" TagType="Base" DataType="BOOL" Usage="Output" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read Only">
+<Description>
+<![CDATA[Both Fwd and Rev latched (conflict)]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Sts_IOFault" TagType="Base" DataType="BOOL" Usage="Output" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read Only">
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Sts_DriveFault" TagType="Base" DataType="BOOL" Usage="Output" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read Only">
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Sts_IntlkTrip" TagType="Base" DataType="BOOL" Usage="Output" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read Only">
+<Description>
+<![CDATA[Live: interlock not OK (NOT Inp_IntlkOK)]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Sts_FailToStart" TagType="Base" DataType="BOOL" Usage="Output" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read Only">
+<Description>
+<![CDATA[Live: drive failed to start (timer expired, not running)]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Sts_FailToStop" TagType="Base" DataType="BOOL" Usage="Output" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read Only">
+<Description>
+<![CDATA[Live: drive failed to stop (timer expired, still running)]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Nrdy_Fail" TagType="Base" DataType="BOOL" Usage="Output" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read Only">
+<Description>
+<![CDATA[Latched feedback fail - blocks restart until reset]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Alm_DriveFault" TagType="Base" DataType="BOOL" Usage="Output" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read Only">
+<Description>
+<![CDATA[Latched drive fault alarm (gated by Cfg_HasDriveFaultAlm)]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Alm_IOFault" TagType="Base" DataType="BOOL" Usage="Output" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read Only">
+<Description>
+<![CDATA[Latched comms/IO fault alarm]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Alm_FailToStart" TagType="Base" DataType="BOOL" Usage="Output" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read Only">
+<Description>
+<![CDATA[Latched fail-to-start alarm (gated by Cfg_HasFailToStartAlm)]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Alm_FailToStop" TagType="Base" DataType="BOOL" Usage="Output" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read Only">
+<Description>
+<![CDATA[Latched fail-to-stop alarm (gated by Cfg_HasFailToStopAlm)]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Alm_IntlkTrip" TagType="Base" DataType="BOOL" Usage="Output" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read Only">
+<Description>
+<![CDATA[Latched interlock trip alarm (gated by Cfg_HasIntlkTripAlm)]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Val_SpeedRef" TagType="Base" DataType="REAL" Usage="Output" Radix="Float" Required="false" Visible="true" ExternalAccess="Read Only">
+<Description>
+<![CDATA[Active Speed Ref (EU)]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0.00000000e+000]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="REAL" Radix="Float" Value="0.0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Val_SpeedFdbk" TagType="Base" DataType="REAL" Usage="Output" Radix="Float" Required="false" Visible="true" ExternalAccess="Read Only">
+<Description>
+<![CDATA[Speed Feedback (EU, scaled from drive)]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0.00000000e+000]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="REAL" Radix="Float" Value="0.0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Val_OutDatalink" TagType="Base" DataType="REAL" Usage="Output" Radix="Float" Required="false" Visible="true" ExternalAccess="Read Only">
+<Description>
+<![CDATA[Active Output Datalink (EU)]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0.00000000e+000]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="REAL" Radix="Float" Value="0.0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Val_InpDatalink" TagType="Base" DataType="REAL" Usage="Output" Radix="Float" Required="false" Visible="true" ExternalAccess="Read Only">
+<Description>
+<![CDATA[Input Datalink (EU, scaled from drive)]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0.00000000e+000]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="REAL" Radix="Float" Value="0.0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Val_Sts" TagType="Base" DataType="DINT" Usage="Output" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read Only">
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="DINT" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Val_Fault" TagType="Base" DataType="DINT" Usage="Output" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read Only">
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="DINT" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Val_LastFaultCode" TagType="Base" DataType="DINT" Usage="Output" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read Only">
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="DINT" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+<Parameter Name="Inp_LastFaultCode" TagType="Base" DataType="DINT" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="DINT" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
+</Parameters>
+<LocalTags>
+<LocalTag Name="Wrk_ModeAuto" DataType="BOOL" Radix="Decimal" ExternalAccess="None">
+<Description>
+<![CDATA[Active mode (1=Program, 0=Operator)]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</LocalTag>
+<LocalTag Name="Wrk_PrevModeAuto" DataType="BOOL" Radix="Decimal" ExternalAccess="None">
+<Description>
+<![CDATA[Previous-scan mode for edge detection]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</LocalTag>
+<LocalTag Name="Wrk_ModeChange" DataType="BOOL" Radix="Decimal" ExternalAccess="None">
+<Description>
+<![CDATA[TRUE for one scan on mode change]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</LocalTag>
+<LocalTag Name="Wrk_PrevPCmdFwd" DataType="BOOL" Radix="Decimal" ExternalAccess="None">
+<Description>
+<![CDATA[Edge detect prev PCmd_Fwd]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</LocalTag>
+<LocalTag Name="Wrk_PrevPCmdRev" DataType="BOOL" Radix="Decimal" ExternalAccess="None">
+<Description>
+<![CDATA[Edge detect prev PCmd_Rev]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</LocalTag>
+<LocalTag Name="Wrk_PrevPCmdStop" DataType="BOOL" Radix="Decimal" ExternalAccess="None">
+<Description>
+<![CDATA[Edge detect prev PCmd_Stop]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</LocalTag>
+<LocalTag Name="Wrk_PrevOCmdFwd" DataType="BOOL" Radix="Decimal" ExternalAccess="None">
+<Description>
+<![CDATA[Edge detect prev OCmd_Fwd]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</LocalTag>
+<LocalTag Name="Wrk_PrevOCmdRev" DataType="BOOL" Radix="Decimal" ExternalAccess="None">
+<Description>
+<![CDATA[Edge detect prev OCmd_Rev]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</LocalTag>
+<LocalTag Name="Wrk_PrevOCmdStop" DataType="BOOL" Radix="Decimal" ExternalAccess="None">
+<Description>
+<![CDATA[Edge detect prev OCmd_Stop]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</LocalTag>
+<LocalTag Name="Wrk_PCmdFwdEdge" DataType="BOOL" Radix="Decimal" ExternalAccess="None">
+<Description>
+<![CDATA[Rising edge PCmd_Fwd]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</LocalTag>
+<LocalTag Name="Wrk_PCmdRevEdge" DataType="BOOL" Radix="Decimal" ExternalAccess="None">
+<Description>
+<![CDATA[Rising edge PCmd_Rev]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</LocalTag>
+<LocalTag Name="Wrk_PCmdStopEdge" DataType="BOOL" Radix="Decimal" ExternalAccess="None">
+<Description>
+<![CDATA[Rising edge PCmd_Stop]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</LocalTag>
+<LocalTag Name="Wrk_OCmdFwdEdge" DataType="BOOL" Radix="Decimal" ExternalAccess="None">
+<Description>
+<![CDATA[Rising edge OCmd_Fwd]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</LocalTag>
+<LocalTag Name="Wrk_OCmdRevEdge" DataType="BOOL" Radix="Decimal" ExternalAccess="None">
+<Description>
+<![CDATA[Rising edge OCmd_Rev]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</LocalTag>
+<LocalTag Name="Wrk_OCmdStopEdge" DataType="BOOL" Radix="Decimal" ExternalAccess="None">
+<Description>
+<![CDATA[Rising edge OCmd_Stop]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</LocalTag>
+<LocalTag Name="Wrk_SrcCmdFwdEdge" DataType="BOOL" Radix="Decimal" ExternalAccess="None">
+<Description>
+<![CDATA[Source-selected Fwd edge]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</LocalTag>
+<LocalTag Name="Wrk_SrcCmdRevEdge" DataType="BOOL" Radix="Decimal" ExternalAccess="None">
+<Description>
+<![CDATA[Source-selected Rev edge]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</LocalTag>
+<LocalTag Name="Wrk_SrcCmdStopEdge" DataType="BOOL" Radix="Decimal" ExternalAccess="None">
+<Description>
+<![CDATA[Source-selected Stop edge]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</LocalTag>
+<LocalTag Name="Wrk_CmdFwd" DataType="BOOL" Radix="Decimal" ExternalAccess="None">
+<Description>
+<![CDATA[Internal Forward command latch]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</LocalTag>
+<LocalTag Name="Wrk_CmdRev" DataType="BOOL" Radix="Decimal" ExternalAccess="None">
+<Description>
+<![CDATA[Internal Reverse command latch]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</LocalTag>
+<LocalTag Name="Wrk_CmdStop" DataType="BOOL" Radix="Decimal" ExternalAccess="None">
+<Description>
+<![CDATA[Internal Stop command latch]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</LocalTag>
+<LocalTag Name="Wrk_ResetAlm" DataType="BOOL" Radix="Decimal" ExternalAccess="None">
+<Description>
+<![CDATA[Alarm reset request (level)]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</LocalTag>
+<LocalTag Name="Wrk_BumplessHold" DataType="BOOL" Radix="Decimal" ExternalAccess="None">
+<Description>
+<![CDATA[Setpoint bumpless hold active]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</LocalTag>
+<LocalTag Name="Wrk_SpeedMatched" DataType="BOOL" Radix="Decimal" ExternalAccess="None">
+<Description>
+<![CDATA[Speed Ref matches last value within tolerance]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</LocalTag>
+<LocalTag Name="Wrk_OutDatalinkMatched" DataType="BOOL" Radix="Decimal" ExternalAccess="None">
+<Description>
+<![CDATA[Out Datalink matches last value within tolerance]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</LocalTag>
+<LocalTag Name="Wrk_SrcSpeedRef" DataType="REAL" Radix="Float" ExternalAccess="None">
+<Description>
+<![CDATA[Source-selected Speed Ref setpoint (EU)]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0.00000000e+000]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="REAL" Radix="Float" Value="0.0"/>
+</DefaultData>
+</LocalTag>
+<LocalTag Name="Wrk_SrcOutDatalink" DataType="REAL" Radix="Float" ExternalAccess="None">
+<Description>
+<![CDATA[Source-selected Out Datalink setpoint (EU)]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0.00000000e+000]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="REAL" Radix="Float" Value="0.0"/>
+</DefaultData>
+</LocalTag>
+<LocalTag Name="Wrk_LastSpeedRef" DataType="REAL" Radix="Float" ExternalAccess="None">
+<Description>
+<![CDATA[Last Speed Ref before mode change (EU)]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0.00000000e+000]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="REAL" Radix="Float" Value="0.0"/>
+</DefaultData>
+</LocalTag>
+<LocalTag Name="Wrk_LastOutDatalink" DataType="REAL" Radix="Float" ExternalAccess="None">
+<Description>
+<![CDATA[Last Out Datalink before mode change (EU)]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0.00000000e+000]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="REAL" Radix="Float" Value="0.0"/>
+</DefaultData>
+</LocalTag>
+<LocalTag Name="Wrk_SpeedRef" DataType="REAL" Radix="Float" ExternalAccess="None">
+<Description>
+<![CDATA[Working Speed Ref (EU)]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0.00000000e+000]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="REAL" Radix="Float" Value="0.0"/>
+</DefaultData>
+</LocalTag>
+<LocalTag Name="Wrk_OutDatalink" DataType="REAL" Radix="Float" ExternalAccess="None">
+<Description>
+<![CDATA[Working Out Datalink (EU)]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0.00000000e+000]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="REAL" Radix="Float" Value="0.0"/>
+</DefaultData>
+</LocalTag>
+<LocalTag Name="Wrk_SpeedRawReal" DataType="REAL" Radix="Float" ExternalAccess="None">
+<Description>
+<![CDATA[Speed Ref scaled to raw]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0.00000000e+000]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="REAL" Radix="Float" Value="0.0"/>
+</DefaultData>
+</LocalTag>
+<LocalTag Name="Wrk_OutDatalinkRawReal" DataType="REAL" Radix="Float" ExternalAccess="None">
+<Description>
+<![CDATA[Out Datalink scaled to raw]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0.00000000e+000]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="REAL" Radix="Float" Value="0.0"/>
+</DefaultData>
+</LocalTag>
+<LocalTag Name="Wrk_SpeedFdbkEU" DataType="REAL" Radix="Float" ExternalAccess="None">
+<Description>
+<![CDATA[Speed Fdbk scaled to EU]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0.00000000e+000]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="REAL" Radix="Float" Value="0.0"/>
+</DefaultData>
+</LocalTag>
+<LocalTag Name="Wrk_InpDatalinkEU" DataType="REAL" Radix="Float" ExternalAccess="None">
+<Description>
+<![CDATA[Inp Datalink scaled to EU]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0.00000000e+000]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="REAL" Radix="Float" Value="0.0"/>
+</DefaultData>
+</LocalTag>
+<LocalTag Name="Wrk_OutStop" DataType="BOOL" Radix="Decimal" ExternalAccess="None">
+<Description>
+<![CDATA[Internal stop condition before Hand-mode gating]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</LocalTag>
+<LocalTag Name="Wrk_StartReq" DataType="BOOL" Radix="Decimal" ExternalAccess="None">
+<Description>
+<![CDATA[Start request active (timer enable)]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</LocalTag>
+<LocalTag Name="Wrk_StopReq" DataType="BOOL" Radix="Decimal" ExternalAccess="None">
+<Description>
+<![CDATA[Stop request active (timer enable)]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</LocalTag>
+<LocalTag Name="Wrk_Trip" DataType="BOOL" Radix="Decimal" ExternalAccess="None">
+<Description>
+<![CDATA[Any latched alarm tripping outputs]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</LocalTag>
+<LocalTag Name="Wrk_StartTmr" DataType="FBD_TIMER" ExternalAccess="None">
+<Description>
+<![CDATA[Fail-to-start timer]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[[1,0,0,0,0,0,0,0,0,4,0,0]]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<Structure DataType="FBD_TIMER">
+<DataValueMember Name="EnableIn" DataType="BOOL" Value="1"/>
+<DataValueMember Name="TimerEnable" DataType="BOOL" Value="0"/>
+<DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="0"/>
+<DataValueMember Name="Reset" DataType="BOOL" Value="0"/>
+<DataValueMember Name="EnableOut" DataType="BOOL" Value="0"/>
+<DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0"/>
+<DataValueMember Name="EN" DataType="BOOL" Value="0"/>
+<DataValueMember Name="TT" DataType="BOOL" Value="0"/>
+<DataValueMember Name="DN" DataType="BOOL" Value="0"/>
+<DataValueMember Name="Status" DataType="DINT" Radix="Hex" Value="16#0000_0000"/>
+<DataValueMember Name="InstructFault" DataType="BOOL" Value="0"/>
+<DataValueMember Name="PresetInv" DataType="BOOL" Value="0"/>
+</Structure>
+</DefaultData>
+</LocalTag>
+<LocalTag Name="Wrk_StopTmr" DataType="FBD_TIMER" ExternalAccess="None">
+<Description>
+<![CDATA[Fail-to-stop timer]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[[1,0,0,0,0,0,0,0,0,4,0,0]]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<Structure DataType="FBD_TIMER">
+<DataValueMember Name="EnableIn" DataType="BOOL" Value="1"/>
+<DataValueMember Name="TimerEnable" DataType="BOOL" Value="0"/>
+<DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="0"/>
+<DataValueMember Name="Reset" DataType="BOOL" Value="0"/>
+<DataValueMember Name="EnableOut" DataType="BOOL" Value="0"/>
+<DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0"/>
+<DataValueMember Name="EN" DataType="BOOL" Value="0"/>
+<DataValueMember Name="TT" DataType="BOOL" Value="0"/>
+<DataValueMember Name="DN" DataType="BOOL" Value="0"/>
+<DataValueMember Name="Status" DataType="DINT" Radix="Hex" Value="16#0000_0000"/>
+<DataValueMember Name="InstructFault" DataType="BOOL" Value="0"/>
+<DataValueMember Name="PresetInv" DataType="BOOL" Value="0"/>
+</Structure>
+</DefaultData>
+</LocalTag>
+<LocalTag Name="Wrk_NotRdy" DataType="BOOL" Radix="Decimal" ExternalAccess="None">
+<Description>
+<![CDATA[Master not-ready rollup; gates command acceptance and outputs]]>
+</Description>
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</LocalTag>
+<LocalTag Name="Wrk_PrevInpRunning" DataType="BOOL" Radix="Decimal" ExternalAccess="None">
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</DefaultData>
+</LocalTag>
+</LocalTags>
+<Routines>
+<Routine Name="Logic" Type="ST">
+<STContent>
+<Line Number="0">
+<![CDATA[(*]]>
+</Line>
+<Line Number="1">
+<![CDATA[=============================================================================]]>
+</Line>
+<Line Number="2">
+<![CDATA[P_VSD Simplified AOI - Studio 5000]]>
+</Line>
+<Line Number="3">
+<![CDATA[Modified version: applies internal command latch, hand-mode handling,]]>
+</Line>
+<Line Number="4">
+<![CDATA[                  mode-agnostic reset, Sts_Available/Sts_NotRdy/Sts_RdyReset,]]>
+</Line>
+<Line Number="5">
+<![CDATA[                  and latched Nrdy_Fail.]]>
+</Line>
+<Line Number="6">
+<![CDATA[Based on: PlantPAx P_VSD AOI + Machine Expert P_VSD FB reference.]]>
+</Line>
+<Line Number="7">
+<![CDATA[=============================================================================]]>
+</Line>
+<Line Number="8">
+<![CDATA[*)]]>
+</Line>
+<Line Number="9">
+<![CDATA[]]>
+</Line>
+<Line Number="10">
+<![CDATA[]]>
+</Line>
+<Line Number="11">
+<![CDATA[(*]]>
+</Line>
+<Line Number="12">
+<![CDATA[========================================]]>
+</Line>
+<Line Number="13">
+<![CDATA[Mode select]]>
+</Line>
+<Line Number="14">
+<![CDATA[Cmd_Prog / Cmd_Oper momentary, mutually exclusive]]>
+</Line>
+<Line Number="15">
+<![CDATA[Operator wins if both active]]>
+</Line>
+<Line Number="16">
+<![CDATA[========================================]]>
+</Line>
+<Line Number="17">
+<![CDATA[*)]]>
+</Line>
+<Line Number="18">
+<![CDATA[IF Cmd_Oper THEN]]>
+</Line>
+<Line Number="19">
+<![CDATA[    Wrk_ModeAuto := 0;]]>
+</Line>
+<Line Number="20">
+<![CDATA[ELSIF Cmd_Prog THEN]]>
+</Line>
+<Line Number="21">
+<![CDATA[    Wrk_ModeAuto := 1;]]>
+</Line>
+<Line Number="22">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="23">
+<![CDATA[]]>
+</Line>
+<Line Number="24">
+<![CDATA[Wrk_ModeChange := Wrk_ModeAuto XOR Wrk_PrevModeAuto;]]>
+</Line>
+<Line Number="25">
+<![CDATA[]]>
+</Line>
+<Line Number="26">
+<![CDATA[]]>
+</Line>
+<Line Number="27">
+<![CDATA[(*]]>
+</Line>
+<Line Number="28">
+<![CDATA[========================================]]>
+</Line>
+<Line Number="29">
+<![CDATA[Command edge detection + source selection]]>
+</Line>
+<Line Number="30">
+<![CDATA[PCmd_/OCmd_ are momentary - detect rising edges using Wrk_Prev*]]>
+</Line>
+<Line Number="31">
+<![CDATA[tracker tags. Only the active mode's edges propagate to the latch]]>
+</Line>
+<Line Number="32">
+<![CDATA[via Wrk_SrcCmd*Edge. Tracker tags are updated AFTER edge detection]]>
+</Line>
+<Line Number="33">
+<![CDATA[so this scan's edge uses last scan's value.]]>
+</Line>
+<Line Number="34">
+<![CDATA[========================================]]>
+</Line>
+<Line Number="35">
+<![CDATA[*)]]>
+</Line>
+<Line Number="36">
+<![CDATA[IF Wrk_ModeAuto THEN]]>
+</Line>
+<Line Number="37">
+<![CDATA[    Wrk_SrcCmdFwdEdge  := PCmd_Fwd  AND NOT Wrk_PrevPCmdFwd;]]>
+</Line>
+<Line Number="38">
+<![CDATA[    Wrk_SrcCmdRevEdge  := PCmd_Rev  AND NOT Wrk_PrevPCmdRev;]]>
+</Line>
+<Line Number="39">
+<![CDATA[    Wrk_SrcCmdStopEdge := PCmd_Stop AND NOT Wrk_PrevPCmdStop;]]>
+</Line>
+<Line Number="40">
+<![CDATA[    Wrk_SrcSpeedRef    := PSet_SpeedRef;]]>
+</Line>
+<Line Number="41">
+<![CDATA[    Wrk_SrcOutDatalink := PSet_OutDatalink;]]>
+</Line>
+<Line Number="42">
+<![CDATA[ELSE]]>
+</Line>
+<Line Number="43">
+<![CDATA[    Wrk_SrcCmdFwdEdge  := OCmd_Fwd  AND NOT Wrk_PrevOCmdFwd;]]>
+</Line>
+<Line Number="44">
+<![CDATA[    Wrk_SrcCmdRevEdge  := OCmd_Rev  AND NOT Wrk_PrevOCmdRev;]]>
+</Line>
+<Line Number="45">
+<![CDATA[    Wrk_SrcCmdStopEdge := OCmd_Stop AND NOT Wrk_PrevOCmdStop;]]>
+</Line>
+<Line Number="46">
+<![CDATA[    Wrk_SrcSpeedRef    := OSet_SpeedRef;]]>
+</Line>
+<Line Number="47">
+<![CDATA[    Wrk_SrcOutDatalink := OSet_OutDatalink;]]>
+</Line>
+<Line Number="48">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="49">
+<![CDATA[]]>
+</Line>
+<Line Number="50">
+<![CDATA[Wrk_PrevPCmdFwd  := PCmd_Fwd;]]>
+</Line>
+<Line Number="51">
+<![CDATA[Wrk_PrevPCmdRev  := PCmd_Rev;]]>
+</Line>
+<Line Number="52">
+<![CDATA[Wrk_PrevPCmdStop := PCmd_Stop;]]>
+</Line>
+<Line Number="53">
+<![CDATA[Wrk_PrevOCmdFwd  := OCmd_Fwd;]]>
+</Line>
+<Line Number="54">
+<![CDATA[Wrk_PrevOCmdRev  := OCmd_Rev;]]>
+</Line>
+<Line Number="55">
+<![CDATA[Wrk_PrevOCmdStop := OCmd_Stop;]]>
+</Line>
+<Line Number="56">
+<![CDATA[]]>
+</Line>
+<Line Number="57">
+<![CDATA[]]>
+</Line>
+<Line Number="58">
+<![CDATA[(*]]>
+</Line>
+<Line Number="59">
+<![CDATA[========================================]]>
+</Line>
+<Line Number="60">
+<![CDATA[Master not-ready rollup]]>
+</Line>
+<Line Number="61">
+<![CDATA[Combines live input conditions + latched alarms.]]>
+</Line>
+<Line Number="62">
+<![CDATA[Computed early so it serves as the single gate for command acceptance]]>
+</Line>
+<Line Number="63">
+<![CDATA[and physical outputs (matches PlantPAx Sts_NotRdy usage pattern).]]>
+</Line>
+<Line Number="64">
+<![CDATA[========================================]]>
+</Line>
+<Line Number="65">
+<![CDATA[*)]]>
+</Line>
+<Line Number="66">
+<![CDATA[Wrk_NotRdy :=]]>
+</Line>
+<Line Number="67">
+<![CDATA[    (NOT Inp_Ready)]]>
+</Line>
+<Line Number="68">
+<![CDATA[    OR Inp_Fault              (* live drive fault *)]]>
+</Line>
+<Line Number="69">
+<![CDATA[    OR Inp_IOFault            (* live IO/comms fault *)]]>
+</Line>
+<Line Number="70">
+<![CDATA[    OR (NOT Inp_IntlkOK);     (* live interlock not OK *)]]>
+</Line>
+<Line Number="71">
+<![CDATA[]]>
+</Line>
+<Line Number="72">
+<![CDATA[Wrk_NotRdy :=]]>
+</Line>
+<Line Number="73">
+<![CDATA[    Wrk_NotRdy]]>
+</Line>
+<Line Number="74">
+<![CDATA[    OR Alm_DriveFault         (* latched DriveFault *)]]>
+</Line>
+<Line Number="75">
+<![CDATA[    OR Alm_IOFault            (* latched IOFault *)]]>
+</Line>
+<Line Number="76">
+<![CDATA[    OR Alm_IntlkTrip;         (* latched IntlkTrip *)]]>
+</Line>
+<Line Number="77">
+<![CDATA[]]>
+</Line>
+<Line Number="78">
+<![CDATA[Wrk_NotRdy :=]]>
+</Line>
+<Line Number="79">
+<![CDATA[    Wrk_NotRdy]]>
+</Line>
+<Line Number="80">
+<![CDATA[    OR Alm_FailToStart        (* latched FailToStart *)]]>
+</Line>
+<Line Number="81">
+<![CDATA[    OR Alm_FailToStop         (* latched FailToStop *)]]>
+</Line>
+<Line Number="82">
+<![CDATA[    OR Nrdy_Fail;             (* latched feedback fail *)]]>
+</Line>
+<Line Number="83">
+<![CDATA[]]>
+</Line>
+<Line Number="84">
+<![CDATA[]]>
+</Line>
+<Line Number="85">
+<![CDATA[(*]]>
+</Line>
+<Line Number="86">
+<![CDATA[========================================]]>
+</Line>
+<Line Number="87">
+<![CDATA[Internal command latch]]>
+</Line>
+<Line Number="88">
+<![CDATA[Direction is mutually exclusive and persists across scans and modes.]]>
+</Line>
+<Line Number="89">
+<![CDATA[Stop edge wins over Fwd/Rev. Any not-ready condition forces Stop state.]]>
+</Line>
+<Line Number="90">
+<![CDATA[Note: The latch is NOT auto-cleared on Inp_Running falling edge - this]]>
+</Line>
+<Line Number="91">
+<![CDATA[lets the fail-to-start timer detect unexpected stops (drive stopping on]]>
+</Line>
+<Line Number="92">
+<![CDATA[its own while commanded to run triggers Sts_FailToStart after timeout).]]>
+</Line>
+<Line Number="93">
+<![CDATA[========================================]]>
+</Line>
+<Line Number="94">
+<![CDATA[*)]]>
+</Line>
+<Line Number="95">
+<![CDATA[IF Wrk_NotRdy THEN]]>
+</Line>
+<Line Number="96">
+<![CDATA[    Wrk_CmdFwd  := 0;]]>
+</Line>
+<Line Number="97">
+<![CDATA[    Wrk_CmdRev  := 0;]]>
+</Line>
+<Line Number="98">
+<![CDATA[    Wrk_CmdStop := 1;]]>
+</Line>
+<Line Number="99">
+<![CDATA[ELSIF Wrk_SrcCmdStopEdge THEN]]>
+</Line>
+<Line Number="100">
+<![CDATA[    Wrk_CmdFwd  := 0;]]>
+</Line>
+<Line Number="101">
+<![CDATA[    Wrk_CmdRev  := 0;]]>
+</Line>
+<Line Number="102">
+<![CDATA[    Wrk_CmdStop := 1;]]>
+</Line>
+<Line Number="103">
+<![CDATA[ELSIF Wrk_SrcCmdFwdEdge AND Inp_FwdPermOK THEN]]>
+</Line>
+<Line Number="104">
+<![CDATA[    Wrk_CmdFwd  := 1;]]>
+</Line>
+<Line Number="105">
+<![CDATA[    Wrk_CmdRev  := 0;]]>
+</Line>
+<Line Number="106">
+<![CDATA[    Wrk_CmdStop := 0;]]>
+</Line>
+<Line Number="107">
+<![CDATA[ELSIF Wrk_SrcCmdRevEdge AND Cfg_HasRev AND Inp_RevPermOK THEN]]>
+</Line>
+<Line Number="108">
+<![CDATA[    Wrk_CmdFwd  := 0;]]>
+</Line>
+<Line Number="109">
+<![CDATA[    Wrk_CmdRev  := 1;]]>
+</Line>
+<Line Number="110">
+<![CDATA[    Wrk_CmdStop := 0;]]>
+</Line>
+<Line Number="111">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="112">
+<![CDATA[]]>
+</Line>
+<Line Number="113">
+<![CDATA[]]>
+</Line>
+<Line Number="114">
+<![CDATA[(*]]>
+</Line>
+<Line Number="115">
+<![CDATA[========================================]]>
+</Line>
+<Line Number="116">
+<![CDATA[Self-clear PCmd / OCmd]]>
+</Line>
+<Line Number="117">
+<![CDATA[PCmd_/OCmd_ must be declared as InOut parameters]]>
+</Line>
+<Line Number="118">
+<![CDATA[========================================]]>
+</Line>
+<Line Number="119">
+<![CDATA[*)]]>
+</Line>
+<Line Number="120">
+<![CDATA[PCmd_Fwd  := 0;]]>
+</Line>
+<Line Number="121">
+<![CDATA[PCmd_Rev  := 0;]]>
+</Line>
+<Line Number="122">
+<![CDATA[PCmd_Stop := 0;]]>
+</Line>
+<Line Number="123">
+<![CDATA[OCmd_Fwd  := 0;]]>
+</Line>
+<Line Number="124">
+<![CDATA[OCmd_Rev  := 0;]]>
+</Line>
+<Line Number="125">
+<![CDATA[OCmd_Stop := 0;]]>
+</Line>
+<Line Number="126">
+<![CDATA[]]>
+</Line>
+<Line Number="127">
+<![CDATA[]]>
+</Line>
+<Line Number="128">
+<![CDATA[(*]]>
+</Line>
+<Line Number="129">
+<![CDATA[========================================]]>
+</Line>
+<Line Number="130">
+<![CDATA[Reset command - mode-agnostic]]>
+</Line>
+<Line Number="131">
+<![CDATA[Either reset source clears alarms and pulses drive reset]]>
+</Line>
+<Line Number="132">
+<![CDATA[========================================]]>
+</Line>
+<Line Number="133">
+<![CDATA[*)]]>
+</Line>
+<Line Number="134">
+<![CDATA[Wrk_ResetAlm := PCmd_Reset OR OCmd_Reset;]]>
+</Line>
+<Line Number="135">
+<![CDATA[]]>
+</Line>
+<Line Number="136">
+<![CDATA[PCmd_Reset := 0;]]>
+</Line>
+<Line Number="137">
+<![CDATA[OCmd_Reset := 0;]]>
+</Line>
+<Line Number="138">
+<![CDATA[]]>
+</Line>
+<Line Number="139">
+<![CDATA[]]>
+</Line>
+<Line Number="140">
+<![CDATA[(*]]>
+</Line>
+<Line Number="141">
+<![CDATA[========================================]]>
+</Line>
+<Line Number="142">
+<![CDATA[Capture last setpoints on mode change for bumpless]]>
+</Line>
+<Line Number="143">
+<![CDATA[Commands use internal latch and persist across mode changes naturally]]>
+</Line>
+<Line Number="144">
+<![CDATA[========================================]]>
+</Line>
+<Line Number="145">
+<![CDATA[*)]]>
+</Line>
+<Line Number="146">
+<![CDATA[IF Wrk_ModeChange THEN]]>
+</Line>
+<Line Number="147">
+<![CDATA[    Wrk_LastSpeedRef := Wrk_SpeedRef;]]>
+</Line>
+<Line Number="148">
+<![CDATA[    Wrk_LastOutDatalink := Wrk_OutDatalink;]]>
+</Line>
+<Line Number="149">
+<![CDATA[]]>
+</Line>
+<Line Number="150">
+<![CDATA[    IF Cfg_BumplessEnable THEN]]>
+</Line>
+<Line Number="151">
+<![CDATA[        Wrk_BumplessHold := 1;]]>
+</Line>
+<Line Number="152">
+<![CDATA[    ELSE]]>
+</Line>
+<Line Number="153">
+<![CDATA[        Wrk_BumplessHold := 0;]]>
+</Line>
+<Line Number="154">
+<![CDATA[    END_IF;]]>
+</Line>
+<Line Number="155">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="156">
+<![CDATA[]]>
+</Line>
+<Line Number="157">
+<![CDATA[]]>
+</Line>
+<Line Number="158">
+<![CDATA[(*]]>
+</Line>
+<Line Number="159">
+<![CDATA[========================================]]>
+</Line>
+<Line Number="160">
+<![CDATA[Match logic for bumpless setpoint release]]>
+</Line>
+<Line Number="161">
+<![CDATA[========================================]]>
+</Line>
+<Line Number="162">
+<![CDATA[*)]]>
+</Line>
+<Line Number="163">
+<![CDATA[Wrk_SpeedMatched :=]]>
+</Line>
+<Line Number="164">
+<![CDATA[    ABS(Wrk_SrcSpeedRef - Wrk_LastSpeedRef) <= Cfg_SpeedRefBumpTol;]]>
+</Line>
+<Line Number="165">
+<![CDATA[]]>
+</Line>
+<Line Number="166">
+<![CDATA[Wrk_OutDatalinkMatched :=]]>
+</Line>
+<Line Number="167">
+<![CDATA[    ABS(Wrk_SrcOutDatalink - Wrk_LastOutDatalink) <= Cfg_OutDatalinkBumpTol;]]>
+</Line>
+<Line Number="168">
+<![CDATA[]]>
+</Line>
+<Line Number="169">
+<![CDATA[]]>
+</Line>
+<Line Number="170">
+<![CDATA[(*]]>
+</Line>
+<Line Number="171">
+<![CDATA[========================================]]>
+</Line>
+<Line Number="172">
+<![CDATA[Working setpoints]]>
+</Line>
+<Line Number="173">
+<![CDATA[Hold last value until new source matches within tolerance]]>
+</Line>
+<Line Number="174">
+<![CDATA[========================================]]>
+</Line>
+<Line Number="175">
+<![CDATA[*)]]>
+</Line>
+<Line Number="176">
+<![CDATA[IF Wrk_BumplessHold THEN]]>
+</Line>
+<Line Number="177">
+<![CDATA[    IF Wrk_SpeedMatched THEN]]>
+</Line>
+<Line Number="178">
+<![CDATA[        Wrk_SpeedRef := Wrk_SrcSpeedRef;]]>
+</Line>
+<Line Number="179">
+<![CDATA[    ELSE]]>
+</Line>
+<Line Number="180">
+<![CDATA[        Wrk_SpeedRef := Wrk_LastSpeedRef;]]>
+</Line>
+<Line Number="181">
+<![CDATA[    END_IF;]]>
+</Line>
+<Line Number="182">
+<![CDATA[]]>
+</Line>
+<Line Number="183">
+<![CDATA[    IF Wrk_OutDatalinkMatched THEN]]>
+</Line>
+<Line Number="184">
+<![CDATA[        Wrk_OutDatalink := Wrk_SrcOutDatalink;]]>
+</Line>
+<Line Number="185">
+<![CDATA[    ELSE]]>
+</Line>
+<Line Number="186">
+<![CDATA[        Wrk_OutDatalink := Wrk_LastOutDatalink;]]>
+</Line>
+<Line Number="187">
+<![CDATA[    END_IF;]]>
+</Line>
+<Line Number="188">
+<![CDATA[]]>
+</Line>
+<Line Number="189">
+<![CDATA[    IF Wrk_SpeedMatched AND Wrk_OutDatalinkMatched THEN]]>
+</Line>
+<Line Number="190">
+<![CDATA[        Wrk_BumplessHold := 0;]]>
+</Line>
+<Line Number="191">
+<![CDATA[    END_IF;]]>
+</Line>
+<Line Number="192">
+<![CDATA[ELSE]]>
+</Line>
+<Line Number="193">
+<![CDATA[    Wrk_SpeedRef := Wrk_SrcSpeedRef;]]>
+</Line>
+<Line Number="194">
+<![CDATA[    Wrk_OutDatalink := Wrk_SrcOutDatalink;]]>
+</Line>
+<Line Number="195">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="196">
+<![CDATA[]]>
+</Line>
+<Line Number="197">
+<![CDATA[]]>
+</Line>
+<Line Number="198">
+<![CDATA[(*]]>
+</Line>
+<Line Number="199">
+<![CDATA[========================================]]>
+</Line>
+<Line Number="200">
+<![CDATA[Command conflict]]>
+</Line>
+<Line Number="201">
+<![CDATA[========================================]]>
+</Line>
+<Line Number="202">
+<![CDATA[*)]]>
+</Line>
+<Line Number="203">
+<![CDATA[Sts_CommandConflict := Wrk_CmdFwd AND Wrk_CmdRev;]]>
+</Line>
+<Line Number="204">
+<![CDATA[]]>
+</Line>
+<Line Number="205">
+<![CDATA[]]>
+</Line>
+<Line Number="206">
+<![CDATA[(*]]>
+</Line>
+<Line Number="207">
+<![CDATA[========================================]]>
+</Line>
+<Line Number="208">
+<![CDATA[Live status: Interlock trip]]>
+</Line>
+<Line Number="209">
+<![CDATA[TRUE when interlock condition is active (regardless of alarm config)]]>
+</Line>
+<Line Number="210">
+<![CDATA[========================================]]>
+</Line>
+<Line Number="211">
+<![CDATA[*)]]>
+</Line>
+<Line Number="212">
+<![CDATA[Sts_IntlkTrip := NOT Inp_IntlkOK;]]>
+</Line>
+<Line Number="213">
+<![CDATA[]]>
+</Line>
+<Line Number="214">
+<![CDATA[]]>
+</Line>
+<Line Number="215">
+<![CDATA[(*]]>
+</Line>
+<Line Number="216">
+<![CDATA[========================================]]>
+</Line>
+<Line Number="217">
+<![CDATA[Internal stop condition (separate from Out_Stop)]]>
+</Line>
+<Line Number="218">
+<![CDATA[Asserts Stop to drive when NotRdy or user-commanded Stop.]]>
+</Line>
+<Line Number="219">
+<![CDATA[Hand mode forces all outputs idle in the drive output section below.]]>
+</Line>
+<Line Number="220">
+<![CDATA[========================================]]>
+</Line>
+<Line Number="221">
+<![CDATA[*)]]>
+</Line>
+<Line Number="222">
+<![CDATA[Wrk_OutStop := Wrk_NotRdy OR Wrk_CmdStop;]]>
+</Line>
+<Line Number="223">
+<![CDATA[]]>
+</Line>
+<Line Number="224">
+<![CDATA[]]>
+</Line>
+<Line Number="225">
+<![CDATA[(*]]>
+</Line>
+<Line Number="226">
+<![CDATA[========================================]]>
+</Line>
+<Line Number="227">
+<![CDATA[Drive output commands]]>
+</Line>
+<Line Number="228">
+<![CDATA[Hand mode forces all outputs idle (drive is under local control).]]>
+</Line>
+<Line Number="229">
+<![CDATA[Wrk_NotRdy is the master gate - blocks all run outputs.]]>
+</Line>
+<Line Number="230">
+<![CDATA[========================================]]>
+</Line>
+<Line Number="231">
+<![CDATA[*)]]>
+</Line>
+<Line Number="232">
+<![CDATA[Out_Reset := Wrk_ResetAlm;]]>
+</Line>
+<Line Number="233">
+<![CDATA[]]>
+</Line>
+<Line Number="234">
+<![CDATA[IF Inp_Hand THEN]]>
+</Line>
+<Line Number="235">
+<![CDATA[    Out_Fwd  := 0;]]>
+</Line>
+<Line Number="236">
+<![CDATA[    Out_Rev  := 0;]]>
+</Line>
+<Line Number="237">
+<![CDATA[    Out_Run  := 0;]]>
+</Line>
+<Line Number="238">
+<![CDATA[    Out_Stop := 0;]]>
+</Line>
+<Line Number="239">
+<![CDATA[ELSE]]>
+</Line>
+<Line Number="240">
+<![CDATA[    Out_Stop := Wrk_OutStop;]]>
+</Line>
+<Line Number="241">
+<![CDATA[]]>
+</Line>
+<Line Number="242">
+<![CDATA[    IF Wrk_NotRdy OR Wrk_CmdStop OR Sts_CommandConflict THEN]]>
+</Line>
+<Line Number="243">
+<![CDATA[        Out_Fwd := 0;]]>
+</Line>
+<Line Number="244">
+<![CDATA[        Out_Rev := 0;]]>
+</Line>
+<Line Number="245">
+<![CDATA[        Out_Run := 0;]]>
+</Line>
+<Line Number="246">
+<![CDATA[    ELSE]]>
+</Line>
+<Line Number="247">
+<![CDATA[        Out_Fwd := Wrk_CmdFwd AND NOT Wrk_CmdRev;]]>
+</Line>
+<Line Number="248">
+<![CDATA[        Out_Rev := Wrk_CmdRev AND NOT Wrk_CmdFwd AND Cfg_HasRev;]]>
+</Line>
+<Line Number="249">
+<![CDATA[        Out_Run := Out_Fwd OR Out_Rev;]]>
+</Line>
+<Line Number="250">
+<![CDATA[    END_IF;]]>
+</Line>
+<Line Number="251">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="252">
+<![CDATA[]]>
+</Line>
+<Line Number="253">
+<![CDATA[]]>
+</Line>
+<Line Number="254">
+<![CDATA[(*]]>
+</Line>
+<Line Number="255">
+<![CDATA[========================================]]>
+</Line>
+<Line Number="256">
+<![CDATA[Start / Stop request detection]]>
+</Line>
+<Line Number="257">
+<![CDATA[Inhibited in Hand mode (drive is under local control)]]>
+</Line>
+<Line Number="258">
+<![CDATA[Inhibited when no run feedback (cannot detect what cannot be measured)]]>
+</Line>
+<Line Number="259">
+<![CDATA[========================================]]>
+</Line>
+<Line Number="260">
+<![CDATA[*)]]>
+</Line>
+<Line Number="261">
+<![CDATA[Wrk_StartReq :=]]>
+</Line>
+<Line Number="262">
+<![CDATA[    Out_Run]]>
+</Line>
+<Line Number="263">
+<![CDATA[    AND NOT Inp_Running]]>
+</Line>
+<Line Number="264">
+<![CDATA[    AND NOT Inp_Fault]]>
+</Line>
+<Line Number="265">
+<![CDATA[    AND NOT Inp_IOFault]]>
+</Line>
+<Line Number="266">
+<![CDATA[    AND NOT Inp_Hand]]>
+</Line>
+<Line Number="267">
+<![CDATA[    AND Cfg_HasRunFdbk;]]>
+</Line>
+<Line Number="268">
+<![CDATA[]]>
+</Line>
+<Line Number="269">
+<![CDATA[Wrk_StopReq :=]]>
+</Line>
+<Line Number="270">
+<![CDATA[    Wrk_OutStop]]>
+</Line>
+<Line Number="271">
+<![CDATA[    AND Inp_Running]]>
+</Line>
+<Line Number="272">
+<![CDATA[    AND NOT Inp_Fault]]>
+</Line>
+<Line Number="273">
+<![CDATA[    AND NOT Inp_IOFault]]>
+</Line>
+<Line Number="274">
+<![CDATA[    AND NOT Inp_Hand]]>
+</Line>
+<Line Number="275">
+<![CDATA[    AND Cfg_HasRunFdbk;]]>
+</Line>
+<Line Number="276">
+<![CDATA[]]>
+</Line>
+<Line Number="277">
+<![CDATA[]]>
+</Line>
+<Line Number="278">
+<![CDATA[(*]]>
+</Line>
+<Line Number="279">
+<![CDATA[========================================]]>
+</Line>
+<Line Number="280">
+<![CDATA[Timers]]>
+</Line>
+<Line Number="281">
+<![CDATA[Cfg_StartFbTime / Cfg_StopFbTime in seconds; PRE in milliseconds]]>
+</Line>
+<Line Number="282">
+<![CDATA[Wrk_StartTmr / Wrk_StopTmr are FBD_TIMER structures.]]>
+</Line>
+<Line Number="283">
+<![CDATA[Timer is reset when its Req goes FALSE OR on alarm reset, so the]]>
+</Line>
+<Line Number="284">
+<![CDATA[operator gets a full timeout window after pressing Reset instead of]]>
+</Line>
+<Line Number="285">
+<![CDATA[the alarm re-firing immediately if the underlying condition persists.]]>
+</Line>
+<Line Number="286">
+<![CDATA[========================================]]>
+</Line>
+<Line Number="287">
+<![CDATA[*)]]>
+</Line>
+<Line Number="288">
+<![CDATA[Wrk_StartTmr.PRE := Cfg_StartFbTime * 1000;]]>
+</Line>
+<Line Number="289">
+<![CDATA[Wrk_StartTmr.TimerEnable := Wrk_StartReq;]]>
+</Line>
+<Line Number="290">
+<![CDATA[Wrk_StartTmr.Reset := (NOT Wrk_StartReq) OR Wrk_ResetAlm;]]>
+</Line>
+<Line Number="291">
+<![CDATA[TONR(Wrk_StartTmr);]]>
+</Line>
+<Line Number="292">
+<![CDATA[]]>
+</Line>
+<Line Number="293">
+<![CDATA[Wrk_StopTmr.PRE := Cfg_StopFbTime * 1000;]]>
+</Line>
+<Line Number="294">
+<![CDATA[Wrk_StopTmr.TimerEnable := Wrk_StopReq;]]>
+</Line>
+<Line Number="295">
+<![CDATA[Wrk_StopTmr.Reset := (NOT Wrk_StopReq) OR Wrk_ResetAlm;]]>
+</Line>
+<Line Number="296">
+<![CDATA[TONR(Wrk_StopTmr);]]>
+</Line>
+<Line Number="297">
+<![CDATA[]]>
+</Line>
+<Line Number="298">
+<![CDATA[]]>
+</Line>
+<Line Number="299">
+<![CDATA[(*]]>
+</Line>
+<Line Number="300">
+<![CDATA[========================================]]>
+</Line>
+<Line Number="301">
+<![CDATA[Live alarm conditions]]>
+</Line>
+<Line Number="302">
+<![CDATA[TRUE while the underlying condition is active (independent of alarm config)]]>
+</Line>
+<Line Number="303">
+<![CDATA[========================================]]>
+</Line>
+<Line Number="304">
+<![CDATA[*)]]>
+</Line>
+<Line Number="305">
+<![CDATA[Sts_DriveFault  := Inp_Fault;]]>
+</Line>
+<Line Number="306">
+<![CDATA[Sts_IOFault     := Inp_IOFault;]]>
+</Line>
+<Line Number="307">
+<![CDATA[Sts_FailToStart := Wrk_StartTmr.DN AND NOT Inp_Running;]]>
+</Line>
+<Line Number="308">
+<![CDATA[Sts_FailToStop  := Wrk_StopTmr.DN  AND Inp_Running;]]>
+</Line>
+<Line Number="309">
+<![CDATA[]]>
+</Line>
+<Line Number="310">
+<![CDATA[]]>
+</Line>
+<Line Number="311">
+<![CDATA[(*]]>
+</Line>
+<Line Number="312">
+<![CDATA[========================================]]>
+</Line>
+<Line Number="313">
+<![CDATA[Latched alarms]]>
+</Line>
+<Line Number="314">
+<![CDATA[Each alarm latches only when its Cfg_Has*Alm config is enabled.]]>
+</Line>
+<Line Number="315">
+<![CDATA[Sts_* live status always reports the underlying condition.]]>
+</Line>
+<Line Number="316">
+<![CDATA[========================================]]>
+</Line>
+<Line Number="317">
+<![CDATA[*)]]>
+</Line>
+<Line Number="318">
+<![CDATA[IF Wrk_ResetAlm THEN]]>
+</Line>
+<Line Number="319">
+<![CDATA[    Alm_DriveFault  := 0;]]>
+</Line>
+<Line Number="320">
+<![CDATA[    Alm_IOFault     := 0;]]>
+</Line>
+<Line Number="321">
+<![CDATA[    Alm_FailToStart := 0;]]>
+</Line>
+<Line Number="322">
+<![CDATA[    Alm_FailToStop  := 0;]]>
+</Line>
+<Line Number="323">
+<![CDATA[    Alm_IntlkTrip   := 0;]]>
+</Line>
+<Line Number="324">
+<![CDATA[ELSE]]>
+</Line>
+<Line Number="325">
+<![CDATA[    IF Sts_DriveFault AND Cfg_HasDriveFaultAlm THEN]]>
+</Line>
+<Line Number="326">
+<![CDATA[        Alm_DriveFault := 1;]]>
+</Line>
+<Line Number="327">
+<![CDATA[    END_IF;]]>
+</Line>
+<Line Number="328">
+<![CDATA[    IF Sts_IOFault AND Cfg_HasIOFaultAlm THEN]]>
+</Line>
+<Line Number="329">
+<![CDATA[        Alm_IOFault := 1;]]>
+</Line>
+<Line Number="330">
+<![CDATA[    END_IF;]]>
+</Line>
+<Line Number="331">
+<![CDATA[    IF Sts_FailToStart AND Cfg_HasFailToStartAlm THEN]]>
+</Line>
+<Line Number="332">
+<![CDATA[        Alm_FailToStart := 1;]]>
+</Line>
+<Line Number="333">
+<![CDATA[    END_IF;]]>
+</Line>
+<Line Number="334">
+<![CDATA[    IF Sts_FailToStop AND Cfg_HasFailToStopAlm THEN]]>
+</Line>
+<Line Number="335">
+<![CDATA[        Alm_FailToStop := 1;]]>
+</Line>
+<Line Number="336">
+<![CDATA[    END_IF;]]>
+</Line>
+<Line Number="337">
+<![CDATA[    IF Sts_IntlkTrip AND Cfg_HasIntlkTripAlm THEN]]>
+</Line>
+<Line Number="338">
+<![CDATA[        Alm_IntlkTrip := 1;]]>
+</Line>
+<Line Number="339">
+<![CDATA[    END_IF;]]>
+</Line>
+<Line Number="340">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="341">
+<![CDATA[]]>
+</Line>
+<Line Number="342">
+<![CDATA[]]>
+</Line>
+<Line Number="343">
+<![CDATA[(*]]>
+</Line>
+<Line Number="344">
+<![CDATA[========================================]]>
+</Line>
+<Line Number="345">
+<![CDATA[Latched not-ready fail]]>
+</Line>
+<Line Number="346">
+<![CDATA[Latches on LIVE Sts_FailToStart or Sts_FailToStop - regardless of]]>
+</Line>
+<Line Number="347">
+<![CDATA[Cfg_HasFailToStartAlm / Cfg_HasFailToStopAlm setting. The user can]]>
+</Line>
+<Line Number="348">
+<![CDATA[disable the alarm latching but the device still requires a Reset]]>
+</Line>
+<Line Number="349">
+<![CDATA[before another start attempt after a feedback failure.]]>
+</Line>
+<Line Number="350">
+<![CDATA[Cleared on reset.]]>
+</Line>
+<Line Number="351">
+<![CDATA[========================================]]>
+</Line>
+<Line Number="352">
+<![CDATA[*)]]>
+</Line>
+<Line Number="353">
+<![CDATA[IF Wrk_ResetAlm THEN]]>
+</Line>
+<Line Number="354">
+<![CDATA[    Nrdy_Fail := 0;]]>
+</Line>
+<Line Number="355">
+<![CDATA[ELSIF Sts_FailToStart OR Sts_FailToStop THEN]]>
+</Line>
+<Line Number="356">
+<![CDATA[    Nrdy_Fail := 1;]]>
+</Line>
+<Line Number="357">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="358">
+<![CDATA[]]>
+</Line>
+<Line Number="359">
+<![CDATA[]]>
+</Line>
+<Line Number="360">
+<![CDATA[(*]]>
+</Line>
+<Line Number="361">
+<![CDATA[========================================]]>
+</Line>
+<Line Number="362">
+<![CDATA[Trip condition]]>
+</Line>
+<Line Number="363">
+<![CDATA[Any latched alarm trips drive outputs - requires reset to clear]]>
+</Line>
+<Line Number="364">
+<![CDATA[========================================]]>
+</Line>
+<Line Number="365">
+<![CDATA[*)]]>
+</Line>
+<Line Number="366">
+<![CDATA[Wrk_Trip :=]]>
+</Line>
+<Line Number="367">
+<![CDATA[    Alm_FailToStart]]>
+</Line>
+<Line Number="368">
+<![CDATA[    OR Alm_FailToStop]]>
+</Line>
+<Line Number="369">
+<![CDATA[    OR Alm_DriveFault]]>
+</Line>
+<Line Number="370">
+<![CDATA[    OR Alm_IOFault]]>
+</Line>
+<Line Number="371">
+<![CDATA[    OR Alm_IntlkTrip;]]>
+</Line>
+<Line Number="372">
+<![CDATA[]]>
+</Line>
+<Line Number="373">
+<![CDATA[]]>
+</Line>
+<Line Number="374">
+<![CDATA[(*]]>
+</Line>
+<Line Number="375">
+<![CDATA[========================================]]>
+</Line>
+<Line Number="376">
+<![CDATA[Scaling SpeedRef (outgoing: EU -> Raw)]]>
+</Line>
+<Line Number="377">
+<![CDATA[EU clamp first (operational limits), then scale to raw, then raw clamp]]>
+</Line>
+<Line Number="378">
+<![CDATA[========================================]]>
+</Line>
+<Line Number="379">
+<![CDATA[*)]]>
+</Line>
+<Line Number="380">
+<![CDATA[IF Wrk_SpeedRef > Cfg_MaxSpdRef THEN]]>
+</Line>
+<Line Number="381">
+<![CDATA[    Wrk_SpeedRef := Cfg_MaxSpdRef;]]>
+</Line>
+<Line Number="382">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="383">
+<![CDATA[]]>
+</Line>
+<Line Number="384">
+<![CDATA[IF Wrk_SpeedRef < Cfg_MinSpdRef THEN]]>
+</Line>
+<Line Number="385">
+<![CDATA[    Wrk_SpeedRef := Cfg_MinSpdRef;]]>
+</Line>
+<Line Number="386">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="387">
+<![CDATA[]]>
+</Line>
+<Line Number="388">
+<![CDATA[IF (Cfg_SpeedRefEUMax - Cfg_SpeedRefEUMin) <> 0 THEN]]>
+</Line>
+<Line Number="389">
+<![CDATA[    Wrk_SpeedRawReal :=]]>
+</Line>
+<Line Number="390">
+<![CDATA[        Cfg_SpeedRefRawMin +]]>
+</Line>
+<Line Number="391">
+<![CDATA[        ((Wrk_SpeedRef - Cfg_SpeedRefEUMin) /]]>
+</Line>
+<Line Number="392">
+<![CDATA[        (Cfg_SpeedRefEUMax - Cfg_SpeedRefEUMin)) *]]>
+</Line>
+<Line Number="393">
+<![CDATA[        (Cfg_SpeedRefRawMax - Cfg_SpeedRefRawMin);]]>
+</Line>
+<Line Number="394">
+<![CDATA[ELSE]]>
+</Line>
+<Line Number="395">
+<![CDATA[    Wrk_SpeedRawReal := Cfg_SpeedRefRawMin;]]>
+</Line>
+<Line Number="396">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="397">
+<![CDATA[]]>
+</Line>
+<Line Number="398">
+<![CDATA[IF Wrk_SpeedRawReal < Cfg_SpeedRefRawMin THEN]]>
+</Line>
+<Line Number="399">
+<![CDATA[    Wrk_SpeedRawReal := Cfg_SpeedRefRawMin;]]>
+</Line>
+<Line Number="400">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="401">
+<![CDATA[]]>
+</Line>
+<Line Number="402">
+<![CDATA[IF Wrk_SpeedRawReal > Cfg_SpeedRefRawMax THEN]]>
+</Line>
+<Line Number="403">
+<![CDATA[    Wrk_SpeedRawReal := Cfg_SpeedRefRawMax;]]>
+</Line>
+<Line Number="404">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="405">
+<![CDATA[]]>
+</Line>
+<Line Number="406">
+<![CDATA[Out_SpeedRef := Wrk_SpeedRawReal;]]>
+</Line>
+<Line Number="407">
+<![CDATA[]]>
+</Line>
+<Line Number="408">
+<![CDATA[]]>
+</Line>
+<Line Number="409">
+<![CDATA[(*]]>
+</Line>
+<Line Number="410">
+<![CDATA[========================================]]>
+</Line>
+<Line Number="411">
+<![CDATA[Scaling Datalink (outgoing: EU -> Raw)]]>
+</Line>
+<Line Number="412">
+<![CDATA[Gated by Cfg_HasOutDatalink; EU clamp first then scale]]>
+</Line>
+<Line Number="413">
+<![CDATA[========================================]]>
+</Line>
+<Line Number="414">
+<![CDATA[*)]]>
+</Line>
+<Line Number="415">
+<![CDATA[IF Cfg_HasOutDatalink THEN]]>
+</Line>
+<Line Number="416">
+<![CDATA[    IF Wrk_OutDatalink > Cfg_OutDatalinkMax THEN]]>
+</Line>
+<Line Number="417">
+<![CDATA[        Wrk_OutDatalink := Cfg_OutDatalinkMax;]]>
+</Line>
+<Line Number="418">
+<![CDATA[    END_IF;]]>
+</Line>
+<Line Number="419">
+<![CDATA[]]>
+</Line>
+<Line Number="420">
+<![CDATA[    IF Wrk_OutDatalink < Cfg_OutDatalinkMin THEN]]>
+</Line>
+<Line Number="421">
+<![CDATA[        Wrk_OutDatalink := Cfg_OutDatalinkMin;]]>
+</Line>
+<Line Number="422">
+<![CDATA[    END_IF;]]>
+</Line>
+<Line Number="423">
+<![CDATA[]]>
+</Line>
+<Line Number="424">
+<![CDATA[    IF (Cfg_OutDatalinkEUMax - Cfg_OutDatalinkEUMin) <> 0 THEN]]>
+</Line>
+<Line Number="425">
+<![CDATA[        Wrk_OutDatalinkRawReal :=]]>
+</Line>
+<Line Number="426">
+<![CDATA[            Cfg_OutDatalinkRawMin +]]>
+</Line>
+<Line Number="427">
+<![CDATA[            ((Wrk_OutDatalink - Cfg_OutDatalinkEUMin) /]]>
+</Line>
+<Line Number="428">
+<![CDATA[            (Cfg_OutDatalinkEUMax - Cfg_OutDatalinkEUMin)) *]]>
+</Line>
+<Line Number="429">
+<![CDATA[            (Cfg_OutDatalinkRawMax - Cfg_OutDatalinkRawMin);]]>
+</Line>
+<Line Number="430">
+<![CDATA[    ELSE]]>
+</Line>
+<Line Number="431">
+<![CDATA[        Wrk_OutDatalinkRawReal := Cfg_OutDatalinkRawMin;]]>
+</Line>
+<Line Number="432">
+<![CDATA[    END_IF;]]>
+</Line>
+<Line Number="433">
+<![CDATA[]]>
+</Line>
+<Line Number="434">
+<![CDATA[    IF Wrk_OutDatalinkRawReal < Cfg_OutDatalinkRawMin THEN]]>
+</Line>
+<Line Number="435">
+<![CDATA[        Wrk_OutDatalinkRawReal := Cfg_OutDatalinkRawMin;]]>
+</Line>
+<Line Number="436">
+<![CDATA[    END_IF;]]>
+</Line>
+<Line Number="437">
+<![CDATA[]]>
+</Line>
+<Line Number="438">
+<![CDATA[    IF Wrk_OutDatalinkRawReal > Cfg_OutDatalinkRawMax THEN]]>
+</Line>
+<Line Number="439">
+<![CDATA[        Wrk_OutDatalinkRawReal := Cfg_OutDatalinkRawMax;]]>
+</Line>
+<Line Number="440">
+<![CDATA[    END_IF;]]>
+</Line>
+<Line Number="441">
+<![CDATA[]]>
+</Line>
+<Line Number="442">
+<![CDATA[    Out_Datalink := Wrk_OutDatalinkRawReal;]]>
+</Line>
+<Line Number="443">
+<![CDATA[ELSE]]>
+</Line>
+<Line Number="444">
+<![CDATA[    Out_Datalink := 0.0;]]>
+</Line>
+<Line Number="445">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="446">
+<![CDATA[]]>
+</Line>
+<Line Number="447">
+<![CDATA[]]>
+</Line>
+<Line Number="448">
+<![CDATA[(*]]>
+</Line>
+<Line Number="449">
+<![CDATA[========================================]]>
+</Line>
+<Line Number="450">
+<![CDATA[Scaling SpeedFdbk (incoming: Raw -> EU)]]>
+</Line>
+<Line Number="451">
+<![CDATA[With feedback: scale Inp_SpeedFdbk raw to EU with clamps.]]>
+</Line>
+<Line Number="452">
+<![CDATA[Without feedback: mirror Val_SpeedRef when running (drive assumed to track]]>
+</Line>
+<Line Number="453">
+<![CDATA[commanded speed), 0 when stopped.]]>
+</Line>
+<Line Number="454">
+<![CDATA[========================================]]>
+</Line>
+<Line Number="455">
+<![CDATA[*)]]>
+</Line>
+<Line Number="456">
+<![CDATA[IF Cfg_HasSpeedFdbk THEN]]>
+</Line>
+<Line Number="457">
+<![CDATA[    IF (Cfg_SpeedFdbkRawMax - Cfg_SpeedFdbkRawMin) <> 0 THEN]]>
+</Line>
+<Line Number="458">
+<![CDATA[        Wrk_SpeedFdbkEU :=]]>
+</Line>
+<Line Number="459">
+<![CDATA[            Cfg_SpeedFdbkEUMin +]]>
+</Line>
+<Line Number="460">
+<![CDATA[            ((Inp_SpeedFdbk - Cfg_SpeedFdbkRawMin) /]]>
+</Line>
+<Line Number="461">
+<![CDATA[            (Cfg_SpeedFdbkRawMax - Cfg_SpeedFdbkRawMin)) *]]>
+</Line>
+<Line Number="462">
+<![CDATA[            (Cfg_SpeedFdbkEUMax - Cfg_SpeedFdbkEUMin);]]>
+</Line>
+<Line Number="463">
+<![CDATA[    ELSE]]>
+</Line>
+<Line Number="464">
+<![CDATA[        Wrk_SpeedFdbkEU := Cfg_SpeedFdbkEUMin;]]>
+</Line>
+<Line Number="465">
+<![CDATA[    END_IF;]]>
+</Line>
+<Line Number="466">
+<![CDATA[]]>
+</Line>
+<Line Number="467">
+<![CDATA[    IF Wrk_SpeedFdbkEU < Cfg_SpeedFdbkEUMin THEN]]>
+</Line>
+<Line Number="468">
+<![CDATA[        Wrk_SpeedFdbkEU := Cfg_SpeedFdbkEUMin;]]>
+</Line>
+<Line Number="469">
+<![CDATA[    END_IF;]]>
+</Line>
+<Line Number="470">
+<![CDATA[]]>
+</Line>
+<Line Number="471">
+<![CDATA[    IF Wrk_SpeedFdbkEU > Cfg_SpeedFdbkEUMax THEN]]>
+</Line>
+<Line Number="472">
+<![CDATA[        Wrk_SpeedFdbkEU := Cfg_SpeedFdbkEUMax;]]>
+</Line>
+<Line Number="473">
+<![CDATA[    END_IF;]]>
+</Line>
+<Line Number="474">
+<![CDATA[]]>
+</Line>
+<Line Number="475">
+<![CDATA[    Val_SpeedFdbk := Wrk_SpeedFdbkEU;]]>
+</Line>
+<Line Number="476">
+<![CDATA[ELSIF Sts_RunningFwd OR Sts_RunningRev THEN]]>
+</Line>
+<Line Number="477">
+<![CDATA[    Val_SpeedFdbk := Wrk_SpeedRef;]]>
+</Line>
+<Line Number="478">
+<![CDATA[ELSE]]>
+</Line>
+<Line Number="479">
+<![CDATA[    Val_SpeedFdbk := 0.0;]]>
+</Line>
+<Line Number="480">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="481">
+<![CDATA[]]>
+</Line>
+<Line Number="482">
+<![CDATA[]]>
+</Line>
+<Line Number="483">
+<![CDATA[(*]]>
+</Line>
+<Line Number="484">
+<![CDATA[========================================]]>
+</Line>
+<Line Number="485">
+<![CDATA[Scaling Datalink (incoming: Raw -> EU)]]>
+</Line>
+<Line Number="486">
+<![CDATA[Gated by Cfg_HasInpDatalink]]>
+</Line>
+<Line Number="487">
+<![CDATA[========================================]]>
+</Line>
+<Line Number="488">
+<![CDATA[*)]]>
+</Line>
+<Line Number="489">
+<![CDATA[IF Cfg_HasInpDatalink THEN]]>
+</Line>
+<Line Number="490">
+<![CDATA[    IF (Cfg_InpDatalinkRawMax - Cfg_InpDatalinkRawMin) <> 0 THEN]]>
+</Line>
+<Line Number="491">
+<![CDATA[        Wrk_InpDatalinkEU :=]]>
+</Line>
+<Line Number="492">
+<![CDATA[            Cfg_InpDatalinkEUMin +]]>
+</Line>
+<Line Number="493">
+<![CDATA[            ((Inp_Datalink - Cfg_InpDatalinkRawMin) /]]>
+</Line>
+<Line Number="494">
+<![CDATA[            (Cfg_InpDatalinkRawMax - Cfg_InpDatalinkRawMin)) *]]>
+</Line>
+<Line Number="495">
+<![CDATA[            (Cfg_InpDatalinkEUMax - Cfg_InpDatalinkEUMin);]]>
+</Line>
+<Line Number="496">
+<![CDATA[    ELSE]]>
+</Line>
+<Line Number="497">
+<![CDATA[        Wrk_InpDatalinkEU := Cfg_InpDatalinkEUMin;]]>
+</Line>
+<Line Number="498">
+<![CDATA[    END_IF;]]>
+</Line>
+<Line Number="499">
+<![CDATA[]]>
+</Line>
+<Line Number="500">
+<![CDATA[    IF Wrk_InpDatalinkEU < Cfg_InpDatalinkEUMin THEN]]>
+</Line>
+<Line Number="501">
+<![CDATA[        Wrk_InpDatalinkEU := Cfg_InpDatalinkEUMin;]]>
+</Line>
+<Line Number="502">
+<![CDATA[    END_IF;]]>
+</Line>
+<Line Number="503">
+<![CDATA[]]>
+</Line>
+<Line Number="504">
+<![CDATA[    IF Wrk_InpDatalinkEU > Cfg_InpDatalinkEUMax THEN]]>
+</Line>
+<Line Number="505">
+<![CDATA[        Wrk_InpDatalinkEU := Cfg_InpDatalinkEUMax;]]>
+</Line>
+<Line Number="506">
+<![CDATA[    END_IF;]]>
+</Line>
+<Line Number="507">
+<![CDATA[]]>
+</Line>
+<Line Number="508">
+<![CDATA[    Val_InpDatalink := Wrk_InpDatalinkEU;]]>
+</Line>
+<Line Number="509">
+<![CDATA[ELSE]]>
+</Line>
+<Line Number="510">
+<![CDATA[    Val_InpDatalink := 0.0;]]>
+</Line>
+<Line Number="511">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="512">
+<![CDATA[]]>
+</Line>
+<Line Number="513">
+<![CDATA[]]>
+</Line>
+<Line Number="514">
+<![CDATA[(*]]>
+</Line>
+<Line Number="515">
+<![CDATA[========================================]]>
+</Line>
+<Line Number="516">
+<![CDATA[Statuses]]>
+</Line>
+<Line Number="517">
+<![CDATA[========================================]]>
+</Line>
+<Line Number="518">
+<![CDATA[*)]]>
+</Line>
+<Line Number="519">
+<![CDATA[Sts_Prog         := Wrk_ModeAuto;]]>
+</Line>
+<Line Number="520">
+<![CDATA[Sts_Oper         := NOT Wrk_ModeAuto;]]>
+</Line>
+<Line Number="521">
+<![CDATA[]]>
+</Line>
+<Line Number="522">
+<![CDATA[Sts_Ready        := Inp_Ready AND NOT Wrk_Trip;]]>
+</Line>
+<Line Number="523">
+<![CDATA[]]>
+</Line>
+<Line Number="524">
+<![CDATA[Sts_NotRdy       := Wrk_NotRdy;]]>
+</Line>
+<Line Number="525">
+<![CDATA[]]>
+</Line>
+<Line Number="526">
+<![CDATA[Sts_Available    := Sts_Prog AND NOT Sts_NotRdy AND NOT Inp_Hand;]]>
+</Line>
+<Line Number="527">
+<![CDATA[]]>
+</Line>
+<Line Number="528">
+<![CDATA[Sts_RdyReset     :=]]>
+</Line>
+<Line Number="529">
+<![CDATA[    (Alm_FailToStart AND Inp_Running)]]>
+</Line>
+<Line Number="530">
+<![CDATA[    OR (Alm_FailToStop  AND NOT Inp_Running)]]>
+</Line>
+<Line Number="531">
+<![CDATA[    OR (Alm_DriveFault  AND NOT Inp_Fault)]]>
+</Line>
+<Line Number="532">
+<![CDATA[    OR (Alm_IOFault     AND NOT Inp_IOFault)]]>
+</Line>
+<Line Number="533">
+<![CDATA[    OR (Alm_IntlkTrip   AND Inp_IntlkOK);]]>
+</Line>
+<Line Number="534">
+<![CDATA[]]>
+</Line>
+<Line Number="535">
+<![CDATA[Sts_Alarm        := Inp_Alarm;]]>
+</Line>
+<Line Number="536">
+<![CDATA[Sts_Hand         := Inp_Hand;]]>
+</Line>
+<Line Number="537">
+<![CDATA[Sts_AtSpeed      := Inp_AtSpeed;]]>
+</Line>
+<Line Number="538">
+<![CDATA[Sts_Accelerating := Inp_Accelerating;]]>
+</Line>
+<Line Number="539">
+<![CDATA[Sts_Decelerating := Inp_Decelerating;]]>
+</Line>
+<Line Number="540">
+<![CDATA[]]>
+</Line>
+<Line Number="541">
+<![CDATA[(* Motion state machine]]>
+</Line>
+<Line Number="542">
+<![CDATA[   With run feedback: use Inp_Running / Inp_ActualDir to detect actual motion]]>
+</Line>
+<Line Number="543">
+<![CDATA[   Without feedback: trust commands directly (no starting/stopping transition) *)]]>
+</Line>
+<Line Number="544">
+<![CDATA[IF Cfg_HasRunFdbk THEN]]>
+</Line>
+<Line Number="545">
+<![CDATA[    Sts_RunningFwd := Out_Run AND Inp_Running AND Inp_ActualDir;]]>
+</Line>
+<Line Number="546">
+<![CDATA[    Sts_RunningRev := Out_Run AND Inp_Running AND NOT Inp_ActualDir;]]>
+</Line>
+<Line Number="547">
+<![CDATA[]]>
+</Line>
+<Line Number="548">
+<![CDATA[    Sts_StartingFwd :=]]>
+</Line>
+<Line Number="549">
+<![CDATA[        Out_Run]]>
+</Line>
+<Line Number="550">
+<![CDATA[        AND Out_Fwd]]>
+</Line>
+<Line Number="551">
+<![CDATA[        AND NOT Inp_Running]]>
+</Line>
+<Line Number="552">
+<![CDATA[        AND NOT Alm_FailToStart]]>
+</Line>
+<Line Number="553">
+<![CDATA[        AND NOT Inp_Fault;]]>
+</Line>
+<Line Number="554">
+<![CDATA[]]>
+</Line>
+<Line Number="555">
+<![CDATA[    Sts_StartingRev :=]]>
+</Line>
+<Line Number="556">
+<![CDATA[        Out_Run]]>
+</Line>
+<Line Number="557">
+<![CDATA[        AND Out_Rev]]>
+</Line>
+<Line Number="558">
+<![CDATA[        AND NOT Inp_Running]]>
+</Line>
+<Line Number="559">
+<![CDATA[        AND NOT Alm_FailToStart]]>
+</Line>
+<Line Number="560">
+<![CDATA[        AND NOT Inp_Fault;]]>
+</Line>
+<Line Number="561">
+<![CDATA[]]>
+</Line>
+<Line Number="562">
+<![CDATA[    Sts_Stopping := Out_Stop AND Inp_Running;]]>
+</Line>
+<Line Number="563">
+<![CDATA[]]>
+</Line>
+<Line Number="564">
+<![CDATA[    Sts_Stopped :=]]>
+</Line>
+<Line Number="565">
+<![CDATA[        NOT Inp_Running]]>
+</Line>
+<Line Number="566">
+<![CDATA[        AND NOT Out_Run]]>
+</Line>
+<Line Number="567">
+<![CDATA[        AND NOT Inp_Accelerating]]>
+</Line>
+<Line Number="568">
+<![CDATA[        AND NOT Inp_Decelerating;]]>
+</Line>
+<Line Number="569">
+<![CDATA[ELSE]]>
+</Line>
+<Line Number="570">
+<![CDATA[    (* No run feedback - status mirrors output commands (drive assumed to follow instantly) *)]]>
+</Line>
+<Line Number="571">
+<![CDATA[    Sts_RunningFwd  := Out_Run AND Out_Fwd;]]>
+</Line>
+<Line Number="572">
+<![CDATA[    Sts_RunningRev  := Out_Run AND Out_Rev;]]>
+</Line>
+<Line Number="573">
+<![CDATA[    Sts_StartingFwd := 0;]]>
+</Line>
+<Line Number="574">
+<![CDATA[    Sts_StartingRev := 0;]]>
+</Line>
+<Line Number="575">
+<![CDATA[    Sts_Stopping    := 0;]]>
+</Line>
+<Line Number="576">
+<![CDATA[    Sts_Stopped     := NOT Out_Run;]]>
+</Line>
+<Line Number="577">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="578">
+<![CDATA[]]>
+</Line>
+<Line Number="579">
+<![CDATA[Sts_BumplessActive := Wrk_BumplessHold;]]>
+</Line>
+<Line Number="580">
+<![CDATA[Val_SpeedRef       := Wrk_SpeedRef;]]>
+</Line>
+<Line Number="581">
+<![CDATA[Val_OutDatalink    := Wrk_OutDatalink;]]>
+</Line>
+<Line Number="582">
+<![CDATA[]]>
+</Line>
+<Line Number="583">
+<![CDATA[]]>
+</Line>
+<Line Number="584">
+<![CDATA[(*]]>
+</Line>
+<Line Number="585">
+<![CDATA[========================================]]>
+</Line>
+<Line Number="586">
+<![CDATA[HMI numeric status codes (PlantPAx convention)]]>
+</Line>
+<Line Number="587">
+<![CDATA[Val_Sts   - device state enumeration]]>
+</Line>
+<Line Number="588">
+<![CDATA[Val_Fault - highest-priority fault code (0 = no fault)]]>
+</Line>
+<Line Number="589">
+<![CDATA[Val_LastFaultCode - passthrough of drive's own fault code]]>
+</Line>
+<Line Number="590">
+<![CDATA[========================================]]>
+</Line>
+<Line Number="591">
+<![CDATA[*)]]>
+</Line>
+<Line Number="592">
+<![CDATA[Val_LastFaultCode := Inp_LastFaultCode;]]>
+</Line>
+<Line Number="593">
+<![CDATA[]]>
+</Line>
+<Line Number="594">
+<![CDATA[IF Sts_RunningFwd THEN]]>
+</Line>
+<Line Number="595">
+<![CDATA[    Val_Sts := 2;]]>
+</Line>
+<Line Number="596">
+<![CDATA[ELSIF Sts_RunningRev THEN]]>
+</Line>
+<Line Number="597">
+<![CDATA[    Val_Sts := 3;]]>
+</Line>
+<Line Number="598">
+<![CDATA[ELSIF Sts_StartingFwd THEN]]>
+</Line>
+<Line Number="599">
+<![CDATA[    Val_Sts := 5;]]>
+</Line>
+<Line Number="600">
+<![CDATA[ELSIF Sts_StartingRev THEN]]>
+</Line>
+<Line Number="601">
+<![CDATA[    Val_Sts := 6;]]>
+</Line>
+<Line Number="602">
+<![CDATA[ELSIF Sts_Stopping THEN]]>
+</Line>
+<Line Number="603">
+<![CDATA[    Val_Sts := 10;]]>
+</Line>
+<Line Number="604">
+<![CDATA[ELSIF Sts_Stopped THEN]]>
+</Line>
+<Line Number="605">
+<![CDATA[    Val_Sts := 1;]]>
+</Line>
+<Line Number="606">
+<![CDATA[ELSE]]>
+</Line>
+<Line Number="607">
+<![CDATA[    Val_Sts := 0;]]>
+</Line>
+<Line Number="608">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="609">
+<![CDATA[]]>
+</Line>
+<Line Number="610">
+<![CDATA[IF Sts_IOFault OR Alm_IOFault THEN]]>
+</Line>
+<Line Number="611">
+<![CDATA[    Val_Fault := 32;]]>
+</Line>
+<Line Number="612">
+<![CDATA[ELSIF Sts_DriveFault OR Alm_DriveFault THEN]]>
+</Line>
+<Line Number="613">
+<![CDATA[    Val_Fault := 18;]]>
+</Line>
+<Line Number="614">
+<![CDATA[ELSIF Sts_FailToStop OR Alm_FailToStop THEN]]>
+</Line>
+<Line Number="615">
+<![CDATA[    Val_Fault := 17;]]>
+</Line>
+<Line Number="616">
+<![CDATA[ELSIF Sts_FailToStart OR Alm_FailToStart OR Nrdy_Fail THEN]]>
+</Line>
+<Line Number="617">
+<![CDATA[    Val_Fault := 16;]]>
+</Line>
+<Line Number="618">
+<![CDATA[ELSE]]>
+</Line>
+<Line Number="619">
+<![CDATA[    Val_Fault := 0;]]>
+</Line>
+<Line Number="620">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="621">
+<![CDATA[]]>
+</Line>
+<Line Number="622">
+<![CDATA[]]>
+</Line>
+<Line Number="623">
+<![CDATA[(*]]>
+</Line>
+<Line Number="624">
+<![CDATA[========================================]]>
+</Line>
+<Line Number="625">
+<![CDATA[Store previous-scan values for next-scan edge detection]]>
+</Line>
+<Line Number="626">
+<![CDATA[While NotRdy is TRUE, force PCmd edge history to 0 - this lets a]]>
+</Line>
+<Line Number="627">
+<![CDATA[still-held external PCmd be re-detected as a rising edge on the next]]>
+</Line>
+<Line Number="628">
+<![CDATA[scan after the not-ready condition clears. Avoids requiring the]]>
+</Line>
+<Line Number="629">
+<![CDATA[external tag to toggle off-and-on after fault recovery.]]>
+</Line>
+<Line Number="630">
+<![CDATA[OCmd edge history is NOT cleared (operator buttons are momentary).]]>
+</Line>
+<Line Number="631">
+<![CDATA[========================================]]>
+</Line>
+<Line Number="632">
+<![CDATA[*)]]>
+</Line>
+<Line Number="633">
+<![CDATA[Wrk_PrevModeAuto    := Wrk_ModeAuto;]]>
+</Line>
+<Line Number="634">
+<![CDATA[]]>
+</Line>
+<Line Number="635">
+<![CDATA[IF Wrk_NotRdy THEN]]>
+</Line>
+<Line Number="636">
+<![CDATA[    Wrk_PrevPCmdFwd  := 0;]]>
+</Line>
+<Line Number="637">
+<![CDATA[    Wrk_PrevPCmdRev  := 0;]]>
+</Line>
+<Line Number="638">
+<![CDATA[    Wrk_PrevPCmdStop := 0;]]>
+</Line>
+<Line Number="639">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="640">
+<![CDATA[]]>
+</Line>
+<Line Number="641">
+<![CDATA[(*]]>
+</Line>
+<Line Number="642">
+<![CDATA[========================================]]>
+</Line>
+<Line Number="643">
+<![CDATA[Reset edge history on mode change]]>
+</Line>
+<Line Number="644">
+<![CDATA[A command already held TRUE on the side that just became active]]>
+</Line>
+<Line Number="645">
+<![CDATA[(e.g. Auto's PCmd_Stop asserted before switching from Operator)]]>
+</Line>
+<Line Number="646">
+<![CDATA[would otherwise never see a 0->1 transition, since its edge]]>
+</Line>
+<Line Number="647">
+<![CDATA[history was kept in sync even while that side was inactive.]]>
+</Line>
+<Line Number="648">
+<![CDATA[Clearing both sides' history here lets it register as a fresh]]>
+</Line>
+<Line Number="649">
+<![CDATA[edge on the next scan, mirroring the NotRdy recovery above.]]>
+</Line>
+<Line Number="650">
+<![CDATA[========================================]]>
+</Line>
+<Line Number="651">
+<![CDATA[*)]]>
+</Line>
+<Line Number="652">
+<![CDATA[IF Wrk_ModeChange THEN]]>
+</Line>
+<Line Number="653">
+<![CDATA[    Wrk_PrevPCmdFwd  := 0;]]>
+</Line>
+<Line Number="654">
+<![CDATA[    Wrk_PrevPCmdRev  := 0;]]>
+</Line>
+<Line Number="655">
+<![CDATA[    Wrk_PrevPCmdStop := 0;]]>
+</Line>
+<Line Number="656">
+<![CDATA[    Wrk_PrevOCmdFwd  := 0;]]>
+</Line>
+<Line Number="657">
+<![CDATA[    Wrk_PrevOCmdRev  := 0;]]>
+</Line>
+<Line Number="658">
+<![CDATA[    Wrk_PrevOCmdStop := 0;]]>
+</Line>
+<Line Number="659">
+<![CDATA[END_IF;]]>
+</Line>
+</STContent>
+</Routine>
+</Routines>
+</AddOnInstructionDefinition>
+</AddOnInstructionDefinitions>
+</Controller>
+</RSLogix5000Content>
