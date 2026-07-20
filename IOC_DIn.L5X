@@ -114,6 +114,11 @@
         <![CDATA[Latched Target Disagree (needs reset)]]>
       </Description>
     </Parameter>
+    <Parameter Name="Sts_RdyReset" TagType="Base" DataType="BOOL" Usage="Output" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read/Write">
+      <Description>
+        <![CDATA[1 = A latched alarm's condition has cleared - Reset would actually clear it (matches PlantPAx P_DIn ORdy_Reset)]]>
+      </Description>
+    </Parameter>
 </Parameters>
 <LocalTags>
     <LocalTag Name="Wrk_PrevPCmdReset" DataType="BOOL" Radix="Decimal" ExternalAccess="None">
@@ -243,6 +248,17 @@
       <Line Number="75"><![CDATA[ELSIF Sts_TgtDisagree AND Cfg_HasTgtDisagreeAlm THEN]]></Line>
       <Line Number="76"><![CDATA[    Alm_TgtDisagree := 1;]]></Line>
       <Line Number="77"><![CDATA[END_IF;]]></Line>
+      <Line Number="78"><![CDATA[]]></Line>
+      <Line Number="79"><![CDATA[(*]]></Line>
+      <Line Number="80"><![CDATA[========================================]]></Line>
+      <Line Number="81"><![CDATA[Sts_RdyReset (matches PlantPAx P_DIn ORdy_Reset):]]></Line>
+      <Line Number="82"><![CDATA[1 = a latched alarm's live condition has already cleared, so pressing]]></Line>
+      <Line Number="83"><![CDATA[Reset would actually clear it (vs. instantly re-latching because the]]></Line>
+      <Line Number="84"><![CDATA[triggering condition is still active).]]></Line>
+      <Line Number="85"><![CDATA[========================================]]></Line>
+      <Line Number="86"><![CDATA[*)]]></Line>
+      <Line Number="87"><![CDATA[Sts_RdyReset := (Alm_TgtDisagree AND NOT Sts_TgtDisagree)]]></Line>
+      <Line Number="88"><![CDATA[               OR (Alm_IOFault AND NOT Sts_IOFault);]]></Line>
 </STContent>
 </Routine>
 </Routines>
