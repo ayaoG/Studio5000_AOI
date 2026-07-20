@@ -279,6 +279,11 @@
         <![CDATA[Fault code: 0=None, 20=Lo, 21=Hi, 24=LoLo, 25=HiHi, 32=Fail]]>
       </Description>
     </Parameter>
+    <Parameter Name="Val_NotifyAll" TagType="Base" DataType="DINT" Usage="Output" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read/Write">
+      <Description>
+        <![CDATA[Same code as Val_Fault, but only for a latched (Cfg_Has*Alm) alarm - 0 means Val_Fault is just a live threshold crossing, not a configured alarm]]>
+      </Description>
+    </Parameter>
 </Parameters>
 <LocalTags>
     <LocalTag Name="Wrk_PrevPCmdReset" DataType="BOOL" Radix="Decimal" ExternalAccess="None">
@@ -671,6 +676,28 @@
       <Line Number="283"><![CDATA[ELSE]]></Line>
       <Line Number="284"><![CDATA[    Val_Fault := 0;]]></Line>
       <Line Number="285"><![CDATA[END_IF;]]></Line>
+      <Line Number="286"><![CDATA[]]></Line>
+      <Line Number="287"><![CDATA[(*]]></Line>
+      <Line Number="288"><![CDATA[========================================]]></Line>
+      <Line Number="289"><![CDATA[Val_NotifyAll (matches PlantPAx P_AIn Val_NotifyAll intent):]]></Line>
+      <Line Number="290"><![CDATA[Same fault code as Val_Fault, but driven ONLY by latched Alm_* bits -]]></Line>
+      <Line Number="291"><![CDATA[i.e. only nonzero if the alarm was configured (Cfg_Has*Alm) and actually]]></Line>
+      <Line Number="292"><![CDATA[latched, not merely a live threshold crossing that isn't alarmed.]]></Line>
+      <Line Number="293"><![CDATA[========================================]]></Line>
+      <Line Number="294"><![CDATA[*)]]></Line>
+      <Line Number="295"><![CDATA[IF Alm_Fail THEN]]></Line>
+      <Line Number="296"><![CDATA[    Val_NotifyAll := 32;]]></Line>
+      <Line Number="297"><![CDATA[ELSIF Alm_HiHi THEN]]></Line>
+      <Line Number="298"><![CDATA[    Val_NotifyAll := 25;]]></Line>
+      <Line Number="299"><![CDATA[ELSIF Alm_LoLo THEN]]></Line>
+      <Line Number="300"><![CDATA[    Val_NotifyAll := 24;]]></Line>
+      <Line Number="301"><![CDATA[ELSIF Alm_Hi THEN]]></Line>
+      <Line Number="302"><![CDATA[    Val_NotifyAll := 21;]]></Line>
+      <Line Number="303"><![CDATA[ELSIF Alm_Lo THEN]]></Line>
+      <Line Number="304"><![CDATA[    Val_NotifyAll := 20;]]></Line>
+      <Line Number="305"><![CDATA[ELSE]]></Line>
+      <Line Number="306"><![CDATA[    Val_NotifyAll := 0;]]></Line>
+      <Line Number="307"><![CDATA[END_IF;]]></Line>
 </STContent>
 </Routine>
 </Routines>
