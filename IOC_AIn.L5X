@@ -244,6 +244,11 @@
         <![CDATA[Live: signal fail (out-of-range or Inp_PVBad)]]>
       </Description>
     </Parameter>
+    <Parameter Name="Sts_RdyReset" TagType="Base" DataType="BOOL" Usage="Output" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read/Write">
+      <Description>
+        <![CDATA[1 = A latched alarm's condition has cleared - Reset would actually clear it (matches PlantPAx P_AIn ORdy_Reset)]]>
+      </Description>
+    </Parameter>
     <Parameter Name="Alm_HiHi" TagType="Base" DataType="BOOL" Usage="Output" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read/Write">
       <Description>
         <![CDATA[Latched HiHi alarm (needs reset)]]>
@@ -628,31 +633,44 @@
       <Line Number="245"><![CDATA[    Alm_Fail := 1;]]></Line>
       <Line Number="246"><![CDATA[END_IF;]]></Line>
       <Line Number="247"><![CDATA[]]></Line>
-      <Line Number="248"><![CDATA[]]></Line>
-      <Line Number="249"><![CDATA[(*]]></Line>
-      <Line Number="250"><![CDATA[========================================]]></Line>
-      <Line Number="251"><![CDATA[Val_Fault - highest-priority active fault code (matches PlantPAx P_AIn):]]></Line>
-      <Line Number="252"><![CDATA[  32 = Fail (out-of-range or Inp_PVBad)]]></Line>
-      <Line Number="253"><![CDATA[  25 = HiHi]]></Line>
-      <Line Number="254"><![CDATA[  24 = LoLo]]></Line>
-      <Line Number="255"><![CDATA[  21 = Hi]]></Line>
-      <Line Number="256"><![CDATA[  20 = Lo]]></Line>
-      <Line Number="257"><![CDATA[   0 = None]]></Line>
-      <Line Number="258"><![CDATA[========================================]]></Line>
-      <Line Number="259"><![CDATA[*)]]></Line>
-      <Line Number="260"><![CDATA[IF Sts_Fail OR Alm_Fail THEN]]></Line>
-      <Line Number="261"><![CDATA[    Val_Fault := 32;]]></Line>
-      <Line Number="262"><![CDATA[ELSIF Sts_HiHi OR Alm_HiHi THEN]]></Line>
-      <Line Number="263"><![CDATA[    Val_Fault := 25;]]></Line>
-      <Line Number="264"><![CDATA[ELSIF Sts_LoLo OR Alm_LoLo THEN]]></Line>
-      <Line Number="265"><![CDATA[    Val_Fault := 24;]]></Line>
-      <Line Number="266"><![CDATA[ELSIF Sts_Hi OR Alm_Hi THEN]]></Line>
-      <Line Number="267"><![CDATA[    Val_Fault := 21;]]></Line>
-      <Line Number="268"><![CDATA[ELSIF Sts_Lo OR Alm_Lo THEN]]></Line>
-      <Line Number="269"><![CDATA[    Val_Fault := 20;]]></Line>
-      <Line Number="270"><![CDATA[ELSE]]></Line>
-      <Line Number="271"><![CDATA[    Val_Fault := 0;]]></Line>
-      <Line Number="272"><![CDATA[END_IF;]]></Line>
+      <Line Number="248"><![CDATA[(*]]></Line>
+      <Line Number="249"><![CDATA[========================================]]></Line>
+      <Line Number="250"><![CDATA[Sts_RdyReset (matches PlantPAx P_AIn ORdy_Reset):]]></Line>
+      <Line Number="251"><![CDATA[1 = a latched alarm's live condition has already cleared, so pressing]]></Line>
+      <Line Number="252"><![CDATA[Reset would actually clear it (vs. instantly re-latching because the]]></Line>
+      <Line Number="253"><![CDATA[triggering condition is still active).]]></Line>
+      <Line Number="254"><![CDATA[========================================]]></Line>
+      <Line Number="255"><![CDATA[*)]]></Line>
+      <Line Number="256"><![CDATA[Sts_RdyReset := (Alm_HiHi AND NOT Sts_HiHi)]]></Line>
+      <Line Number="257"><![CDATA[                OR (Alm_Hi AND NOT Sts_Hi)]]></Line>
+      <Line Number="258"><![CDATA[                OR (Alm_Lo AND NOT Sts_Lo)]]></Line>
+      <Line Number="259"><![CDATA[                OR (Alm_LoLo AND NOT Sts_LoLo)]]></Line>
+      <Line Number="260"><![CDATA[                OR (Alm_Fail AND NOT Sts_Fail);]]></Line>
+      <Line Number="261"><![CDATA[]]></Line>
+      <Line Number="262"><![CDATA[(*]]></Line>
+      <Line Number="263"><![CDATA[========================================]]></Line>
+      <Line Number="264"><![CDATA[Val_Fault - highest-priority active fault code (matches PlantPAx P_AIn):]]></Line>
+      <Line Number="265"><![CDATA[  32 = Fail (out-of-range or Inp_PVBad)]]></Line>
+      <Line Number="266"><![CDATA[  25 = HiHi]]></Line>
+      <Line Number="267"><![CDATA[  24 = LoLo]]></Line>
+      <Line Number="268"><![CDATA[  21 = Hi]]></Line>
+      <Line Number="269"><![CDATA[  20 = Lo]]></Line>
+      <Line Number="270"><![CDATA[   0 = None]]></Line>
+      <Line Number="271"><![CDATA[========================================]]></Line>
+      <Line Number="272"><![CDATA[*)]]></Line>
+      <Line Number="273"><![CDATA[IF Sts_Fail OR Alm_Fail THEN]]></Line>
+      <Line Number="274"><![CDATA[    Val_Fault := 32;]]></Line>
+      <Line Number="275"><![CDATA[ELSIF Sts_HiHi OR Alm_HiHi THEN]]></Line>
+      <Line Number="276"><![CDATA[    Val_Fault := 25;]]></Line>
+      <Line Number="277"><![CDATA[ELSIF Sts_LoLo OR Alm_LoLo THEN]]></Line>
+      <Line Number="278"><![CDATA[    Val_Fault := 24;]]></Line>
+      <Line Number="279"><![CDATA[ELSIF Sts_Hi OR Alm_Hi THEN]]></Line>
+      <Line Number="280"><![CDATA[    Val_Fault := 21;]]></Line>
+      <Line Number="281"><![CDATA[ELSIF Sts_Lo OR Alm_Lo THEN]]></Line>
+      <Line Number="282"><![CDATA[    Val_Fault := 20;]]></Line>
+      <Line Number="283"><![CDATA[ELSE]]></Line>
+      <Line Number="284"><![CDATA[    Val_Fault := 0;]]></Line>
+      <Line Number="285"><![CDATA[END_IF;]]></Line>
 </STContent>
 </Routine>
 </Routines>

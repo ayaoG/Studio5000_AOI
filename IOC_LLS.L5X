@@ -451,7 +451,7 @@
     </LocalTag>
     <LocalTag Name="Wrk_EffectiveTarget" DataType="DINT" Radix="Decimal" ExternalAccess="None">
       <Description>
-        <![CDATA[Actual target driving PCmd (ramps to TargetNum)]]>
+        <![CDATA[Reported count of units currently committed in Wrk_CmdRunMask]]>
       </Description>
     </LocalTag>
     <LocalTag Name="Wrk_StaggerTmr" DataType="FBD_TIMER" ExternalAccess="None">
@@ -467,6 +467,30 @@
     <LocalTag Name="Wrk_PrevStaggerTmrDN" DataType="BOOL" Radix="Decimal" ExternalAccess="None">
       <Description>
         <![CDATA[Previous-scan value of Wrk_StaggerTmr.DN]]>
+      </Description>
+    </LocalTag>
+    <LocalTag Name="Wrk_CmdRunMask" DataType="DINT" Radix="Binary" ExternalAccess="None">
+      <Description>
+        <![CDATA[Persistent per-unit committed-to-run set (bit i = unit i). Migrates
+toward Wrk_DesiredRunMask one unit at a time, staggered by
+Cfg_StartDelay/Cfg_StopDelay, regardless of whether the overall count
+changes - so a fault-driven promotion staggers in exactly like a
+fresh start.]]>
+      </Description>
+    </LocalTag>
+    <LocalTag Name="Wrk_DesiredRunMask" DataType="DINT" Radix="Binary" ExternalAccess="None">
+      <Description>
+        <![CDATA[Units that should be running this scan (Val_Rank 1..Wrk_TargetNum)]]>
+      </Description>
+    </LocalTag>
+    <LocalTag Name="Wrk_PendingAdd" DataType="DINT" Radix="Decimal" ExternalAccess="None">
+      <Description>
+        <![CDATA[Index of the single highest-priority unit awaiting start, or -1]]>
+      </Description>
+    </LocalTag>
+    <LocalTag Name="Wrk_PendingRemove" DataType="DINT" Radix="Decimal" ExternalAccess="None">
+      <Description>
+        <![CDATA[Index of the single lowest-priority committed unit awaiting stop, or -1]]>
       </Description>
     </LocalTag>
 </LocalTags>
@@ -752,60 +776,107 @@ then within tier: Cfg_Prio desc, Wrk_UnitPos asc, Cfg_Pref desc, index asc.]]></
       <Line Number="265"><![CDATA[]]></Line>
       <Line Number="266"><![CDATA[(*]]></Line>
       <Line Number="267"><![CDATA[========================================]]></Line>
-      <Line Number="268"><![CDATA[Stagger delay - Wrk_EffectiveTarget ramps toward Wrk_TargetNum, one unit]]></Line>
-      <Line Number="269"><![CDATA[per Cfg_StartDelay (ramping up) or Cfg_StopDelay (ramping down).]]></Line>
-      <Line Number="270"><![CDATA[Set Cfg_StartDelay = Cfg_StopDelay = 0 for immediate response.]]></Line>
+      <Line Number="268"><![CDATA[Per-unit staggered enrollment - Wrk_CmdRunMask persists which units are
+currently committed to run (bit i = unit i). At most one unit is added
+(Cfg_StartDelay elapsed) or removed (Cfg_StopDelay elapsed) per timer
+interval, so a promoted standby staggers in exactly like a fresh start
+even when the overall running count doesn't change (e.g. a fault swap
+keeps the demand-driven headcount the same while substituting which
+unit fills it). A committed unit that becomes fully ineligible (fault/
+disabled) drops immediately, bypassing the stop delay.
+Set Cfg_StartDelay = Cfg_StopDelay = 0 for immediate response.]]></Line>
       <Line Number="271"><![CDATA[========================================]]></Line>
       <Line Number="272"><![CDATA[*)]]></Line>
-      <Line Number="273"><![CDATA[Wrk_StaggerTmrDNEdge := Wrk_StaggerTmr.DN AND NOT Wrk_PrevStaggerTmrDN;]]></Line>
-      <Line Number="274"><![CDATA[Wrk_PrevStaggerTmrDN := Wrk_StaggerTmr.DN;]]></Line>
+      <Line Number="273"><![CDATA[Wrk_StaggerTmrDNEdge := Wrk_StaggerTmr.DN AND NOT Wrk_PrevStaggerTmrDN;
+Wrk_PrevStaggerTmrDN := Wrk_StaggerTmr.DN;]]></Line>
       <Line Number="275"><![CDATA[]]></Line>
-      <Line Number="276"><![CDATA[(* Advance EffectiveTarget on timer edge (or immediately if 0 delay) *)]]></Line>
-      <Line Number="277"><![CDATA[IF Wrk_StaggerTmrDNEdge OR (Wrk_EffectiveTarget = 0 AND Wrk_TargetNum > 0]]></Line>
-      <Line Number="278"><![CDATA[                             AND Cfg_StartDelay <= 0.0) THEN]]></Line>
-      <Line Number="279"><![CDATA[    IF Wrk_EffectiveTarget < Wrk_TargetNum THEN]]></Line>
-      <Line Number="280"><![CDATA[        Wrk_EffectiveTarget := Wrk_EffectiveTarget + 1;]]></Line>
-      <Line Number="281"><![CDATA[    ELSIF Wrk_EffectiveTarget > Wrk_TargetNum THEN]]></Line>
-      <Line Number="282"><![CDATA[        Wrk_EffectiveTarget := Wrk_EffectiveTarget - 1;]]></Line>
-      <Line Number="283"><![CDATA[    END_IF;]]></Line>
-      <Line Number="284"><![CDATA[END_IF;]]></Line>
-      <Line Number="285"><![CDATA[]]></Line>
-      <Line Number="286"><![CDATA[(* Zero-delay bypass - snap directly to target *)]]></Line>
-      <Line Number="287"><![CDATA[IF (Wrk_EffectiveTarget < Wrk_TargetNum AND Cfg_StartDelay <= 0.0)]]></Line>
-      <Line Number="288"><![CDATA[   OR (Wrk_EffectiveTarget > Wrk_TargetNum AND Cfg_StopDelay <= 0.0) THEN]]></Line>
-      <Line Number="289"><![CDATA[    Wrk_EffectiveTarget := Wrk_TargetNum;]]></Line>
-      <Line Number="290"><![CDATA[END_IF;]]></Line>
-      <Line Number="291"><![CDATA[]]></Line>
-      <Line Number="292"><![CDATA[(* Timer preset based on direction of change *)]]></Line>
-      <Line Number="293"><![CDATA[IF Wrk_EffectiveTarget < Wrk_TargetNum THEN]]></Line>
-      <Line Number="294"><![CDATA[    Wrk_StaggerTmr.PRE := Cfg_StartDelay * 1000.0;]]></Line>
-      <Line Number="295"><![CDATA[ELSIF Wrk_EffectiveTarget > Wrk_TargetNum THEN]]></Line>
-      <Line Number="296"><![CDATA[    Wrk_StaggerTmr.PRE := Cfg_StopDelay * 1000.0;]]></Line>
-      <Line Number="297"><![CDATA[ELSE]]></Line>
-      <Line Number="298"><![CDATA[    Wrk_StaggerTmr.PRE := 0;]]></Line>
-      <Line Number="299"><![CDATA[END_IF;]]></Line>
-      <Line Number="300"><![CDATA[]]></Line>
-      <Line Number="301"><![CDATA[Wrk_StaggerTmr.TimerEnable := Wrk_EffectiveTarget <> Wrk_TargetNum;]]></Line>
-      <Line Number="302"><![CDATA[Wrk_StaggerTmr.Reset := (Wrk_EffectiveTarget = Wrk_TargetNum) OR Wrk_StaggerTmrDNEdge;]]></Line>
-      <Line Number="303"><![CDATA[TONR(Wrk_StaggerTmr);]]></Line>
-      <Line Number="304"><![CDATA[]]></Line>
+      <Line Number="276"><![CDATA[(* Units that should be running now, and immediate drop of anything
+   that's no longer eligible at all (no stop-delay wait for a fault) *)
+Wrk_DesiredRunMask := 0;
+FOR Wrk_I := 0 TO Wrk_ClampedNumUnits - 1 DO
+    IF Ref_Units[Wrk_I].Val_Rank > 0 AND Ref_Units[Wrk_I].Val_Rank <= Wrk_TargetNum THEN
+        Wrk_DesiredRunMask.[Wrk_I] := 1;
+    END_IF;
+    IF Wrk_CmdRunMask.[Wrk_I] AND (NOT Wrk_UnitEligible.[Wrk_I]) THEN
+        Wrk_CmdRunMask.[Wrk_I] := 0;
+    END_IF;
+END_FOR;]]></Line>
+      <Line Number="278"><![CDATA[]]></Line>
+      <Line Number="279"><![CDATA[(* Pick the single highest-priority pending add / lowest-priority
+   pending removal so at most one unit changes state per interval *)
+Wrk_PendingAdd    := -1;
+Wrk_PendingRemove := -1;
+FOR Wrk_I := 0 TO Wrk_ClampedNumUnits - 1 DO
+    IF Wrk_DesiredRunMask.[Wrk_I] AND (NOT Wrk_CmdRunMask.[Wrk_I]) THEN
+        IF Wrk_PendingAdd < 0 THEN
+            Wrk_PendingAdd := Wrk_I;
+        ELSIF Ref_Units[Wrk_I].Val_Rank < Ref_Units[Wrk_PendingAdd].Val_Rank THEN
+            Wrk_PendingAdd := Wrk_I;
+        END_IF;
+    END_IF;
+    IF Wrk_CmdRunMask.[Wrk_I] AND (NOT Wrk_DesiredRunMask.[Wrk_I]) THEN
+        IF Wrk_PendingRemove < 0 THEN
+            Wrk_PendingRemove := Wrk_I;
+        ELSIF Ref_Units[Wrk_I].Val_Rank > Ref_Units[Wrk_PendingRemove].Val_Rank THEN
+            Wrk_PendingRemove := Wrk_I;
+        END_IF;
+    END_IF;
+END_FOR;]]></Line>
+      <Line Number="281"><![CDATA[]]></Line>
+      <Line Number="282"><![CDATA[IF Wrk_PendingAdd >= 0 THEN
+    Wrk_StaggerTmr.PRE := Cfg_StartDelay * 1000.0;
+ELSIF Wrk_PendingRemove >= 0 THEN
+    Wrk_StaggerTmr.PRE := Cfg_StopDelay * 1000.0;
+ELSE
+    Wrk_StaggerTmr.PRE := 0;
+END_IF;]]></Line>
+      <Line Number="284"><![CDATA[]]></Line>
+      <Line Number="285"><![CDATA[Wrk_StaggerTmr.TimerEnable := (Wrk_PendingAdd >= 0) OR (Wrk_PendingRemove >= 0);
+Wrk_StaggerTmr.Reset := (NOT Wrk_StaggerTmr.TimerEnable) OR Wrk_StaggerTmrDNEdge;
+TONR(Wrk_StaggerTmr);]]></Line>
+      <Line Number="287"><![CDATA[]]></Line>
+      <Line Number="288"><![CDATA[(* Commit the pending add/remove once its delay elapses (or immediately
+   at 0 delay, snapping every pending unit at once to match the
+   documented zero-delay contract) *)
+IF Wrk_PendingAdd >= 0 AND (Wrk_StaggerTmrDNEdge OR Cfg_StartDelay <= 0.0) THEN
+    IF Cfg_StartDelay <= 0.0 THEN
+        FOR Wrk_I := 0 TO Wrk_ClampedNumUnits - 1 DO
+            IF Wrk_DesiredRunMask.[Wrk_I] AND (NOT Wrk_CmdRunMask.[Wrk_I]) THEN
+                Wrk_CmdRunMask.[Wrk_I] := 1;
+            END_IF;
+        END_FOR;
+    ELSE
+        Wrk_CmdRunMask.[Wrk_PendingAdd] := 1;
+    END_IF;
+ELSIF Wrk_PendingRemove >= 0 AND (Wrk_StaggerTmrDNEdge OR Cfg_StopDelay <= 0.0) THEN
+    IF Cfg_StopDelay <= 0.0 THEN
+        FOR Wrk_I := 0 TO Wrk_ClampedNumUnits - 1 DO
+            IF Wrk_CmdRunMask.[Wrk_I] AND (NOT Wrk_DesiredRunMask.[Wrk_I]) THEN
+                Wrk_CmdRunMask.[Wrk_I] := 0;
+            END_IF;
+        END_FOR;
+    ELSE
+        Wrk_CmdRunMask.[Wrk_PendingRemove] := 0;
+    END_IF;
+END_IF;]]></Line>
       <Line Number="305"><![CDATA[]]></Line>
-      <Line Number="306"><![CDATA[(*]]></Line>
-      <Line Number="307"><![CDATA[========================================]]></Line>
-      <Line Number="308"><![CDATA[Issue per-unit PCmd_Start / PCmd_Stop.]]></Line>
-      <Line Number="309"><![CDATA[A unit is commanded to run if its Val_Rank is 1..Wrk_EffectiveTarget.]]></Line>
-      <Line Number="310"><![CDATA[========================================]]></Line>
-      <Line Number="311"><![CDATA[*)]]></Line>
-      <Line Number="312"><![CDATA[FOR Wrk_I := 0 TO Wrk_ClampedNumUnits - 1 DO]]></Line>
-      <Line Number="313"><![CDATA[    IF Ref_Units[Wrk_I].Val_Rank > 0]]></Line>
-      <Line Number="314"><![CDATA[       AND Ref_Units[Wrk_I].Val_Rank <= Wrk_EffectiveTarget THEN]]></Line>
-      <Line Number="315"><![CDATA[        Ref_Units[Wrk_I].PCmd_Start := 1;]]></Line>
-      <Line Number="316"><![CDATA[        Ref_Units[Wrk_I].PCmd_Stop  := 0;]]></Line>
-      <Line Number="317"><![CDATA[    ELSE]]></Line>
-      <Line Number="318"><![CDATA[        Ref_Units[Wrk_I].PCmd_Start := 0;]]></Line>
-      <Line Number="319"><![CDATA[        Ref_Units[Wrk_I].PCmd_Stop  := 1;]]></Line>
-      <Line Number="320"><![CDATA[    END_IF;]]></Line>
-      <Line Number="321"><![CDATA[END_FOR;]]></Line>
+      <Line Number="306"><![CDATA[(*
+========================================
+Issue per-unit PCmd_Start / PCmd_Stop from the committed run mask, and
+report Wrk_EffectiveTarget as the count currently committed.
+========================================
+*)
+Wrk_EffectiveTarget := 0;
+FOR Wrk_I := 0 TO Wrk_ClampedNumUnits - 1 DO
+    IF Wrk_CmdRunMask.[Wrk_I] THEN
+        Ref_Units[Wrk_I].PCmd_Start := 1;
+        Ref_Units[Wrk_I].PCmd_Stop  := 0;
+        Wrk_EffectiveTarget := Wrk_EffectiveTarget + 1;
+    ELSE
+        Ref_Units[Wrk_I].PCmd_Start := 0;
+        Ref_Units[Wrk_I].PCmd_Stop  := 1;
+    END_IF;
+END_FOR;]]></Line>
       <Line Number="322"><![CDATA[]]></Line>
       <Line Number="323"><![CDATA[]]></Line>
       <Line Number="324"><![CDATA[(*]]></Line>
