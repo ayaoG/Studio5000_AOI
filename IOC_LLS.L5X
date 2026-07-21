@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <RSLogix5000Content SchemaRevision="1.0" SoftwareRevision="33.00" TargetName="IOC_LLS" TargetType="AddOnInstructionDefinition" ContainsContext="true" ExportDate="2026-07-15T20:38:20.000Z" ExportOptions="References DecoratedData ForceProtectedEncoding AllProjDocTrans">
 <Controller Use="Context" Name="IOC_LLS_Context">
 <DataTypes Use="Context">
@@ -147,47 +147,47 @@
         <![CDATA[1=Permissive OK. Only gates new Start commands; does not shut down a running system.]]>
       </Description>
     </Parameter>
-    <Parameter Name="Cfg_ProgPwrUp" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read/Write">
+    <Parameter Name="Cfg_ProgPwrUp" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
       <Description>
         <![CDATA[1 = default to Program mode on power-up]]>
       </Description>
     </Parameter>
-    <Parameter Name="Cfg_NumUnits" TagType="Base" DataType="DINT" Usage="Input" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read/Write">
+    <Parameter Name="Cfg_NumUnits" TagType="Base" DataType="DINT" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
       <Description>
         <![CDATA[Number of units managed (1..12). Must match size of Ref_Units.]]>
       </Description>
     </Parameter>
-    <Parameter Name="Cfg_MinDemand" TagType="Base" DataType="DINT" Usage="Input" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read/Write">
+    <Parameter Name="Cfg_MinDemand" TagType="Base" DataType="DINT" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
       <Description>
         <![CDATA[Minimum PSet_Demand allowed (0..Cfg_NumUnits)]]>
       </Description>
     </Parameter>
-    <Parameter Name="Cfg_MaxDemand" TagType="Base" DataType="DINT" Usage="Input" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read/Write">
+    <Parameter Name="Cfg_MaxDemand" TagType="Base" DataType="DINT" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
       <Description>
         <![CDATA[Maximum PSet_Demand allowed (0..Cfg_NumUnits)]]>
       </Description>
     </Parameter>
-    <Parameter Name="Cfg_StartDelay" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="true" ExternalAccess="Read/Write">
+    <Parameter Name="Cfg_StartDelay" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="false" ExternalAccess="Read/Write">
       <Description>
         <![CDATA[Delay between successive unit starts (sec, 0=no stagger)]]>
       </Description>
     </Parameter>
-    <Parameter Name="Cfg_StopDelay" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="true" ExternalAccess="Read/Write">
+    <Parameter Name="Cfg_StopDelay" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="false" ExternalAccess="Read/Write">
       <Description>
         <![CDATA[Delay between successive unit stops (sec, 0=no stagger)]]>
       </Description>
     </Parameter>
-    <Parameter Name="Cfg_AllowRotate" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read/Write">
+    <Parameter Name="Cfg_AllowRotate" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
       <Description>
         <![CDATA[1 = Enable rotation via PCmd_Rotate / Cfg_RotateOnStop]]>
       </Description>
     </Parameter>
-    <Parameter Name="Cfg_RotateOnStop" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read/Write">
+    <Parameter Name="Cfg_RotateOnStop" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
       <Description>
         <![CDATA[1 = Auto-rotate on system Stop (rising edge of NOT Sts_Running)]]>
       </Description>
     </Parameter>
-    <Parameter Name="Cfg_HasIntlkTripAlm" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read/Write">
+    <Parameter Name="Cfg_HasIntlkTripAlm" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
       <Description>
         <![CDATA[1 = Enable IntlkTrip alarm latching (live IntlkTrip always trips regardless)]]>
       </Description>
@@ -317,6 +317,21 @@
         <![CDATA[Latched IntlkTrip (needs reset; gated by Cfg_HasIntlkTripAlm)]]>
       </Description>
     </Parameter>
+    <Parameter Name="Val_Sts" TagType="Base" DataType="DINT" Usage="Output" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read/Write">
+      <Description>
+        <![CDATA[Group status: 0=Unknown, 1=Stopped, 2=Running, 10=Stopping, 12=Increasing, 13=Decreasing]]>
+      </Description>
+    </Parameter>
+    <Parameter Name="Val_Fault" TagType="Base" DataType="DINT" Usage="Output" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read/Write">
+      <Description>
+        <![CDATA[Fault code: 0=None, 34=CfgErr (matches PlantPAx P_LLS - IntlkTrip is not a Val_Fault code)]]>
+      </Description>
+    </Parameter>
+    <Parameter Name="Val_NotifyAll" TagType="Base" DataType="DINT" Usage="Output" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read/Write">
+      <Description>
+        <![CDATA[Latched-alarm rollup: 0=None, 16=IntlkTrip, 34=CfgErr - unlike Val_Fault this includes IntlkTrip, matching PlantPAx P_LLS Val_NotifyAll]]>
+      </Description>
+    </Parameter>
 </Parameters>
 <LocalTags>
     <LocalTag Name="Wrk_ModeAuto" DataType="BOOL" Radix="Decimal" ExternalAccess="None">
@@ -327,6 +342,11 @@
     <LocalTag Name="Wrk_PrevModeAuto" DataType="BOOL" Radix="Decimal" ExternalAccess="None">
       <Description>
         <![CDATA[Previous-scan mode]]>
+      </Description>
+    </LocalTag>
+    <LocalTag Name="Wrk_ModeChange" DataType="BOOL" Radix="Decimal" ExternalAccess="None">
+      <Description>
+        <![CDATA[1 = mode switched this scan (Wrk_ModeAuto vs previous scan)]]>
       </Description>
     </LocalTag>
     <LocalTag Name="Wrk_PrevPCmdStart" DataType="BOOL" Radix="Decimal" ExternalAccess="None">
@@ -520,433 +540,513 @@ fresh start.]]>
       <Line Number="20"><![CDATA[    On valve or VSD fault: user's ladder drops Sts_Available]]></Line>
       <Line Number="21"><![CDATA[]]></Line>
       <Line Number="22"><![CDATA[Ranking:]]></Line>
-      <Line Number="23"><![CDATA[  Sticky: currently-running units rank ahead of idle ones, so a unit
-  that returns to available does not bump one already running to cover
-  for it. Within each tier: Cfg_Prio (0-31) desc, then cyclic rotation
-  position, then Cfg_Pref desc, then unit index.]]></Line>
-      <Line Number="24"><![CDATA[  Only Sts_Available AND NOT Cfg_Disable units are ranked.]]></Line>
-      <Line Number="25"><![CDATA[  Val_Rank = 0 for unavailable / disabled units.]]></Line>
-      <Line Number="26"><![CDATA[]]></Line>
-      <Line Number="27"><![CDATA[Demand:]]></Line>
-      <Line Number="28"><![CDATA[  PSet_Demand clamped to [Cfg_MinDemand, Cfg_MaxDemand] and to number of]]></Line>
-      <Line Number="29"><![CDATA[  eligible units. Val_Demand = current effective demand (Wrk_EffectiveTarget).]]></Line>
-      <Line Number="30"><![CDATA[  Cfg_StartDelay / Cfg_StopDelay stagger between successive changes.]]></Line>
-      <Line Number="31"><![CDATA[]]></Line>
-      <Line Number="32"><![CDATA[Rotation:]]></Line>
-      <Line Number="33"><![CDATA[  PCmd_Rotate (edge) or Cfg_RotateOnStop (on system stop) advances the]]></Line>
-      <Line Number="34"><![CDATA[  cyclic offset by 1. Cfg_AllowRotate gates rotation entirely.]]></Line>
-      <Line Number="35"><![CDATA[]]></Line>
-      <Line Number="36"><![CDATA[Auto-promote:]]></Line>
-      <Line Number="37"><![CDATA[  Handled naturally by ranking - when a running unit's Sts_Available drops,]]></Line>
-      <Line Number="38"><![CDATA[  Val_Rank becomes 0 and the next-ranked standby inherits its slot. Because
-  ranking is sticky, that standby keeps running even after the original
-  unit becomes available again - it only gives the slot back on rotation.]]></Line>
-      <Line Number="39"><![CDATA[=============================================================================]]></Line>
-      <Line Number="40"><![CDATA[*)]]></Line>
-      <Line Number="41"><![CDATA[]]></Line>
-      <Line Number="42"><![CDATA[]]></Line>
-      <Line Number="43"><![CDATA[(*]]></Line>
-      <Line Number="44"><![CDATA[========================================]]></Line>
-      <Line Number="45"><![CDATA[Mode select]]></Line>
-      <Line Number="46"><![CDATA[========================================]]></Line>
-      <Line Number="47"><![CDATA[*)]]></Line>
-      <Line Number="48"><![CDATA[IF Cmd_Oper THEN]]></Line>
-      <Line Number="49"><![CDATA[    Wrk_ModeAuto := 0;]]></Line>
-      <Line Number="50"><![CDATA[ELSIF Cmd_Prog THEN]]></Line>
-      <Line Number="51"><![CDATA[    Wrk_ModeAuto := 1;]]></Line>
-      <Line Number="52"><![CDATA[END_IF;]]></Line>
-      <Line Number="53"><![CDATA[]]></Line>
-      <Line Number="54"><![CDATA[]]></Line>
-      <Line Number="55"><![CDATA[(*]]></Line>
-      <Line Number="56"><![CDATA[========================================]]></Line>
-      <Line Number="57"><![CDATA[Command edge detection + source selection]]></Line>
-      <Line Number="58"><![CDATA[========================================]]></Line>
-      <Line Number="59"><![CDATA[*)]]></Line>
-      <Line Number="60"><![CDATA[IF Wrk_ModeAuto THEN]]></Line>
-      <Line Number="61"><![CDATA[    Wrk_SrcCmdStartEdge  := PCmd_Start  AND NOT Wrk_PrevPCmdStart;]]></Line>
-      <Line Number="62"><![CDATA[    Wrk_SrcCmdStopEdge   := PCmd_Stop   AND NOT Wrk_PrevPCmdStop;]]></Line>
-      <Line Number="63"><![CDATA[    Wrk_SrcCmdRotateEdge := PCmd_Rotate AND NOT Wrk_PrevPCmdRotate;]]></Line>
-      <Line Number="64"><![CDATA[ELSE]]></Line>
-      <Line Number="65"><![CDATA[    Wrk_SrcCmdStartEdge  := OCmd_Start  AND NOT Wrk_PrevOCmdStart;]]></Line>
-      <Line Number="66"><![CDATA[    Wrk_SrcCmdStopEdge   := OCmd_Stop   AND NOT Wrk_PrevOCmdStop;]]></Line>
-      <Line Number="67"><![CDATA[    Wrk_SrcCmdRotateEdge := OCmd_Rotate AND NOT Wrk_PrevOCmdRotate;]]></Line>
-      <Line Number="68"><![CDATA[END_IF;]]></Line>
-      <Line Number="69"><![CDATA[]]></Line>
-      <Line Number="70"><![CDATA[Wrk_PrevPCmdStart  := PCmd_Start;]]></Line>
-      <Line Number="71"><![CDATA[Wrk_PrevPCmdStop   := PCmd_Stop;]]></Line>
-      <Line Number="72"><![CDATA[Wrk_PrevPCmdRotate := PCmd_Rotate;]]></Line>
-      <Line Number="73"><![CDATA[Wrk_PrevOCmdStart  := OCmd_Start;]]></Line>
-      <Line Number="74"><![CDATA[Wrk_PrevOCmdStop   := OCmd_Stop;]]></Line>
-      <Line Number="75"><![CDATA[Wrk_PrevOCmdRotate := OCmd_Rotate;]]></Line>
+      <Line Number="23"><![CDATA[  Sticky: currently-running units rank ahead of idle ones, so a unit]]></Line>
+      <Line Number="24"><![CDATA[  that returns to available does not bump one already running to cover]]></Line>
+      <Line Number="25"><![CDATA[  for it. Within each tier: Cfg_Prio (0-31) desc, then cyclic rotation]]></Line>
+      <Line Number="26"><![CDATA[  position, then Cfg_Pref desc, then unit index.]]></Line>
+      <Line Number="27"><![CDATA[  Only Sts_Available AND NOT Cfg_Disable units are ranked.]]></Line>
+      <Line Number="28"><![CDATA[  Val_Rank = 0 for unavailable / disabled units.]]></Line>
+      <Line Number="29"><![CDATA[]]></Line>
+      <Line Number="30"><![CDATA[Demand:]]></Line>
+      <Line Number="31"><![CDATA[  PSet_Demand clamped to [Cfg_MinDemand, Cfg_MaxDemand] and to number of]]></Line>
+      <Line Number="32"><![CDATA[  eligible units. Val_Demand = current effective demand (Wrk_EffectiveTarget).]]></Line>
+      <Line Number="33"><![CDATA[  Cfg_StartDelay / Cfg_StopDelay stagger between successive changes.]]></Line>
+      <Line Number="34"><![CDATA[]]></Line>
+      <Line Number="35"><![CDATA[Rotation:]]></Line>
+      <Line Number="36"><![CDATA[  PCmd_Rotate (edge) or Cfg_RotateOnStop (on system stop) advances the]]></Line>
+      <Line Number="37"><![CDATA[  cyclic offset by 1. Cfg_AllowRotate gates rotation entirely.]]></Line>
+      <Line Number="38"><![CDATA[]]></Line>
+      <Line Number="39"><![CDATA[Auto-promote:]]></Line>
+      <Line Number="40"><![CDATA[  Handled naturally by ranking - when a running unit's Sts_Available drops,]]></Line>
+      <Line Number="41"><![CDATA[  Val_Rank becomes 0 and the next-ranked standby inherits its slot. Because]]></Line>
+      <Line Number="42"><![CDATA[  ranking is sticky, that standby keeps running even after the original]]></Line>
+      <Line Number="43"><![CDATA[  unit becomes available again - it only gives the slot back on rotation.]]></Line>
+      <Line Number="44"><![CDATA[=============================================================================]]></Line>
+      <Line Number="45"><![CDATA[*)]]></Line>
+      <Line Number="46"><![CDATA[]]></Line>
+      <Line Number="47"><![CDATA[]]></Line>
+      <Line Number="48"><![CDATA[(*]]></Line>
+      <Line Number="49"><![CDATA[========================================]]></Line>
+      <Line Number="50"><![CDATA[Mode select]]></Line>
+      <Line Number="51"><![CDATA[========================================]]></Line>
+      <Line Number="52"><![CDATA[*)]]></Line>
+      <Line Number="53"><![CDATA[IF Cmd_Oper THEN]]></Line>
+      <Line Number="54"><![CDATA[    Wrk_ModeAuto := 0;]]></Line>
+      <Line Number="55"><![CDATA[ELSIF Cmd_Prog THEN]]></Line>
+      <Line Number="56"><![CDATA[    Wrk_ModeAuto := 1;]]></Line>
+      <Line Number="57"><![CDATA[END_IF;]]></Line>
+      <Line Number="58"><![CDATA[]]></Line>
+      <Line Number="59"><![CDATA[Wrk_ModeChange := Wrk_ModeAuto XOR Wrk_PrevModeAuto;]]></Line>
+      <Line Number="60"><![CDATA[]]></Line>
+      <Line Number="61"><![CDATA[]]></Line>
+      <Line Number="62"><![CDATA[(*]]></Line>
+      <Line Number="63"><![CDATA[========================================]]></Line>
+      <Line Number="64"><![CDATA[Command edge detection + source selection]]></Line>
+      <Line Number="65"><![CDATA[========================================]]></Line>
+      <Line Number="66"><![CDATA[*)]]></Line>
+      <Line Number="67"><![CDATA[IF Wrk_ModeAuto THEN]]></Line>
+      <Line Number="68"><![CDATA[    Wrk_SrcCmdStartEdge  := PCmd_Start  AND NOT Wrk_PrevPCmdStart;]]></Line>
+      <Line Number="69"><![CDATA[    Wrk_SrcCmdStopEdge   := PCmd_Stop   AND NOT Wrk_PrevPCmdStop;]]></Line>
+      <Line Number="70"><![CDATA[    Wrk_SrcCmdRotateEdge := PCmd_Rotate AND NOT Wrk_PrevPCmdRotate;]]></Line>
+      <Line Number="71"><![CDATA[ELSE]]></Line>
+      <Line Number="72"><![CDATA[    Wrk_SrcCmdStartEdge  := OCmd_Start  AND NOT Wrk_PrevOCmdStart;]]></Line>
+      <Line Number="73"><![CDATA[    Wrk_SrcCmdStopEdge   := OCmd_Stop   AND NOT Wrk_PrevOCmdStop;]]></Line>
+      <Line Number="74"><![CDATA[    Wrk_SrcCmdRotateEdge := OCmd_Rotate AND NOT Wrk_PrevOCmdRotate;]]></Line>
+      <Line Number="75"><![CDATA[END_IF;]]></Line>
       <Line Number="76"><![CDATA[]]></Line>
-      <Line Number="77"><![CDATA[]]></Line>
-      <Line Number="78"><![CDATA[(*]]></Line>
-      <Line Number="79"><![CDATA[========================================]]></Line>
-      <Line Number="80"><![CDATA[Live status mirror + master not-ready rollup]]></Line>
-      <Line Number="81"><![CDATA[Live interlock (NOT Inp_IntlkOK) drops the system immediately.]]></Line>
-      <Line Number="82"><![CDATA[Permissive (Inp_PermOK) only blocks new starts (see command latch below).]]></Line>
-      <Line Number="83"><![CDATA[========================================]]></Line>
-      <Line Number="84"><![CDATA[*)]]></Line>
-      <Line Number="85"><![CDATA[Sts_IntlkTrip := NOT Inp_IntlkOK;]]></Line>
-      <Line Number="86"><![CDATA[]]></Line>
-      <Line Number="87"><![CDATA[Wrk_NotRdy :=]]></Line>
-      <Line Number="88"><![CDATA[    Alm_CfgErr]]></Line>
-      <Line Number="89"><![CDATA[    OR Sts_IntlkTrip]]></Line>
-      <Line Number="90"><![CDATA[    OR Alm_IntlkTrip;]]></Line>
-      <Line Number="91"><![CDATA[]]></Line>
-      <Line Number="92"><![CDATA[]]></Line>
-      <Line Number="93"><![CDATA[(*]]></Line>
-      <Line Number="94"><![CDATA[========================================]]></Line>
-      <Line Number="95"><![CDATA[System-level Start/Stop latch]]></Line>
-      <Line Number="96"><![CDATA[Stop wins over Start. NotRdy forces Stop.]]></Line>
-      <Line Number="97"><![CDATA[Start edge is gated by Inp_PermOK (permissive must be OK to start,]]></Line>
-      <Line Number="98"><![CDATA[but does not shut down a system that's already running).]]></Line>
-      <Line Number="99"><![CDATA[========================================]]></Line>
-      <Line Number="100"><![CDATA[*)]]></Line>
-      <Line Number="101"><![CDATA[IF Wrk_NotRdy THEN]]></Line>
-      <Line Number="102"><![CDATA[    Wrk_SysRunning := 0;]]></Line>
-      <Line Number="103"><![CDATA[ELSIF Wrk_SrcCmdStopEdge THEN]]></Line>
-      <Line Number="104"><![CDATA[    Wrk_SysRunning := 0;]]></Line>
-      <Line Number="105"><![CDATA[ELSIF Wrk_SrcCmdStartEdge AND Inp_PermOK THEN]]></Line>
-      <Line Number="106"><![CDATA[    Wrk_SysRunning := 1;]]></Line>
-      <Line Number="107"><![CDATA[END_IF;]]></Line>
-      <Line Number="108"><![CDATA[]]></Line>
-      <Line Number="109"><![CDATA[]]></Line>
-      <Line Number="110"><![CDATA[(*]]></Line>
-      <Line Number="111"><![CDATA[========================================]]></Line>
-      <Line Number="112"><![CDATA[Self-clear PCmd / OCmd]]></Line>
-      <Line Number="113"><![CDATA[========================================]]></Line>
-      <Line Number="114"><![CDATA[*)]]></Line>
-      <Line Number="115"><![CDATA[PCmd_Start  := 0;]]></Line>
-      <Line Number="116"><![CDATA[PCmd_Stop   := 0;]]></Line>
-      <Line Number="117"><![CDATA[PCmd_Rotate := 0;]]></Line>
-      <Line Number="118"><![CDATA[OCmd_Start  := 0;]]></Line>
-      <Line Number="119"><![CDATA[OCmd_Stop   := 0;]]></Line>
-      <Line Number="120"><![CDATA[OCmd_Rotate := 0;]]></Line>
-      <Line Number="121"><![CDATA[]]></Line>
-      <Line Number="122"><![CDATA[]]></Line>
-      <Line Number="123"><![CDATA[(*]]></Line>
-      <Line Number="124"><![CDATA[========================================]]></Line>
-      <Line Number="125"><![CDATA[Reset]]></Line>
-      <Line Number="126"><![CDATA[========================================]]></Line>
-      <Line Number="127"><![CDATA[*)]]></Line>
-      <Line Number="128"><![CDATA[Wrk_ResetAlm := PCmd_Reset OR OCmd_Reset;]]></Line>
-      <Line Number="129"><![CDATA[PCmd_Reset := 0;]]></Line>
-      <Line Number="130"><![CDATA[OCmd_Reset := 0;]]></Line>
-      <Line Number="131"><![CDATA[]]></Line>
-      <Line Number="132"><![CDATA[]]></Line>
-      <Line Number="133"><![CDATA[(*]]></Line>
-      <Line Number="134"><![CDATA[========================================]]></Line>
-      <Line Number="135"><![CDATA[Rotation handling]]></Line>
-      <Line Number="136"><![CDATA[PCmd_Rotate edge OR (Cfg_RotateOnStop AND system just stopped) advances]]></Line>
-      <Line Number="137"><![CDATA[Wrk_RotateOffset by 1 (mod Cfg_NumUnits). Gated by Cfg_AllowRotate.]]></Line>
-      <Line Number="138"><![CDATA[========================================]]></Line>
-      <Line Number="139"><![CDATA[*)]]></Line>
-      <Line Number="140"><![CDATA[Wrk_SysStoppedEdge := (NOT Wrk_SysRunning) AND Wrk_PrevSysRunning;]]></Line>
-      <Line Number="141"><![CDATA[]]></Line>
-      <Line Number="142"><![CDATA[IF Cfg_AllowRotate AND Cfg_NumUnits > 0 THEN]]></Line>
-      <Line Number="143"><![CDATA[    IF Wrk_SrcCmdRotateEdge THEN]]></Line>
-      <Line Number="144"><![CDATA[        Wrk_RotateOffset := (Wrk_RotateOffset + 1) MOD Cfg_NumUnits;]]></Line>
-      <Line Number="145"><![CDATA[    ELSIF Cfg_RotateOnStop AND Wrk_SysStoppedEdge THEN]]></Line>
-      <Line Number="146"><![CDATA[        Wrk_RotateOffset := (Wrk_RotateOffset + 1) MOD Cfg_NumUnits;]]></Line>
-      <Line Number="147"><![CDATA[    END_IF;]]></Line>
-      <Line Number="148"><![CDATA[END_IF;]]></Line>
-      <Line Number="149"><![CDATA[]]></Line>
-      <Line Number="150"><![CDATA[Wrk_PrevSysRunning := Wrk_SysRunning;]]></Line>
-      <Line Number="151"><![CDATA[]]></Line>
-      <Line Number="152"><![CDATA[]]></Line>
-      <Line Number="153"><![CDATA[(*]]></Line>
-      <Line Number="154"><![CDATA[========================================]]></Line>
-      <Line Number="155"><![CDATA[Config check (Cfg_NumUnits must be 1..12)]]></Line>
-      <Line Number="156"><![CDATA[========================================]]></Line>
-      <Line Number="157"><![CDATA[*)]]></Line>
-      <Line Number="158"><![CDATA[Sts_CfgErr := (Cfg_NumUnits < 1) OR (Cfg_NumUnits > 12);]]></Line>
+      <Line Number="77"><![CDATA[Wrk_PrevPCmdStart  := PCmd_Start;]]></Line>
+      <Line Number="78"><![CDATA[Wrk_PrevPCmdStop   := PCmd_Stop;]]></Line>
+      <Line Number="79"><![CDATA[Wrk_PrevPCmdRotate := PCmd_Rotate;]]></Line>
+      <Line Number="80"><![CDATA[Wrk_PrevOCmdStart  := OCmd_Start;]]></Line>
+      <Line Number="81"><![CDATA[Wrk_PrevOCmdStop   := OCmd_Stop;]]></Line>
+      <Line Number="82"><![CDATA[Wrk_PrevOCmdRotate := OCmd_Rotate;]]></Line>
+      <Line Number="83"><![CDATA[]]></Line>
+      <Line Number="84"><![CDATA[]]></Line>
+      <Line Number="85"><![CDATA[(*]]></Line>
+      <Line Number="86"><![CDATA[========================================]]></Line>
+      <Line Number="87"><![CDATA[Live status mirror + master not-ready rollup]]></Line>
+      <Line Number="88"><![CDATA[Live interlock (NOT Inp_IntlkOK) drops the system immediately.]]></Line>
+      <Line Number="89"><![CDATA[Permissive (Inp_PermOK) only blocks new starts (see command latch below).]]></Line>
+      <Line Number="90"><![CDATA[========================================]]></Line>
+      <Line Number="91"><![CDATA[*)]]></Line>
+      <Line Number="92"><![CDATA[Sts_IntlkTrip := NOT Inp_IntlkOK;]]></Line>
+      <Line Number="93"><![CDATA[]]></Line>
+      <Line Number="94"><![CDATA[Wrk_NotRdy :=]]></Line>
+      <Line Number="95"><![CDATA[    Alm_CfgErr]]></Line>
+      <Line Number="96"><![CDATA[    OR Sts_IntlkTrip]]></Line>
+      <Line Number="97"><![CDATA[    OR Alm_IntlkTrip;]]></Line>
+      <Line Number="98"><![CDATA[]]></Line>
+      <Line Number="99"><![CDATA[]]></Line>
+      <Line Number="100"><![CDATA[(*]]></Line>
+      <Line Number="101"><![CDATA[========================================]]></Line>
+      <Line Number="102"><![CDATA[System-level Start/Stop latch]]></Line>
+      <Line Number="103"><![CDATA[Stop wins over Start. NotRdy forces Stop.]]></Line>
+      <Line Number="104"><![CDATA[Start edge is gated by Inp_PermOK (permissive must be OK to start,]]></Line>
+      <Line Number="105"><![CDATA[but does not shut down a system that's already running).]]></Line>
+      <Line Number="106"><![CDATA[========================================]]></Line>
+      <Line Number="107"><![CDATA[*)]]></Line>
+      <Line Number="108"><![CDATA[IF Wrk_NotRdy THEN]]></Line>
+      <Line Number="109"><![CDATA[    Wrk_SysRunning := 0;]]></Line>
+      <Line Number="110"><![CDATA[ELSIF Wrk_SrcCmdStopEdge THEN]]></Line>
+      <Line Number="111"><![CDATA[    Wrk_SysRunning := 0;]]></Line>
+      <Line Number="112"><![CDATA[ELSIF Wrk_SrcCmdStartEdge AND Inp_PermOK THEN]]></Line>
+      <Line Number="113"><![CDATA[    Wrk_SysRunning := 1;]]></Line>
+      <Line Number="114"><![CDATA[END_IF;]]></Line>
+      <Line Number="115"><![CDATA[]]></Line>
+      <Line Number="116"><![CDATA[]]></Line>
+      <Line Number="117"><![CDATA[(*]]></Line>
+      <Line Number="118"><![CDATA[========================================]]></Line>
+      <Line Number="119"><![CDATA[Self-clear PCmd / OCmd]]></Line>
+      <Line Number="120"><![CDATA[========================================]]></Line>
+      <Line Number="121"><![CDATA[*)]]></Line>
+      <Line Number="122"><![CDATA[PCmd_Start  := 0;]]></Line>
+      <Line Number="123"><![CDATA[PCmd_Stop   := 0;]]></Line>
+      <Line Number="124"><![CDATA[PCmd_Rotate := 0;]]></Line>
+      <Line Number="125"><![CDATA[OCmd_Start  := 0;]]></Line>
+      <Line Number="126"><![CDATA[OCmd_Stop   := 0;]]></Line>
+      <Line Number="127"><![CDATA[OCmd_Rotate := 0;]]></Line>
+      <Line Number="128"><![CDATA[]]></Line>
+      <Line Number="129"><![CDATA[]]></Line>
+      <Line Number="130"><![CDATA[(*]]></Line>
+      <Line Number="131"><![CDATA[========================================]]></Line>
+      <Line Number="132"><![CDATA[Reset]]></Line>
+      <Line Number="133"><![CDATA[========================================]]></Line>
+      <Line Number="134"><![CDATA[*)]]></Line>
+      <Line Number="135"><![CDATA[Wrk_ResetAlm := PCmd_Reset OR OCmd_Reset;]]></Line>
+      <Line Number="136"><![CDATA[PCmd_Reset := 0;]]></Line>
+      <Line Number="137"><![CDATA[OCmd_Reset := 0;]]></Line>
+      <Line Number="138"><![CDATA[]]></Line>
+      <Line Number="139"><![CDATA[]]></Line>
+      <Line Number="140"><![CDATA[(*]]></Line>
+      <Line Number="141"><![CDATA[========================================]]></Line>
+      <Line Number="142"><![CDATA[Rotation handling]]></Line>
+      <Line Number="143"><![CDATA[PCmd_Rotate edge OR (Cfg_RotateOnStop AND system just stopped) advances]]></Line>
+      <Line Number="144"><![CDATA[Wrk_RotateOffset by 1 (mod Cfg_NumUnits). Gated by Cfg_AllowRotate.]]></Line>
+      <Line Number="145"><![CDATA[========================================]]></Line>
+      <Line Number="146"><![CDATA[*)]]></Line>
+      <Line Number="147"><![CDATA[Wrk_SysStoppedEdge := (NOT Wrk_SysRunning) AND Wrk_PrevSysRunning;]]></Line>
+      <Line Number="148"><![CDATA[]]></Line>
+      <Line Number="149"><![CDATA[IF Cfg_AllowRotate AND Cfg_NumUnits > 0 THEN]]></Line>
+      <Line Number="150"><![CDATA[    IF Wrk_SrcCmdRotateEdge THEN]]></Line>
+      <Line Number="151"><![CDATA[        Wrk_RotateOffset := (Wrk_RotateOffset + 1) MOD Cfg_NumUnits;]]></Line>
+      <Line Number="152"><![CDATA[    ELSIF Cfg_RotateOnStop AND Wrk_SysStoppedEdge THEN]]></Line>
+      <Line Number="153"><![CDATA[        Wrk_RotateOffset := (Wrk_RotateOffset + 1) MOD Cfg_NumUnits;]]></Line>
+      <Line Number="154"><![CDATA[    END_IF;]]></Line>
+      <Line Number="155"><![CDATA[END_IF;]]></Line>
+      <Line Number="156"><![CDATA[]]></Line>
+      <Line Number="157"><![CDATA[Wrk_PrevSysRunning := Wrk_SysRunning;]]></Line>
+      <Line Number="158"><![CDATA[]]></Line>
       <Line Number="159"><![CDATA[]]></Line>
-      <Line Number="160"><![CDATA[IF Wrk_ResetAlm THEN]]></Line>
-      <Line Number="161"><![CDATA[    Alm_CfgErr := 0;]]></Line>
-      <Line Number="162"><![CDATA[ELSIF Sts_CfgErr THEN]]></Line>
-      <Line Number="163"><![CDATA[    Alm_CfgErr := 1;]]></Line>
-      <Line Number="164"><![CDATA[END_IF;]]></Line>
-      <Line Number="165"><![CDATA[]]></Line>
+      <Line Number="160"><![CDATA[(*]]></Line>
+      <Line Number="161"><![CDATA[========================================]]></Line>
+      <Line Number="162"><![CDATA[Config check (Cfg_NumUnits must be 1..12)]]></Line>
+      <Line Number="163"><![CDATA[========================================]]></Line>
+      <Line Number="164"><![CDATA[*)]]></Line>
+      <Line Number="165"><![CDATA[Sts_CfgErr := (Cfg_NumUnits < 1) OR (Cfg_NumUnits > 12);]]></Line>
       <Line Number="166"><![CDATA[]]></Line>
-      <Line Number="167"><![CDATA[(*]]></Line>
-      <Line Number="168"><![CDATA[========================================]]></Line>
-      <Line Number="169"><![CDATA[Latched interlock alarm - only latches if Cfg_HasIntlkTripAlm.]]></Line>
-      <Line Number="170"><![CDATA[Live Sts_IntlkTrip always drops the system regardless of Cfg.]]></Line>
-      <Line Number="171"><![CDATA[========================================]]></Line>
-      <Line Number="172"><![CDATA[*)]]></Line>
-      <Line Number="173"><![CDATA[IF Wrk_ResetAlm THEN]]></Line>
-      <Line Number="174"><![CDATA[    Alm_IntlkTrip := 0;]]></Line>
-      <Line Number="175"><![CDATA[ELSIF Sts_IntlkTrip AND Cfg_HasIntlkTripAlm THEN]]></Line>
-      <Line Number="176"><![CDATA[    Alm_IntlkTrip := 1;]]></Line>
-      <Line Number="177"><![CDATA[END_IF;]]></Line>
-      <Line Number="178"><![CDATA[]]></Line>
-      <Line Number="179"><![CDATA[]]></Line>
-      <Line Number="180"><![CDATA[(*]]></Line>
-      <Line Number="181"><![CDATA[========================================]]></Line>
-      <Line Number="182"><![CDATA[Per-unit eligibility and cyclic position]]></Line>
-      <Line Number="183"><![CDATA[Iterating over up to Cfg_NumUnits (clamped to 12).]]></Line>
-      <Line Number="184"><![CDATA[========================================]]></Line>
-      <Line Number="185"><![CDATA[*)]]></Line>
-      <Line Number="186"><![CDATA[Wrk_ClampedNumUnits := Cfg_NumUnits;]]></Line>
-      <Line Number="187"><![CDATA[IF Wrk_ClampedNumUnits < 0 THEN]]></Line>
-      <Line Number="188"><![CDATA[    Wrk_ClampedNumUnits := 0;]]></Line>
-      <Line Number="189"><![CDATA[END_IF;]]></Line>
-      <Line Number="190"><![CDATA[IF Wrk_ClampedNumUnits > 12 THEN]]></Line>
-      <Line Number="191"><![CDATA[    Wrk_ClampedNumUnits := 12;]]></Line>
-      <Line Number="192"><![CDATA[END_IF;]]></Line>
-      <Line Number="193"><![CDATA[]]></Line>
-      <Line Number="194"><![CDATA[Wrk_NumEligible := 0;]]></Line>
-      <Line Number="195"><![CDATA[Wrk_UnitEligible := 0;]]></Line>
-      <Line Number="196"><![CDATA[FOR Wrk_I := 0 TO Wrk_ClampedNumUnits - 1 DO]]></Line>
-      <Line Number="197"><![CDATA[    IF Ref_Units[Wrk_I].Sts_Available AND (NOT Ref_Units[Wrk_I].Cfg_Disable) THEN]]></Line>
-      <Line Number="198"><![CDATA[        Wrk_UnitEligible.[Wrk_I] := 1;]]></Line>
-      <Line Number="199"><![CDATA[        Wrk_UnitPos[Wrk_I] := (Wrk_I + Wrk_ClampedNumUnits - Wrk_RotateOffset) MOD Wrk_ClampedNumUnits;]]></Line>
-      <Line Number="200"><![CDATA[        Wrk_NumEligible := Wrk_NumEligible + 1;]]></Line>
-      <Line Number="201"><![CDATA[    ELSE]]></Line>
-      <Line Number="202"><![CDATA[        Wrk_UnitEligible.[Wrk_I] := 0;]]></Line>
-      <Line Number="203"><![CDATA[        Wrk_UnitPos[Wrk_I] := 0;]]></Line>
-      <Line Number="204"><![CDATA[        Ref_Units[Wrk_I].Val_Rank := 0;]]></Line>
-      <Line Number="205"><![CDATA[    END_IF;]]></Line>
-      <Line Number="206"><![CDATA[END_FOR;]]></Line>
-      <Line Number="207"><![CDATA[]]></Line>
-      <Line Number="208"><![CDATA[]]></Line>
-      <Line Number="209"><![CDATA[(*]]></Line>
-      <Line Number="210"><![CDATA[========================================]]></Line>
-      <Line Number="211"><![CDATA[Rank each eligible unit]]></Line>
-      <Line Number="212"><![CDATA[For unit i, rank = 1 + count of eligible units j that outrank i.]]></Line>
-      <Line Number="213"><![CDATA[Ordering: Sts_Running desc (sticky tier - running units always outrank
-idle ones so a returning unit can't bump one already covering for it),
-then within tier: Cfg_Prio desc, Wrk_UnitPos asc, Cfg_Pref desc, index asc.]]></Line>
-      <Line Number="214"><![CDATA[========================================]]></Line>
-      <Line Number="215"><![CDATA[*)]]></Line>
-      <Line Number="216"><![CDATA[FOR Wrk_I := 0 TO Wrk_ClampedNumUnits - 1 DO]]></Line>
-      <Line Number="217"><![CDATA[    IF Wrk_UnitEligible.[Wrk_I] THEN]]></Line>
-      <Line Number="218"><![CDATA[        Wrk_Rank := 1;]]></Line>
-      <Line Number="219"><![CDATA[        FOR Wrk_J := 0 TO Wrk_ClampedNumUnits - 1 DO]]></Line>
-      <Line Number="220"><![CDATA[            IF (Wrk_J <> Wrk_I) AND Wrk_UnitEligible.[Wrk_J] THEN]]></Line>
-      <Line Number="221"><![CDATA[                IF Ref_Units[Wrk_J].Sts_Running AND NOT Ref_Units[Wrk_I].Sts_Running THEN
-                    Wrk_Rank := Wrk_Rank + 1;
-                ELSIF NOT (Ref_Units[Wrk_J].Sts_Running XOR Ref_Units[Wrk_I].Sts_Running) THEN
-                    IF Ref_Units[Wrk_J].Cfg_Prio > Ref_Units[Wrk_I].Cfg_Prio THEN]]></Line>
-      <Line Number="222"><![CDATA[                    Wrk_Rank := Wrk_Rank + 1;]]></Line>
-      <Line Number="223"><![CDATA[                ELSIF Ref_Units[Wrk_J].Cfg_Prio = Ref_Units[Wrk_I].Cfg_Prio THEN]]></Line>
-      <Line Number="224"><![CDATA[                    IF Wrk_UnitPos[Wrk_J] < Wrk_UnitPos[Wrk_I] THEN]]></Line>
-      <Line Number="225"><![CDATA[                        Wrk_Rank := Wrk_Rank + 1;]]></Line>
-      <Line Number="226"><![CDATA[                    ELSIF Wrk_UnitPos[Wrk_J] = Wrk_UnitPos[Wrk_I] THEN]]></Line>
-      <Line Number="227"><![CDATA[                        IF Ref_Units[Wrk_J].Cfg_Pref > Ref_Units[Wrk_I].Cfg_Pref THEN]]></Line>
-      <Line Number="228"><![CDATA[                            Wrk_Rank := Wrk_Rank + 1;]]></Line>
-      <Line Number="229"><![CDATA[                        ELSIF Ref_Units[Wrk_J].Cfg_Pref = Ref_Units[Wrk_I].Cfg_Pref]]></Line>
-      <Line Number="230"><![CDATA[                              AND Wrk_J < Wrk_I THEN]]></Line>
-      <Line Number="231"><![CDATA[                            Wrk_Rank := Wrk_Rank + 1;]]></Line>
-      <Line Number="232"><![CDATA[                        END_IF;]]></Line>
-      <Line Number="233"><![CDATA[                    END_IF;]]></Line>
-      <Line Number="234"><![CDATA[                END_IF;
-                END_IF;]]></Line>
-      <Line Number="235"><![CDATA[            END_IF;]]></Line>
-      <Line Number="236"><![CDATA[        END_FOR;]]></Line>
-      <Line Number="237"><![CDATA[        Ref_Units[Wrk_I].Val_Rank := Wrk_Rank;]]></Line>
-      <Line Number="238"><![CDATA[    END_IF;]]></Line>
-      <Line Number="239"><![CDATA[END_FOR;]]></Line>
-      <Line Number="240"><![CDATA[]]></Line>
-      <Line Number="241"><![CDATA[]]></Line>
-      <Line Number="242"><![CDATA[(*]]></Line>
-      <Line Number="243"><![CDATA[========================================]]></Line>
-      <Line Number="244"><![CDATA[Compute target demand]]></Line>
-      <Line Number="245"><![CDATA[Clamped to [Cfg_MinDemand, Cfg_MaxDemand], eligible count, and system state.]]></Line>
-      <Line Number="246"><![CDATA[========================================]]></Line>
-      <Line Number="247"><![CDATA[*)]]></Line>
-      <Line Number="248"><![CDATA[Wrk_TargetNum := PSet_Demand;]]></Line>
-      <Line Number="249"><![CDATA[IF Wrk_TargetNum < Cfg_MinDemand THEN]]></Line>
-      <Line Number="250"><![CDATA[    Wrk_TargetNum := Cfg_MinDemand;]]></Line>
-      <Line Number="251"><![CDATA[END_IF;]]></Line>
-      <Line Number="252"><![CDATA[IF Wrk_TargetNum > Cfg_MaxDemand THEN]]></Line>
-      <Line Number="253"><![CDATA[    Wrk_TargetNum := Cfg_MaxDemand;]]></Line>
-      <Line Number="254"><![CDATA[END_IF;]]></Line>
-      <Line Number="255"><![CDATA[IF Wrk_TargetNum > Wrk_NumEligible THEN]]></Line>
-      <Line Number="256"><![CDATA[    Wrk_TargetNum := Wrk_NumEligible;]]></Line>
-      <Line Number="257"><![CDATA[END_IF;]]></Line>
-      <Line Number="258"><![CDATA[IF Wrk_TargetNum < 0 THEN]]></Line>
-      <Line Number="259"><![CDATA[    Wrk_TargetNum := 0;]]></Line>
-      <Line Number="260"><![CDATA[END_IF;]]></Line>
-      <Line Number="261"><![CDATA[IF NOT Wrk_SysRunning THEN]]></Line>
-      <Line Number="262"><![CDATA[    Wrk_TargetNum := 0;]]></Line>
-      <Line Number="263"><![CDATA[END_IF;]]></Line>
-      <Line Number="264"><![CDATA[]]></Line>
-      <Line Number="265"><![CDATA[]]></Line>
-      <Line Number="266"><![CDATA[(*]]></Line>
-      <Line Number="267"><![CDATA[========================================]]></Line>
-      <Line Number="268"><![CDATA[Per-unit staggered enrollment - Wrk_CmdRunMask persists which units are
-currently committed to run (bit i = unit i). At most one unit is added
-(Cfg_StartDelay elapsed) or removed (Cfg_StopDelay elapsed) per timer
-interval, so a promoted standby staggers in exactly like a fresh start
-even when the overall running count doesn't change (e.g. a fault swap
-keeps the demand-driven headcount the same while substituting which
-unit fills it). A committed unit that becomes fully ineligible (fault/
-disabled) drops immediately, bypassing the stop delay.
-Set Cfg_StartDelay = Cfg_StopDelay = 0 for immediate response.]]></Line>
-      <Line Number="271"><![CDATA[========================================]]></Line>
-      <Line Number="272"><![CDATA[*)]]></Line>
-      <Line Number="273"><![CDATA[Wrk_StaggerTmrDNEdge := Wrk_StaggerTmr.DN AND NOT Wrk_PrevStaggerTmrDN;
-Wrk_PrevStaggerTmrDN := Wrk_StaggerTmr.DN;]]></Line>
-      <Line Number="275"><![CDATA[]]></Line>
-      <Line Number="276"><![CDATA[(* Units that should be running now, and immediate drop of anything
-   that's no longer eligible at all (no stop-delay wait for a fault) *)
-Wrk_DesiredRunMask := 0;
-FOR Wrk_I := 0 TO Wrk_ClampedNumUnits - 1 DO
-    IF Ref_Units[Wrk_I].Val_Rank > 0 AND Ref_Units[Wrk_I].Val_Rank <= Wrk_TargetNum THEN
-        Wrk_DesiredRunMask.[Wrk_I] := 1;
-    END_IF;
-    IF Wrk_CmdRunMask.[Wrk_I] AND (NOT Wrk_UnitEligible.[Wrk_I]) THEN
-        Wrk_CmdRunMask.[Wrk_I] := 0;
-    END_IF;
-END_FOR;]]></Line>
+      <Line Number="167"><![CDATA[IF Wrk_ResetAlm THEN]]></Line>
+      <Line Number="168"><![CDATA[    Alm_CfgErr := 0;]]></Line>
+      <Line Number="169"><![CDATA[ELSIF Sts_CfgErr THEN]]></Line>
+      <Line Number="170"><![CDATA[    Alm_CfgErr := 1;]]></Line>
+      <Line Number="171"><![CDATA[END_IF;]]></Line>
+      <Line Number="172"><![CDATA[]]></Line>
+      <Line Number="173"><![CDATA[]]></Line>
+      <Line Number="174"><![CDATA[(*]]></Line>
+      <Line Number="175"><![CDATA[========================================]]></Line>
+      <Line Number="176"><![CDATA[Latched interlock alarm - only latches if Cfg_HasIntlkTripAlm.]]></Line>
+      <Line Number="177"><![CDATA[Live Sts_IntlkTrip always drops the system regardless of Cfg.]]></Line>
+      <Line Number="178"><![CDATA[========================================]]></Line>
+      <Line Number="179"><![CDATA[*)]]></Line>
+      <Line Number="180"><![CDATA[IF Wrk_ResetAlm THEN]]></Line>
+      <Line Number="181"><![CDATA[    Alm_IntlkTrip := 0;]]></Line>
+      <Line Number="182"><![CDATA[ELSIF Sts_IntlkTrip AND Cfg_HasIntlkTripAlm THEN]]></Line>
+      <Line Number="183"><![CDATA[    Alm_IntlkTrip := 1;]]></Line>
+      <Line Number="184"><![CDATA[END_IF;]]></Line>
+      <Line Number="185"><![CDATA[]]></Line>
+      <Line Number="186"><![CDATA[]]></Line>
+      <Line Number="187"><![CDATA[(*]]></Line>
+      <Line Number="188"><![CDATA[========================================]]></Line>
+      <Line Number="189"><![CDATA[Per-unit eligibility and cyclic position]]></Line>
+      <Line Number="190"><![CDATA[Iterating over up to Cfg_NumUnits (clamped to 12).]]></Line>
+      <Line Number="191"><![CDATA[========================================]]></Line>
+      <Line Number="192"><![CDATA[*)]]></Line>
+      <Line Number="193"><![CDATA[Wrk_ClampedNumUnits := Cfg_NumUnits;]]></Line>
+      <Line Number="194"><![CDATA[IF Wrk_ClampedNumUnits < 0 THEN]]></Line>
+      <Line Number="195"><![CDATA[    Wrk_ClampedNumUnits := 0;]]></Line>
+      <Line Number="196"><![CDATA[END_IF;]]></Line>
+      <Line Number="197"><![CDATA[IF Wrk_ClampedNumUnits > 12 THEN]]></Line>
+      <Line Number="198"><![CDATA[    Wrk_ClampedNumUnits := 12;]]></Line>
+      <Line Number="199"><![CDATA[END_IF;]]></Line>
+      <Line Number="200"><![CDATA[]]></Line>
+      <Line Number="201"><![CDATA[Wrk_NumEligible := 0;]]></Line>
+      <Line Number="202"><![CDATA[Wrk_UnitEligible := 0;]]></Line>
+      <Line Number="203"><![CDATA[FOR Wrk_I := 0 TO Wrk_ClampedNumUnits - 1 DO]]></Line>
+      <Line Number="204"><![CDATA[    IF Ref_Units[Wrk_I].Sts_Available AND (NOT Ref_Units[Wrk_I].Cfg_Disable) THEN]]></Line>
+      <Line Number="205"><![CDATA[        Wrk_UnitEligible.[Wrk_I] := 1;]]></Line>
+      <Line Number="206"><![CDATA[        Wrk_UnitPos[Wrk_I] := (Wrk_I + Wrk_ClampedNumUnits - Wrk_RotateOffset) MOD Wrk_ClampedNumUnits;]]></Line>
+      <Line Number="207"><![CDATA[        Wrk_NumEligible := Wrk_NumEligible + 1;]]></Line>
+      <Line Number="208"><![CDATA[    ELSE]]></Line>
+      <Line Number="209"><![CDATA[        Wrk_UnitEligible.[Wrk_I] := 0;]]></Line>
+      <Line Number="210"><![CDATA[        Wrk_UnitPos[Wrk_I] := 0;]]></Line>
+      <Line Number="211"><![CDATA[        Ref_Units[Wrk_I].Val_Rank := 0;]]></Line>
+      <Line Number="212"><![CDATA[    END_IF;]]></Line>
+      <Line Number="213"><![CDATA[END_FOR;]]></Line>
+      <Line Number="214"><![CDATA[]]></Line>
+      <Line Number="215"><![CDATA[]]></Line>
+      <Line Number="216"><![CDATA[(*]]></Line>
+      <Line Number="217"><![CDATA[========================================]]></Line>
+      <Line Number="218"><![CDATA[Rank each eligible unit]]></Line>
+      <Line Number="219"><![CDATA[For unit i, rank = 1 + count of eligible units j that outrank i.]]></Line>
+      <Line Number="220"><![CDATA[Ordering: Sts_Running desc (sticky tier - running units always outrank]]></Line>
+      <Line Number="221"><![CDATA[idle ones so a returning unit can't bump one already covering for it),]]></Line>
+      <Line Number="222"><![CDATA[then within tier: Cfg_Prio desc, Wrk_UnitPos asc, Cfg_Pref desc, index asc.]]></Line>
+      <Line Number="223"><![CDATA[========================================]]></Line>
+      <Line Number="224"><![CDATA[*)]]></Line>
+      <Line Number="225"><![CDATA[FOR Wrk_I := 0 TO Wrk_ClampedNumUnits - 1 DO]]></Line>
+      <Line Number="226"><![CDATA[    IF Wrk_UnitEligible.[Wrk_I] THEN]]></Line>
+      <Line Number="227"><![CDATA[        Wrk_Rank := 1;]]></Line>
+      <Line Number="228"><![CDATA[        FOR Wrk_J := 0 TO Wrk_ClampedNumUnits - 1 DO]]></Line>
+      <Line Number="229"><![CDATA[            IF (Wrk_J <> Wrk_I) AND Wrk_UnitEligible.[Wrk_J] THEN]]></Line>
+      <Line Number="230"><![CDATA[                IF Ref_Units[Wrk_J].Sts_Running AND NOT Ref_Units[Wrk_I].Sts_Running THEN]]></Line>
+      <Line Number="231"><![CDATA[                    Wrk_Rank := Wrk_Rank + 1;]]></Line>
+      <Line Number="232"><![CDATA[                ELSIF NOT (Ref_Units[Wrk_J].Sts_Running XOR Ref_Units[Wrk_I].Sts_Running) THEN]]></Line>
+      <Line Number="233"><![CDATA[                    IF Ref_Units[Wrk_J].Cfg_Prio > Ref_Units[Wrk_I].Cfg_Prio THEN]]></Line>
+      <Line Number="234"><![CDATA[                    Wrk_Rank := Wrk_Rank + 1;]]></Line>
+      <Line Number="235"><![CDATA[                ELSIF Ref_Units[Wrk_J].Cfg_Prio = Ref_Units[Wrk_I].Cfg_Prio THEN]]></Line>
+      <Line Number="236"><![CDATA[                    IF Wrk_UnitPos[Wrk_J] < Wrk_UnitPos[Wrk_I] THEN]]></Line>
+      <Line Number="237"><![CDATA[                        Wrk_Rank := Wrk_Rank + 1;]]></Line>
+      <Line Number="238"><![CDATA[                    ELSIF Wrk_UnitPos[Wrk_J] = Wrk_UnitPos[Wrk_I] THEN]]></Line>
+      <Line Number="239"><![CDATA[                        IF Ref_Units[Wrk_J].Cfg_Pref > Ref_Units[Wrk_I].Cfg_Pref THEN]]></Line>
+      <Line Number="240"><![CDATA[                            Wrk_Rank := Wrk_Rank + 1;]]></Line>
+      <Line Number="241"><![CDATA[                        ELSIF Ref_Units[Wrk_J].Cfg_Pref = Ref_Units[Wrk_I].Cfg_Pref]]></Line>
+      <Line Number="242"><![CDATA[                              AND Wrk_J < Wrk_I THEN]]></Line>
+      <Line Number="243"><![CDATA[                            Wrk_Rank := Wrk_Rank + 1;]]></Line>
+      <Line Number="244"><![CDATA[                        END_IF;]]></Line>
+      <Line Number="245"><![CDATA[                    END_IF;]]></Line>
+      <Line Number="246"><![CDATA[                END_IF;]]></Line>
+      <Line Number="247"><![CDATA[                END_IF;]]></Line>
+      <Line Number="248"><![CDATA[            END_IF;]]></Line>
+      <Line Number="249"><![CDATA[        END_FOR;]]></Line>
+      <Line Number="250"><![CDATA[        Ref_Units[Wrk_I].Val_Rank := Wrk_Rank;]]></Line>
+      <Line Number="251"><![CDATA[    END_IF;]]></Line>
+      <Line Number="252"><![CDATA[END_FOR;]]></Line>
+      <Line Number="253"><![CDATA[]]></Line>
+      <Line Number="254"><![CDATA[]]></Line>
+      <Line Number="255"><![CDATA[(*]]></Line>
+      <Line Number="256"><![CDATA[========================================]]></Line>
+      <Line Number="257"><![CDATA[Compute target demand]]></Line>
+      <Line Number="258"><![CDATA[Clamped to [Cfg_MinDemand, Cfg_MaxDemand], eligible count, and system state.]]></Line>
+      <Line Number="259"><![CDATA[========================================]]></Line>
+      <Line Number="260"><![CDATA[*)]]></Line>
+      <Line Number="261"><![CDATA[Wrk_TargetNum := PSet_Demand;]]></Line>
+      <Line Number="262"><![CDATA[IF Wrk_TargetNum < Cfg_MinDemand THEN]]></Line>
+      <Line Number="263"><![CDATA[    Wrk_TargetNum := Cfg_MinDemand;]]></Line>
+      <Line Number="264"><![CDATA[END_IF;]]></Line>
+      <Line Number="265"><![CDATA[IF Wrk_TargetNum > Cfg_MaxDemand THEN]]></Line>
+      <Line Number="266"><![CDATA[    Wrk_TargetNum := Cfg_MaxDemand;]]></Line>
+      <Line Number="267"><![CDATA[END_IF;]]></Line>
+      <Line Number="268"><![CDATA[IF Wrk_TargetNum > Wrk_NumEligible THEN]]></Line>
+      <Line Number="269"><![CDATA[    Wrk_TargetNum := Wrk_NumEligible;]]></Line>
+      <Line Number="270"><![CDATA[END_IF;]]></Line>
+      <Line Number="271"><![CDATA[IF Wrk_TargetNum < 0 THEN]]></Line>
+      <Line Number="272"><![CDATA[    Wrk_TargetNum := 0;]]></Line>
+      <Line Number="273"><![CDATA[END_IF;]]></Line>
+      <Line Number="274"><![CDATA[IF NOT Wrk_SysRunning THEN]]></Line>
+      <Line Number="275"><![CDATA[    Wrk_TargetNum := 0;]]></Line>
+      <Line Number="276"><![CDATA[END_IF;]]></Line>
+      <Line Number="277"><![CDATA[]]></Line>
       <Line Number="278"><![CDATA[]]></Line>
-      <Line Number="279"><![CDATA[(* Pick the single highest-priority pending add / lowest-priority
-   pending removal so at most one unit changes state per interval *)
-Wrk_PendingAdd    := -1;
-Wrk_PendingRemove := -1;
-FOR Wrk_I := 0 TO Wrk_ClampedNumUnits - 1 DO
-    IF Wrk_DesiredRunMask.[Wrk_I] AND (NOT Wrk_CmdRunMask.[Wrk_I]) THEN
-        IF Wrk_PendingAdd < 0 THEN
-            Wrk_PendingAdd := Wrk_I;
-        ELSIF Ref_Units[Wrk_I].Val_Rank < Ref_Units[Wrk_PendingAdd].Val_Rank THEN
-            Wrk_PendingAdd := Wrk_I;
-        END_IF;
-    END_IF;
-    IF Wrk_CmdRunMask.[Wrk_I] AND (NOT Wrk_DesiredRunMask.[Wrk_I]) THEN
-        IF Wrk_PendingRemove < 0 THEN
-            Wrk_PendingRemove := Wrk_I;
-        ELSIF Ref_Units[Wrk_I].Val_Rank > Ref_Units[Wrk_PendingRemove].Val_Rank THEN
-            Wrk_PendingRemove := Wrk_I;
-        END_IF;
-    END_IF;
-END_FOR;]]></Line>
-      <Line Number="281"><![CDATA[]]></Line>
-      <Line Number="282"><![CDATA[IF Wrk_PendingAdd >= 0 THEN
-    Wrk_StaggerTmr.PRE := Cfg_StartDelay * 1000.0;
-ELSIF Wrk_PendingRemove >= 0 THEN
-    Wrk_StaggerTmr.PRE := Cfg_StopDelay * 1000.0;
-ELSE
-    Wrk_StaggerTmr.PRE := 0;
-END_IF;]]></Line>
-      <Line Number="284"><![CDATA[]]></Line>
-      <Line Number="285"><![CDATA[Wrk_StaggerTmr.TimerEnable := (Wrk_PendingAdd >= 0) OR (Wrk_PendingRemove >= 0);
-Wrk_StaggerTmr.Reset := (NOT Wrk_StaggerTmr.TimerEnable) OR Wrk_StaggerTmrDNEdge;
-TONR(Wrk_StaggerTmr);]]></Line>
-      <Line Number="287"><![CDATA[]]></Line>
-      <Line Number="288"><![CDATA[(* Commit the pending add/remove once its delay elapses (or immediately
-   at 0 delay, snapping every pending unit at once to match the
-   documented zero-delay contract) *)
-IF Wrk_PendingAdd >= 0 AND (Wrk_StaggerTmrDNEdge OR Cfg_StartDelay <= 0.0) THEN
-    IF Cfg_StartDelay <= 0.0 THEN
-        FOR Wrk_I := 0 TO Wrk_ClampedNumUnits - 1 DO
-            IF Wrk_DesiredRunMask.[Wrk_I] AND (NOT Wrk_CmdRunMask.[Wrk_I]) THEN
-                Wrk_CmdRunMask.[Wrk_I] := 1;
-            END_IF;
-        END_FOR;
-    ELSE
-        Wrk_CmdRunMask.[Wrk_PendingAdd] := 1;
-    END_IF;
-ELSIF Wrk_PendingRemove >= 0 AND (Wrk_StaggerTmrDNEdge OR Cfg_StopDelay <= 0.0) THEN
-    IF Cfg_StopDelay <= 0.0 THEN
-        FOR Wrk_I := 0 TO Wrk_ClampedNumUnits - 1 DO
-            IF Wrk_CmdRunMask.[Wrk_I] AND (NOT Wrk_DesiredRunMask.[Wrk_I]) THEN
-                Wrk_CmdRunMask.[Wrk_I] := 0;
-            END_IF;
-        END_FOR;
-    ELSE
-        Wrk_CmdRunMask.[Wrk_PendingRemove] := 0;
-    END_IF;
-END_IF;]]></Line>
-      <Line Number="305"><![CDATA[]]></Line>
-      <Line Number="306"><![CDATA[(*
-========================================
-Issue per-unit PCmd_Start / PCmd_Stop from the committed run mask, and
-report Wrk_EffectiveTarget as the count currently committed.
-========================================
-*)
-Wrk_EffectiveTarget := 0;
-FOR Wrk_I := 0 TO Wrk_ClampedNumUnits - 1 DO
-    IF Wrk_CmdRunMask.[Wrk_I] THEN
-        Ref_Units[Wrk_I].PCmd_Start := 1;
-        Ref_Units[Wrk_I].PCmd_Stop  := 0;
-        Wrk_EffectiveTarget := Wrk_EffectiveTarget + 1;
-    ELSE
-        Ref_Units[Wrk_I].PCmd_Start := 0;
-        Ref_Units[Wrk_I].PCmd_Stop  := 1;
-    END_IF;
-END_FOR;]]></Line>
-      <Line Number="322"><![CDATA[]]></Line>
-      <Line Number="323"><![CDATA[]]></Line>
-      <Line Number="324"><![CDATA[(*]]></Line>
-      <Line Number="325"><![CDATA[========================================]]></Line>
-      <Line Number="326"><![CDATA[Per-unit status rollup bitmasks (bit i = unit i)]]></Line>
-      <Line Number="327"><![CDATA[========================================]]></Line>
-      <Line Number="328"><![CDATA[*)]]></Line>
-      <Line Number="329"><![CDATA[Sts_UnitAvail    := 0;]]></Line>
-      <Line Number="330"><![CDATA[Sts_UnitRunning  := 0;]]></Line>
-      <Line Number="331"><![CDATA[Sts_UnitStarting := 0;]]></Line>
-      <Line Number="332"><![CDATA[Sts_UnitStopping := 0;]]></Line>
-      <Line Number="333"><![CDATA[Sts_UnitStopped  := 0;]]></Line>
-      <Line Number="334"><![CDATA[Wrk_NumRunning   := 0;]]></Line>
+      <Line Number="279"><![CDATA[(*]]></Line>
+      <Line Number="280"><![CDATA[========================================]]></Line>
+      <Line Number="281"><![CDATA[Per-unit staggered enrollment - Wrk_CmdRunMask persists which units are]]></Line>
+      <Line Number="282"><![CDATA[currently committed to run (bit i = unit i). At most one unit is added]]></Line>
+      <Line Number="283"><![CDATA[(Cfg_StartDelay elapsed) or removed (Cfg_StopDelay elapsed) per timer]]></Line>
+      <Line Number="284"><![CDATA[interval, so a promoted standby staggers in exactly like a fresh start]]></Line>
+      <Line Number="285"><![CDATA[even when the overall running count doesn't change (e.g. a fault swap]]></Line>
+      <Line Number="286"><![CDATA[keeps the demand-driven headcount the same while substituting which]]></Line>
+      <Line Number="287"><![CDATA[unit fills it). A committed unit that becomes fully ineligible (fault/]]></Line>
+      <Line Number="288"><![CDATA[disabled) drops immediately, bypassing the stop delay.]]></Line>
+      <Line Number="289"><![CDATA[Set Cfg_StartDelay = Cfg_StopDelay = 0 for immediate response.]]></Line>
+      <Line Number="290"><![CDATA[========================================]]></Line>
+      <Line Number="291"><![CDATA[*)]]></Line>
+      <Line Number="292"><![CDATA[Wrk_StaggerTmrDNEdge := Wrk_StaggerTmr.DN AND NOT Wrk_PrevStaggerTmrDN;]]></Line>
+      <Line Number="293"><![CDATA[Wrk_PrevStaggerTmrDN := Wrk_StaggerTmr.DN;]]></Line>
+      <Line Number="294"><![CDATA[]]></Line>
+      <Line Number="295"><![CDATA[(* Units that should be running now, and immediate drop of anything]]></Line>
+      <Line Number="296"><![CDATA[   that's no longer eligible at all (no stop-delay wait for a fault) *)]]></Line>
+      <Line Number="297"><![CDATA[Wrk_DesiredRunMask := 0;]]></Line>
+      <Line Number="298"><![CDATA[FOR Wrk_I := 0 TO Wrk_ClampedNumUnits - 1 DO]]></Line>
+      <Line Number="299"><![CDATA[    IF Ref_Units[Wrk_I].Val_Rank > 0 AND Ref_Units[Wrk_I].Val_Rank <= Wrk_TargetNum THEN]]></Line>
+      <Line Number="300"><![CDATA[        Wrk_DesiredRunMask.[Wrk_I] := 1;]]></Line>
+      <Line Number="301"><![CDATA[    END_IF;]]></Line>
+      <Line Number="302"><![CDATA[    IF Wrk_CmdRunMask.[Wrk_I] AND (NOT Wrk_UnitEligible.[Wrk_I]) THEN]]></Line>
+      <Line Number="303"><![CDATA[        Wrk_CmdRunMask.[Wrk_I] := 0;]]></Line>
+      <Line Number="304"><![CDATA[    END_IF;]]></Line>
+      <Line Number="305"><![CDATA[END_FOR;]]></Line>
+      <Line Number="306"><![CDATA[]]></Line>
+      <Line Number="307"><![CDATA[(* Pick the single highest-priority pending add / lowest-priority]]></Line>
+      <Line Number="308"><![CDATA[   pending removal so at most one unit changes state per interval *)]]></Line>
+      <Line Number="309"><![CDATA[Wrk_PendingAdd    := -1;]]></Line>
+      <Line Number="310"><![CDATA[Wrk_PendingRemove := -1;]]></Line>
+      <Line Number="311"><![CDATA[FOR Wrk_I := 0 TO Wrk_ClampedNumUnits - 1 DO]]></Line>
+      <Line Number="312"><![CDATA[    IF Wrk_DesiredRunMask.[Wrk_I] AND (NOT Wrk_CmdRunMask.[Wrk_I]) THEN]]></Line>
+      <Line Number="313"><![CDATA[        IF Wrk_PendingAdd < 0 THEN]]></Line>
+      <Line Number="314"><![CDATA[            Wrk_PendingAdd := Wrk_I;]]></Line>
+      <Line Number="315"><![CDATA[        ELSIF Ref_Units[Wrk_I].Val_Rank < Ref_Units[Wrk_PendingAdd].Val_Rank THEN]]></Line>
+      <Line Number="316"><![CDATA[            Wrk_PendingAdd := Wrk_I;]]></Line>
+      <Line Number="317"><![CDATA[        END_IF;]]></Line>
+      <Line Number="318"><![CDATA[    END_IF;]]></Line>
+      <Line Number="319"><![CDATA[    IF Wrk_CmdRunMask.[Wrk_I] AND (NOT Wrk_DesiredRunMask.[Wrk_I]) THEN]]></Line>
+      <Line Number="320"><![CDATA[        IF Wrk_PendingRemove < 0 THEN]]></Line>
+      <Line Number="321"><![CDATA[            Wrk_PendingRemove := Wrk_I;]]></Line>
+      <Line Number="322"><![CDATA[        ELSIF Ref_Units[Wrk_I].Val_Rank > Ref_Units[Wrk_PendingRemove].Val_Rank THEN]]></Line>
+      <Line Number="323"><![CDATA[            Wrk_PendingRemove := Wrk_I;]]></Line>
+      <Line Number="324"><![CDATA[        END_IF;]]></Line>
+      <Line Number="325"><![CDATA[    END_IF;]]></Line>
+      <Line Number="326"><![CDATA[END_FOR;]]></Line>
+      <Line Number="327"><![CDATA[]]></Line>
+      <Line Number="328"><![CDATA[IF Wrk_PendingAdd >= 0 THEN]]></Line>
+      <Line Number="329"><![CDATA[    Wrk_StaggerTmr.PRE := Cfg_StartDelay * 1000.0;]]></Line>
+      <Line Number="330"><![CDATA[ELSIF Wrk_PendingRemove >= 0 THEN]]></Line>
+      <Line Number="331"><![CDATA[    Wrk_StaggerTmr.PRE := Cfg_StopDelay * 1000.0;]]></Line>
+      <Line Number="332"><![CDATA[ELSE]]></Line>
+      <Line Number="333"><![CDATA[    Wrk_StaggerTmr.PRE := 0;]]></Line>
+      <Line Number="334"><![CDATA[END_IF;]]></Line>
       <Line Number="335"><![CDATA[]]></Line>
-      <Line Number="336"><![CDATA[FOR Wrk_I := 0 TO Wrk_ClampedNumUnits - 1 DO]]></Line>
-      <Line Number="337"><![CDATA[    IF Wrk_UnitEligible.[Wrk_I] THEN]]></Line>
-      <Line Number="338"><![CDATA[        Sts_UnitAvail.[Wrk_I] := 1;]]></Line>
-      <Line Number="339"><![CDATA[    END_IF;]]></Line>
-      <Line Number="340"><![CDATA[    IF Ref_Units[Wrk_I].Sts_Running THEN]]></Line>
-      <Line Number="341"><![CDATA[        Sts_UnitRunning.[Wrk_I] := 1;]]></Line>
-      <Line Number="342"><![CDATA[        Wrk_NumRunning := Wrk_NumRunning + 1;]]></Line>
-      <Line Number="343"><![CDATA[    END_IF;]]></Line>
-      <Line Number="344"><![CDATA[    IF Ref_Units[Wrk_I].Sts_Starting THEN]]></Line>
-      <Line Number="345"><![CDATA[        Sts_UnitStarting.[Wrk_I] := 1;]]></Line>
-      <Line Number="346"><![CDATA[    END_IF;]]></Line>
-      <Line Number="347"><![CDATA[    IF Ref_Units[Wrk_I].Sts_Stopping THEN]]></Line>
-      <Line Number="348"><![CDATA[        Sts_UnitStopping.[Wrk_I] := 1;]]></Line>
-      <Line Number="349"><![CDATA[    END_IF;]]></Line>
-      <Line Number="350"><![CDATA[    IF Ref_Units[Wrk_I].Sts_Stopped THEN]]></Line>
-      <Line Number="351"><![CDATA[        Sts_UnitStopped.[Wrk_I] := 1;]]></Line>
+      <Line Number="336"><![CDATA[Wrk_StaggerTmr.TimerEnable := (Wrk_PendingAdd >= 0) OR (Wrk_PendingRemove >= 0);]]></Line>
+      <Line Number="337"><![CDATA[Wrk_StaggerTmr.Reset := (NOT Wrk_StaggerTmr.TimerEnable) OR Wrk_StaggerTmrDNEdge;]]></Line>
+      <Line Number="338"><![CDATA[TONR(Wrk_StaggerTmr);]]></Line>
+      <Line Number="339"><![CDATA[]]></Line>
+      <Line Number="340"><![CDATA[(* Commit the pending add/remove once its delay elapses (or immediately]]></Line>
+      <Line Number="341"><![CDATA[   at 0 delay, snapping every pending unit at once to match the]]></Line>
+      <Line Number="342"><![CDATA[   documented zero-delay contract) *)]]></Line>
+      <Line Number="343"><![CDATA[IF Wrk_PendingAdd >= 0 AND (Wrk_StaggerTmrDNEdge OR Cfg_StartDelay <= 0.0) THEN]]></Line>
+      <Line Number="344"><![CDATA[    IF Cfg_StartDelay <= 0.0 THEN]]></Line>
+      <Line Number="345"><![CDATA[        FOR Wrk_I := 0 TO Wrk_ClampedNumUnits - 1 DO]]></Line>
+      <Line Number="346"><![CDATA[            IF Wrk_DesiredRunMask.[Wrk_I] AND (NOT Wrk_CmdRunMask.[Wrk_I]) THEN]]></Line>
+      <Line Number="347"><![CDATA[                Wrk_CmdRunMask.[Wrk_I] := 1;]]></Line>
+      <Line Number="348"><![CDATA[            END_IF;]]></Line>
+      <Line Number="349"><![CDATA[        END_FOR;]]></Line>
+      <Line Number="350"><![CDATA[    ELSE]]></Line>
+      <Line Number="351"><![CDATA[        Wrk_CmdRunMask.[Wrk_PendingAdd] := 1;]]></Line>
       <Line Number="352"><![CDATA[    END_IF;]]></Line>
-      <Line Number="353"><![CDATA[END_FOR;]]></Line>
-      <Line Number="354"><![CDATA[]]></Line>
-      <Line Number="355"><![CDATA[]]></Line>
-      <Line Number="356"><![CDATA[(*]]></Line>
-      <Line Number="357"><![CDATA[========================================]]></Line>
-      <Line Number="358"><![CDATA[System-level statuses]]></Line>
-      <Line Number="359"><![CDATA[========================================]]></Line>
-      <Line Number="360"><![CDATA[*)]]></Line>
-      <Line Number="361"><![CDATA[Sts_Prog       := Wrk_ModeAuto;]]></Line>
-      <Line Number="362"><![CDATA[Sts_Oper       := NOT Wrk_ModeAuto;]]></Line>
-      <Line Number="363"><![CDATA[Sts_NotRdy     := Wrk_NotRdy;]]></Line>
-      <Line Number="364"><![CDATA[Sts_Available  := Sts_Prog AND NOT Sts_NotRdy;]]></Line>
-      <Line Number="365"><![CDATA[Sts_Ready      := NOT (Alm_CfgErr OR Alm_IntlkTrip);]]></Line>
-      <Line Number="366"><![CDATA[Sts_RdyReset   := Alm_CfgErr OR Alm_IntlkTrip;]]></Line>
-      <Line Number="367"><![CDATA[]]></Line>
-      <Line Number="368"><![CDATA[(* System-level state matches PlantPAx P_LLS convention:]]></Line>
-      <Line Number="369"><![CDATA[   - Sts_Running mirrors the system command latch, not physical unit motion.]]></Line>
-      <Line Number="370"><![CDATA[   - Sts_Stopped / Sts_Stopping only meaningful when system commanded off.]]></Line>
-      <Line Number="371"><![CDATA[   - Sts_Increasing / Sts_Decreasing compare actual running count to demand,]]></Line>
-      <Line Number="372"><![CDATA[     not internal target ramp - so they stay TRUE until units physically catch up. *)]]></Line>
-      <Line Number="373"><![CDATA[Val_Demand := Wrk_EffectiveTarget;]]></Line>
-      <Line Number="374"><![CDATA[]]></Line>
-      <Line Number="375"><![CDATA[IF Wrk_SysRunning THEN]]></Line>
-      <Line Number="376"><![CDATA[    Sts_Running    := 1;]]></Line>
-      <Line Number="377"><![CDATA[    Sts_Stopped    := 0;]]></Line>
-      <Line Number="378"><![CDATA[    Sts_Stopping   := 0;]]></Line>
-      <Line Number="379"><![CDATA[    Sts_Increasing := Wrk_NumRunning < Val_Demand;]]></Line>
-      <Line Number="380"><![CDATA[    Sts_Decreasing := Wrk_NumRunning > Val_Demand;]]></Line>
-      <Line Number="381"><![CDATA[ELSE]]></Line>
-      <Line Number="382"><![CDATA[    Sts_Running    := 0;]]></Line>
-      <Line Number="383"><![CDATA[    Sts_Stopped    := Wrk_NumRunning = 0;]]></Line>
-      <Line Number="384"><![CDATA[    Sts_Stopping   := Wrk_NumRunning > 0;]]></Line>
-      <Line Number="385"><![CDATA[    Sts_Increasing := 0;]]></Line>
-      <Line Number="386"><![CDATA[    Sts_Decreasing := 0;]]></Line>
-      <Line Number="387"><![CDATA[END_IF;]]></Line>
-      <Line Number="388"><![CDATA[]]></Line>
-      <Line Number="389"><![CDATA[Val_NumRunning   := Wrk_NumRunning;]]></Line>
-      <Line Number="390"><![CDATA[Val_NumAvailable := Wrk_NumEligible;]]></Line>
-      <Line Number="391"><![CDATA[Val_RotateOffset := Wrk_RotateOffset;]]></Line>
+      <Line Number="353"><![CDATA[ELSIF Wrk_PendingRemove >= 0 AND (Wrk_StaggerTmrDNEdge OR Cfg_StopDelay <= 0.0) THEN]]></Line>
+      <Line Number="354"><![CDATA[    IF Cfg_StopDelay <= 0.0 THEN]]></Line>
+      <Line Number="355"><![CDATA[        FOR Wrk_I := 0 TO Wrk_ClampedNumUnits - 1 DO]]></Line>
+      <Line Number="356"><![CDATA[            IF Wrk_CmdRunMask.[Wrk_I] AND (NOT Wrk_DesiredRunMask.[Wrk_I]) THEN]]></Line>
+      <Line Number="357"><![CDATA[                Wrk_CmdRunMask.[Wrk_I] := 0;]]></Line>
+      <Line Number="358"><![CDATA[            END_IF;]]></Line>
+      <Line Number="359"><![CDATA[        END_FOR;]]></Line>
+      <Line Number="360"><![CDATA[    ELSE]]></Line>
+      <Line Number="361"><![CDATA[        Wrk_CmdRunMask.[Wrk_PendingRemove] := 0;]]></Line>
+      <Line Number="362"><![CDATA[    END_IF;]]></Line>
+      <Line Number="363"><![CDATA[END_IF;]]></Line>
+      <Line Number="364"><![CDATA[]]></Line>
+      <Line Number="365"><![CDATA[(*]]></Line>
+      <Line Number="366"><![CDATA[========================================]]></Line>
+      <Line Number="367"><![CDATA[Issue per-unit PCmd_Start / PCmd_Stop from the committed run mask, and]]></Line>
+      <Line Number="368"><![CDATA[report Wrk_EffectiveTarget as the count currently committed.]]></Line>
+      <Line Number="369"><![CDATA[========================================]]></Line>
+      <Line Number="370"><![CDATA[*)]]></Line>
+      <Line Number="371"><![CDATA[Wrk_EffectiveTarget := 0;]]></Line>
+      <Line Number="372"><![CDATA[FOR Wrk_I := 0 TO Wrk_ClampedNumUnits - 1 DO]]></Line>
+      <Line Number="373"><![CDATA[    IF Wrk_CmdRunMask.[Wrk_I] THEN]]></Line>
+      <Line Number="374"><![CDATA[        Ref_Units[Wrk_I].PCmd_Start := 1;]]></Line>
+      <Line Number="375"><![CDATA[        Ref_Units[Wrk_I].PCmd_Stop  := 0;]]></Line>
+      <Line Number="376"><![CDATA[        Wrk_EffectiveTarget := Wrk_EffectiveTarget + 1;]]></Line>
+      <Line Number="377"><![CDATA[    ELSE]]></Line>
+      <Line Number="378"><![CDATA[        Ref_Units[Wrk_I].PCmd_Start := 0;]]></Line>
+      <Line Number="379"><![CDATA[        Ref_Units[Wrk_I].PCmd_Stop  := 1;]]></Line>
+      <Line Number="380"><![CDATA[    END_IF;]]></Line>
+      <Line Number="381"><![CDATA[END_FOR;]]></Line>
+      <Line Number="382"><![CDATA[]]></Line>
+      <Line Number="383"><![CDATA[]]></Line>
+      <Line Number="384"><![CDATA[(*]]></Line>
+      <Line Number="385"><![CDATA[========================================]]></Line>
+      <Line Number="386"><![CDATA[Per-unit status rollup bitmasks (bit i = unit i)]]></Line>
+      <Line Number="387"><![CDATA[========================================]]></Line>
+      <Line Number="388"><![CDATA[*)]]></Line>
+      <Line Number="389"><![CDATA[Sts_UnitAvail    := 0;]]></Line>
+      <Line Number="390"><![CDATA[Sts_UnitRunning  := 0;]]></Line>
+      <Line Number="391"><![CDATA[Sts_UnitStarting := 0;]]></Line>
+      <Line Number="392"><![CDATA[Sts_UnitStopping := 0;]]></Line>
+      <Line Number="393"><![CDATA[Sts_UnitStopped  := 0;]]></Line>
+      <Line Number="394"><![CDATA[Wrk_NumRunning   := 0;]]></Line>
+      <Line Number="395"><![CDATA[]]></Line>
+      <Line Number="396"><![CDATA[FOR Wrk_I := 0 TO Wrk_ClampedNumUnits - 1 DO]]></Line>
+      <Line Number="397"><![CDATA[    IF Wrk_UnitEligible.[Wrk_I] THEN]]></Line>
+      <Line Number="398"><![CDATA[        Sts_UnitAvail.[Wrk_I] := 1;]]></Line>
+      <Line Number="399"><![CDATA[    END_IF;]]></Line>
+      <Line Number="400"><![CDATA[    IF Ref_Units[Wrk_I].Sts_Running THEN]]></Line>
+      <Line Number="401"><![CDATA[        Sts_UnitRunning.[Wrk_I] := 1;]]></Line>
+      <Line Number="402"><![CDATA[        Wrk_NumRunning := Wrk_NumRunning + 1;]]></Line>
+      <Line Number="403"><![CDATA[    END_IF;]]></Line>
+      <Line Number="404"><![CDATA[    IF Ref_Units[Wrk_I].Sts_Starting THEN]]></Line>
+      <Line Number="405"><![CDATA[        Sts_UnitStarting.[Wrk_I] := 1;]]></Line>
+      <Line Number="406"><![CDATA[    END_IF;]]></Line>
+      <Line Number="407"><![CDATA[    IF Ref_Units[Wrk_I].Sts_Stopping THEN]]></Line>
+      <Line Number="408"><![CDATA[        Sts_UnitStopping.[Wrk_I] := 1;]]></Line>
+      <Line Number="409"><![CDATA[    END_IF;]]></Line>
+      <Line Number="410"><![CDATA[    IF Ref_Units[Wrk_I].Sts_Stopped THEN]]></Line>
+      <Line Number="411"><![CDATA[        Sts_UnitStopped.[Wrk_I] := 1;]]></Line>
+      <Line Number="412"><![CDATA[    END_IF;]]></Line>
+      <Line Number="413"><![CDATA[END_FOR;]]></Line>
+      <Line Number="414"><![CDATA[]]></Line>
+      <Line Number="415"><![CDATA[]]></Line>
+      <Line Number="416"><![CDATA[(*]]></Line>
+      <Line Number="417"><![CDATA[========================================]]></Line>
+      <Line Number="418"><![CDATA[System-level statuses]]></Line>
+      <Line Number="419"><![CDATA[========================================]]></Line>
+      <Line Number="420"><![CDATA[*)]]></Line>
+      <Line Number="421"><![CDATA[Sts_Prog       := Wrk_ModeAuto;]]></Line>
+      <Line Number="422"><![CDATA[Sts_Oper       := NOT Wrk_ModeAuto;]]></Line>
+      <Line Number="423"><![CDATA[Sts_NotRdy     := Wrk_NotRdy;]]></Line>
+      <Line Number="424"><![CDATA[Sts_Available  := Sts_Prog AND NOT Sts_NotRdy;]]></Line>
+      <Line Number="425"><![CDATA[Sts_Ready      := NOT (Alm_CfgErr OR Alm_IntlkTrip);]]></Line>
+      <Line Number="426"><![CDATA[Sts_RdyReset   := Alm_CfgErr OR Alm_IntlkTrip;]]></Line>
+      <Line Number="427"><![CDATA[]]></Line>
+      <Line Number="428"><![CDATA[(* System-level state matches PlantPAx P_LLS convention:]]></Line>
+      <Line Number="429"><![CDATA[   - Sts_Running mirrors the system command latch, not physical unit motion.]]></Line>
+      <Line Number="430"><![CDATA[   - Sts_Stopped / Sts_Stopping only meaningful when system commanded off.]]></Line>
+      <Line Number="431"><![CDATA[   - Sts_Increasing / Sts_Decreasing compare actual running count to demand,]]></Line>
+      <Line Number="432"><![CDATA[     not internal target ramp - so they stay TRUE until units physically catch up. *)]]></Line>
+      <Line Number="433"><![CDATA[Val_Demand := Wrk_EffectiveTarget;]]></Line>
+      <Line Number="434"><![CDATA[]]></Line>
+      <Line Number="435"><![CDATA[IF Wrk_SysRunning THEN]]></Line>
+      <Line Number="436"><![CDATA[    Sts_Running    := 1;]]></Line>
+      <Line Number="437"><![CDATA[    Sts_Stopped    := 0;]]></Line>
+      <Line Number="438"><![CDATA[    Sts_Stopping   := 0;]]></Line>
+      <Line Number="439"><![CDATA[    Sts_Increasing := Wrk_NumRunning < Val_Demand;]]></Line>
+      <Line Number="440"><![CDATA[    Sts_Decreasing := Wrk_NumRunning > Val_Demand;]]></Line>
+      <Line Number="441"><![CDATA[ELSE]]></Line>
+      <Line Number="442"><![CDATA[    Sts_Running    := 0;]]></Line>
+      <Line Number="443"><![CDATA[    Sts_Stopped    := Wrk_NumRunning = 0;]]></Line>
+      <Line Number="444"><![CDATA[    Sts_Stopping   := Wrk_NumRunning > 0;]]></Line>
+      <Line Number="445"><![CDATA[    Sts_Increasing := 0;]]></Line>
+      <Line Number="446"><![CDATA[    Sts_Decreasing := 0;]]></Line>
+      <Line Number="447"><![CDATA[END_IF;]]></Line>
+      <Line Number="448"><![CDATA[]]></Line>
+      <Line Number="449"><![CDATA[Val_NumRunning   := Wrk_NumRunning;]]></Line>
+      <Line Number="450"><![CDATA[Val_NumAvailable := Wrk_NumEligible;]]></Line>
+      <Line Number="451"><![CDATA[Val_RotateOffset := Wrk_RotateOffset;]]></Line>
+      <Line Number="452"><![CDATA[]]></Line>
+      <Line Number="453"><![CDATA[(*]]></Line>
+      <Line Number="454"><![CDATA[========================================]]></Line>
+      <Line Number="455"><![CDATA[HMI numeric status codes (PlantPAx P_LLS convention)]]></Line>
+      <Line Number="456"><![CDATA[Val_Sts   - group status enumeration]]></Line>
+      <Line Number="457"><![CDATA[Val_Fault - device fault status (equipment-level only, matches P_LLS -]]></Line>
+      <Line Number="458"><![CDATA[IntlkTrip is a process shutdown reason, not a Val_Fault code there either)]]></Line>
+      <Line Number="459"><![CDATA[Val_NotifyAll - latched-alarm rollup used for HMI alarm banner; DOES]]></Line>
+      <Line Number="460"><![CDATA[include IntlkTrip, since PlantPAx P_LLS rolls its IntlkTrip P_Alarm]]></Line>
+      <Line Number="461"><![CDATA[instance into Val_NotifyAll even though it's excluded from Val_Fault.]]></Line>
+      <Line Number="462"><![CDATA[========================================]]></Line>
+      <Line Number="463"><![CDATA[*)]]></Line>
+      <Line Number="464"><![CDATA[IF Sts_Stopping THEN]]></Line>
+      <Line Number="465"><![CDATA[    Val_Sts := 10;]]></Line>
+      <Line Number="466"><![CDATA[ELSIF Sts_Decreasing THEN]]></Line>
+      <Line Number="467"><![CDATA[    Val_Sts := 13;]]></Line>
+      <Line Number="468"><![CDATA[ELSIF Sts_Increasing THEN]]></Line>
+      <Line Number="469"><![CDATA[    Val_Sts := 12;]]></Line>
+      <Line Number="470"><![CDATA[ELSIF Sts_Running THEN]]></Line>
+      <Line Number="471"><![CDATA[    Val_Sts := 2;]]></Line>
+      <Line Number="472"><![CDATA[ELSIF Sts_Stopped THEN]]></Line>
+      <Line Number="473"><![CDATA[    Val_Sts := 1;]]></Line>
+      <Line Number="474"><![CDATA[ELSE]]></Line>
+      <Line Number="475"><![CDATA[    Val_Sts := 0;]]></Line>
+      <Line Number="476"><![CDATA[END_IF;]]></Line>
+      <Line Number="477"><![CDATA[]]></Line>
+      <Line Number="478"><![CDATA[IF Sts_CfgErr OR Alm_CfgErr THEN]]></Line>
+      <Line Number="479"><![CDATA[    Val_Fault := 34;]]></Line>
+      <Line Number="480"><![CDATA[ELSE]]></Line>
+      <Line Number="481"><![CDATA[    Val_Fault := 0;]]></Line>
+      <Line Number="482"><![CDATA[END_IF;]]></Line>
+      <Line Number="483"><![CDATA[]]></Line>
+      <Line Number="484"><![CDATA[IF Alm_CfgErr THEN]]></Line>
+      <Line Number="485"><![CDATA[    Val_NotifyAll := 34;]]></Line>
+      <Line Number="486"><![CDATA[ELSIF Alm_IntlkTrip THEN]]></Line>
+      <Line Number="487"><![CDATA[    Val_NotifyAll := 16;]]></Line>
+      <Line Number="488"><![CDATA[ELSE]]></Line>
+      <Line Number="489"><![CDATA[    Val_NotifyAll := 0;]]></Line>
+      <Line Number="490"><![CDATA[END_IF;]]></Line>
+      <Line Number="491"><![CDATA[]]></Line>
+      <Line Number="492"><![CDATA[]]></Line>
+      <Line Number="493"><![CDATA[(*]]></Line>
+      <Line Number="494"><![CDATA[========================================]]></Line>
+      <Line Number="495"><![CDATA[Store previous-scan values for next-scan edge detection]]></Line>
+      <Line Number="496"><![CDATA[While NotRdy is TRUE, force PCmd edge history to 0 - this lets a]]></Line>
+      <Line Number="497"><![CDATA[still-held external PCmd be re-detected as a rising edge on the next]]></Line>
+      <Line Number="498"><![CDATA[scan after the not-ready condition clears. Avoids requiring the]]></Line>
+      <Line Number="499"><![CDATA[external tag to toggle off-and-on after fault recovery.]]></Line>
+      <Line Number="500"><![CDATA[OCmd edge history is NOT cleared (operator buttons are momentary).]]></Line>
+      <Line Number="501"><![CDATA[========================================]]></Line>
+      <Line Number="502"><![CDATA[*)]]></Line>
+      <Line Number="503"><![CDATA[Wrk_PrevModeAuto := Wrk_ModeAuto;]]></Line>
+      <Line Number="504"><![CDATA[]]></Line>
+      <Line Number="505"><![CDATA[IF Wrk_NotRdy THEN]]></Line>
+      <Line Number="506"><![CDATA[    Wrk_PrevPCmdStart  := 0;]]></Line>
+      <Line Number="507"><![CDATA[    Wrk_PrevPCmdStop   := 0;]]></Line>
+      <Line Number="508"><![CDATA[    Wrk_PrevPCmdRotate := 0;]]></Line>
+      <Line Number="509"><![CDATA[END_IF;]]></Line>
+      <Line Number="510"><![CDATA[]]></Line>
+      <Line Number="511"><![CDATA[(*]]></Line>
+      <Line Number="512"><![CDATA[========================================]]></Line>
+      <Line Number="513"><![CDATA[Reset edge history on mode change]]></Line>
+      <Line Number="514"><![CDATA[A command already held TRUE on the side that just became active]]></Line>
+      <Line Number="515"><![CDATA[(e.g. Auto's PCmd_Stop asserted before switching from Operator)]]></Line>
+      <Line Number="516"><![CDATA[would otherwise never see a 0->1 transition, since its edge]]></Line>
+      <Line Number="517"><![CDATA[history was kept in sync even while that side was inactive.]]></Line>
+      <Line Number="518"><![CDATA[Clearing both sides' history here lets it register as a fresh]]></Line>
+      <Line Number="519"><![CDATA[edge on the next scan, mirroring the NotRdy recovery above.]]></Line>
+      <Line Number="520"><![CDATA[========================================]]></Line>
+      <Line Number="521"><![CDATA[*)]]></Line>
+      <Line Number="522"><![CDATA[IF Wrk_ModeChange THEN]]></Line>
+      <Line Number="523"><![CDATA[    Wrk_PrevPCmdStart  := 0;]]></Line>
+      <Line Number="524"><![CDATA[    Wrk_PrevPCmdStop   := 0;]]></Line>
+      <Line Number="525"><![CDATA[    Wrk_PrevPCmdRotate := 0;]]></Line>
+      <Line Number="526"><![CDATA[    Wrk_PrevOCmdStart  := 0;]]></Line>
+      <Line Number="527"><![CDATA[    Wrk_PrevOCmdStop   := 0;]]></Line>
+      <Line Number="528"><![CDATA[    Wrk_PrevOCmdRotate := 0;]]></Line>
+      <Line Number="529"><![CDATA[END_IF;]]></Line>
 </STContent>
 </Routine>
 </Routines>

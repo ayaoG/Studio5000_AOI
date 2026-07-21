@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <RSLogix5000Content SchemaRevision="1.0" SoftwareRevision="33.00" TargetName="IOC_AIn" TargetType="AddOnInstructionDefinition" ContainsContext="true" ExportDate="2026-07-17T21:43:29.000Z" ExportOptions="References DecoratedData ForceProtectedEncoding AllProjDocTrans">
 <Controller Use="Context" Name="IOC_AIn_Context">
 <DataTypes Use="Context">
@@ -69,132 +69,132 @@
         <![CDATA[1 = enable Fail alarm checking (out-of-range and PVBad)]]>
       </Description>
     </Parameter>
-    <Parameter Name="Cfg_InpRawMin" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="true" ExternalAccess="Read/Write">
+    <Parameter Name="Cfg_InpRawMin" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="false" ExternalAccess="Read/Write">
       <Description>
         <![CDATA[Raw input value at Cfg_PVEUMin (e.g. 4.0 for 4-20mA)]]>
       </Description>
     </Parameter>
-    <Parameter Name="Cfg_InpRawMax" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="true" ExternalAccess="Read/Write">
+    <Parameter Name="Cfg_InpRawMax" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="false" ExternalAccess="Read/Write">
       <Description>
         <![CDATA[Raw input value at Cfg_PVEUMax (e.g. 20.0 for 4-20mA)]]>
       </Description>
     </Parameter>
-    <Parameter Name="Cfg_PVEUMin" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="true" ExternalAccess="Read/Write">
+    <Parameter Name="Cfg_PVEUMin" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="false" ExternalAccess="Read/Write">
       <Description>
         <![CDATA[Engineering-unit value when raw = Cfg_InpRawMin]]>
       </Description>
     </Parameter>
-    <Parameter Name="Cfg_PVEUMax" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="true" ExternalAccess="Read/Write">
+    <Parameter Name="Cfg_PVEUMax" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="false" ExternalAccess="Read/Write">
       <Description>
         <![CDATA[Engineering-unit value when raw = Cfg_InpRawMax]]>
       </Description>
     </Parameter>
-    <Parameter Name="Cfg_FiltTC" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="true" ExternalAccess="Read/Write">
+    <Parameter Name="Cfg_FiltTC" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="false" ExternalAccess="Read/Write">
       <Description>
         <![CDATA[First-order filter time constant (sec, 0 = no filter)]]>
       </Description>
     </Parameter>
-    <Parameter Name="Cfg_HiHiGateDly" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="true" ExternalAccess="Read/Write">
+    <Parameter Name="Cfg_HiHiGateDly" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="false" ExternalAccess="Read/Write">
       <Description>
         <![CDATA[Time Inp_HiHiGate must be TRUE before HiHi alarm checking begins (sec)]]>
       </Description>
     </Parameter>
-    <Parameter Name="Cfg_HiGateDly" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="true" ExternalAccess="Read/Write">
+    <Parameter Name="Cfg_HiGateDly" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="false" ExternalAccess="Read/Write">
       <Description>
         <![CDATA[Time Inp_HiGate must be TRUE before Hi alarm checking begins (sec)]]>
       </Description>
     </Parameter>
-    <Parameter Name="Cfg_LoGateDly" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="true" ExternalAccess="Read/Write">
+    <Parameter Name="Cfg_LoGateDly" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="false" ExternalAccess="Read/Write">
       <Description>
         <![CDATA[Time Inp_LoGate must be TRUE before Lo alarm checking begins (sec)]]>
       </Description>
     </Parameter>
-    <Parameter Name="Cfg_LoLoGateDly" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="true" ExternalAccess="Read/Write">
+    <Parameter Name="Cfg_LoLoGateDly" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="false" ExternalAccess="Read/Write">
       <Description>
         <![CDATA[Time Inp_LoLoGate must be TRUE before LoLo alarm checking begins (sec)]]>
       </Description>
     </Parameter>
-    <Parameter Name="Cfg_FailGateDly" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="true" ExternalAccess="Read/Write">
+    <Parameter Name="Cfg_FailGateDly" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="false" ExternalAccess="Read/Write">
       <Description>
         <![CDATA[Time Inp_FailGate must be TRUE before Fail alarm checking begins (sec)]]>
       </Description>
     </Parameter>
-    <Parameter Name="Cfg_HiHiLim" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="true" ExternalAccess="Read/Write">
+    <Parameter Name="Cfg_HiHiLim" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="false" ExternalAccess="Read/Write">
       <Description>
         <![CDATA[HiHi alarm threshold (EU) - Sts_HiHi TRUE when Val > this]]>
       </Description>
     </Parameter>
-    <Parameter Name="Cfg_HiLim" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="true" ExternalAccess="Read/Write">
+    <Parameter Name="Cfg_HiLim" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="false" ExternalAccess="Read/Write">
       <Description>
         <![CDATA[Hi alarm threshold (EU)]]>
       </Description>
     </Parameter>
-    <Parameter Name="Cfg_LoLim" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="true" ExternalAccess="Read/Write">
+    <Parameter Name="Cfg_LoLim" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="false" ExternalAccess="Read/Write">
       <Description>
         <![CDATA[Lo alarm threshold (EU)]]>
       </Description>
     </Parameter>
-    <Parameter Name="Cfg_LoLoLim" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="true" ExternalAccess="Read/Write">
+    <Parameter Name="Cfg_LoLoLim" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="false" ExternalAccess="Read/Write">
       <Description>
         <![CDATA[LoLo alarm threshold (EU)]]>
       </Description>
     </Parameter>
-    <Parameter Name="Cfg_HiHiDB" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="true" ExternalAccess="Read/Write">
+    <Parameter Name="Cfg_HiHiDB" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="false" ExternalAccess="Read/Write">
       <Description>
         <![CDATA[HiHi deadband (EU) - alarm clears when Val falls below (HiHiLim - HiHiDB)]]>
       </Description>
     </Parameter>
-    <Parameter Name="Cfg_HiDB" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="true" ExternalAccess="Read/Write">
+    <Parameter Name="Cfg_HiDB" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="false" ExternalAccess="Read/Write">
       <Description>
         <![CDATA[Hi deadband (EU)]]>
       </Description>
     </Parameter>
-    <Parameter Name="Cfg_LoDB" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="true" ExternalAccess="Read/Write">
+    <Parameter Name="Cfg_LoDB" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="false" ExternalAccess="Read/Write">
       <Description>
         <![CDATA[Lo deadband (EU) - alarm clears when Val rises above (LoLim + LoDB)]]>
       </Description>
     </Parameter>
-    <Parameter Name="Cfg_LoLoDB" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="true" ExternalAccess="Read/Write">
+    <Parameter Name="Cfg_LoLoDB" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="false" ExternalAccess="Read/Write">
       <Description>
         <![CDATA[LoLo deadband (EU)]]>
       </Description>
     </Parameter>
-    <Parameter Name="Cfg_FailHiLim" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="true" ExternalAccess="Read/Write">
+    <Parameter Name="Cfg_FailHiLim" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="false" ExternalAccess="Read/Write">
       <Description>
         <![CDATA[Fail-high threshold (EU) - signal considered out-of-range above this]]>
       </Description>
     </Parameter>
-    <Parameter Name="Cfg_FailLoLim" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="true" ExternalAccess="Read/Write">
+    <Parameter Name="Cfg_FailLoLim" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="false" ExternalAccess="Read/Write">
       <Description>
         <![CDATA[Fail-low threshold (EU) - signal considered out-of-range below this]]>
       </Description>
     </Parameter>
-    <Parameter Name="Cfg_FailDB" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="true" ExternalAccess="Read/Write">
+    <Parameter Name="Cfg_FailDB" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="false" ExternalAccess="Read/Write">
       <Description>
         <![CDATA[Fail deadband (EU) - hysteresis for FailHi/FailLo]]>
       </Description>
     </Parameter>
-    <Parameter Name="Cfg_HasHiHiAlm" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read/Write">
+    <Parameter Name="Cfg_HasHiHiAlm" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
       <Description>
         <![CDATA[1 = Enable HiHi alarm latching]]>
       </Description>
     </Parameter>
-    <Parameter Name="Cfg_HasHiAlm" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read/Write">
+    <Parameter Name="Cfg_HasHiAlm" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
       <Description>
         <![CDATA[1 = Enable Hi alarm latching]]>
       </Description>
     </Parameter>
-    <Parameter Name="Cfg_HasLoAlm" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read/Write">
+    <Parameter Name="Cfg_HasLoAlm" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
       <Description>
         <![CDATA[1 = Enable Lo alarm latching]]>
       </Description>
     </Parameter>
-    <Parameter Name="Cfg_HasLoLoAlm" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read/Write">
+    <Parameter Name="Cfg_HasLoLoAlm" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
       <Description>
         <![CDATA[1 = Enable LoLo alarm latching]]>
       </Description>
     </Parameter>
-    <Parameter Name="Cfg_HasFailAlm" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read/Write">
+    <Parameter Name="Cfg_HasFailAlm" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
       <Description>
         <![CDATA[1 = Enable Fail alarm latching (out-of-range or Inp_PVBad)]]>
       </Description>

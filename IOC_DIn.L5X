@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <RSLogix5000Content SchemaRevision="1.0" SoftwareRevision="33.00" TargetName="IOC_DIn" TargetType="AddOnInstructionDefinition" ContainsContext="true" ExportDate="2026-07-16T02:06:15.000Z" ExportOptions="References DecoratedData ForceProtectedEncoding AllProjDocTrans">
 <Controller Use="Context" Name="IOC_DIn_Context">
 <DataTypes Use="Context">
@@ -49,32 +49,32 @@
         <![CDATA[IO / communications fault input]]>
       </Description>
     </Parameter>
-    <Parameter Name="Cfg_Debounce" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="true" ExternalAccess="Read/Write">
+    <Parameter Name="Cfg_Debounce" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="false" ExternalAccess="Read/Write">
       <Description>
         <![CDATA[Debounce time (sec) - Inp_PV must be stable this long for Sts_PV to update (0 = no debounce)]]>
       </Description>
     </Parameter>
-    <Parameter Name="Cfg_GateDly" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="true" ExternalAccess="Read/Write">
+    <Parameter Name="Cfg_GateDly" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="false" ExternalAccess="Read/Write">
       <Description>
         <![CDATA[Time Inp_Gate must be TRUE before Target Disagree checking begins (sec, 0 = check immediately)]]>
       </Description>
     </Parameter>
-    <Parameter Name="Cfg_TgtDisagreeOnDly" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="true" ExternalAccess="Read/Write">
+    <Parameter Name="Cfg_TgtDisagreeOnDly" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="false" ExternalAccess="Read/Write">
       <Description>
         <![CDATA[Minimum time for input to disagree with target to raise Sts_TgtDisagree (sec)]]>
       </Description>
     </Parameter>
-    <Parameter Name="Cfg_TgtDisagreeOffDly" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="true" ExternalAccess="Read/Write">
+    <Parameter Name="Cfg_TgtDisagreeOffDly" TagType="Base" DataType="REAL" Usage="Input" Radix="Float" Required="false" Visible="false" ExternalAccess="Read/Write">
       <Description>
         <![CDATA[Minimum time for input to agree with target to clear Sts_TgtDisagree (sec)]]>
       </Description>
     </Parameter>
-    <Parameter Name="Cfg_HasTgtDisagreeAlm" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read/Write">
+    <Parameter Name="Cfg_HasTgtDisagreeAlm" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
       <Description>
         <![CDATA[1 = Enable Target Disagree alarm latching]]>
       </Description>
     </Parameter>
-    <Parameter Name="Cfg_HasIOFaultAlm" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read/Write">
+    <Parameter Name="Cfg_HasIOFaultAlm" TagType="Base" DataType="BOOL" Usage="Input" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read/Write">
       <Description>
         <![CDATA[1 = Enable IOFault alarm latching]]>
       </Description>
@@ -117,6 +117,21 @@
     <Parameter Name="Sts_RdyReset" TagType="Base" DataType="BOOL" Usage="Output" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read/Write">
       <Description>
         <![CDATA[1 = A latched alarm's condition has cleared - Reset would actually clear it (matches PlantPAx P_DIn ORdy_Reset)]]>
+      </Description>
+    </Parameter>
+    <Parameter Name="Val_Sts" TagType="Base" DataType="DINT" Usage="Output" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read/Write">
+      <Description>
+        <![CDATA[Device confirmed status: 0=PV Good, 6=PV Bad]]>
+      </Description>
+    </Parameter>
+    <Parameter Name="Val_Fault" TagType="Base" DataType="DINT" Usage="Output" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read/Write">
+      <Description>
+        <![CDATA[Fault code: 0=None, 16=TgtDisagree, 32=IOFault]]>
+      </Description>
+    </Parameter>
+    <Parameter Name="Val_NotifyAll" TagType="Base" DataType="DINT" Usage="Output" Radix="Decimal" Required="false" Visible="true" ExternalAccess="Read/Write">
+      <Description>
+        <![CDATA[Same code as Val_Fault, but only for a latched (Cfg_Has*Alm) alarm - 0 means Val_Fault is just a live condition, not a configured alarm]]>
       </Description>
     </Parameter>
 </Parameters>
@@ -259,6 +274,38 @@
       <Line Number="86"><![CDATA[*)]]></Line>
       <Line Number="87"><![CDATA[Sts_RdyReset := (Alm_TgtDisagree AND NOT Sts_TgtDisagree)]]></Line>
       <Line Number="88"><![CDATA[               OR (Alm_IOFault AND NOT Sts_IOFault);]]></Line>
+      <Line Number="89"><![CDATA[]]></Line>
+      <Line Number="90"><![CDATA[(*]]></Line>
+      <Line Number="91"><![CDATA[========================================]]></Line>
+      <Line Number="92"><![CDATA[HMI numeric status codes (PlantPAx P_DIn convention)]]></Line>
+      <Line Number="93"><![CDATA[Val_Sts   - device confirmed status]]></Line>
+      <Line Number="94"><![CDATA[Val_Fault - highest-priority fault code, live OR latched]]></Line>
+      <Line Number="95"><![CDATA[Val_NotifyAll - same codes as Val_Fault, but latched Alm_* only -]]></Line>
+      <Line Number="96"><![CDATA[nonzero only when a configured alarm actually latched, not a]]></Line>
+      <Line Number="97"><![CDATA[live-only condition.]]></Line>
+      <Line Number="98"><![CDATA[========================================]]></Line>
+      <Line Number="99"><![CDATA[*)]]></Line>
+      <Line Number="100"><![CDATA[IF Sts_PVBad THEN]]></Line>
+      <Line Number="101"><![CDATA[    Val_Sts := 6;]]></Line>
+      <Line Number="102"><![CDATA[ELSE]]></Line>
+      <Line Number="103"><![CDATA[    Val_Sts := 0;]]></Line>
+      <Line Number="104"><![CDATA[END_IF;]]></Line>
+      <Line Number="105"><![CDATA[]]></Line>
+      <Line Number="106"><![CDATA[IF Sts_IOFault OR Alm_IOFault THEN]]></Line>
+      <Line Number="107"><![CDATA[    Val_Fault := 32;]]></Line>
+      <Line Number="108"><![CDATA[ELSIF Sts_TgtDisagree OR Alm_TgtDisagree THEN]]></Line>
+      <Line Number="109"><![CDATA[    Val_Fault := 16;]]></Line>
+      <Line Number="110"><![CDATA[ELSE]]></Line>
+      <Line Number="111"><![CDATA[    Val_Fault := 0;]]></Line>
+      <Line Number="112"><![CDATA[END_IF;]]></Line>
+      <Line Number="113"><![CDATA[]]></Line>
+      <Line Number="114"><![CDATA[IF Alm_IOFault THEN]]></Line>
+      <Line Number="115"><![CDATA[    Val_NotifyAll := 32;]]></Line>
+      <Line Number="116"><![CDATA[ELSIF Alm_TgtDisagree THEN]]></Line>
+      <Line Number="117"><![CDATA[    Val_NotifyAll := 16;]]></Line>
+      <Line Number="118"><![CDATA[ELSE]]></Line>
+      <Line Number="119"><![CDATA[    Val_NotifyAll := 0;]]></Line>
+      <Line Number="120"><![CDATA[END_IF;]]></Line>
 </STContent>
 </Routine>
 </Routines>

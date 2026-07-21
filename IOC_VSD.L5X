@@ -1180,6 +1180,14 @@
 <DataValue DataType="DINT" Radix="Decimal" Value="0"/>
 </DefaultData>
 </Parameter>
+<Parameter Name="Val_NotifyAll" TagType="Base" DataType="DINT" Usage="Output" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read Only">
+<DefaultData Format="L5K">
+<![CDATA[0]]>
+</DefaultData>
+<DefaultData Format="Decorated">
+<DataValue DataType="DINT" Radix="Decimal" Value="0"/>
+</DefaultData>
+</Parameter>
 <Parameter Name="Val_LastFaultCode" TagType="Base" DataType="DINT" Usage="Output" Radix="Decimal" Required="false" Visible="false" ExternalAccess="Read Only">
 <DefaultData Format="L5K">
 <![CDATA[0]]>
@@ -3565,117 +3573,159 @@
 <![CDATA[]]>
 </Line>
 <Line Number="622">
-<![CDATA[]]>
+<![CDATA[(* Val_NotifyAll: same codes as Val_Fault, but latched Alm_* only - nonzero]]>
 </Line>
 <Line Number="623">
-<![CDATA[(*]]>
+<![CDATA[   only when a configured alarm actually latched, not a live-only condition. *)]]>
 </Line>
 <Line Number="624">
-<![CDATA[========================================]]>
+<![CDATA[IF Alm_IOFault THEN]]>
 </Line>
 <Line Number="625">
-<![CDATA[Store previous-scan values for next-scan edge detection]]>
+<![CDATA[    Val_NotifyAll := 32;]]>
 </Line>
 <Line Number="626">
-<![CDATA[While NotRdy is TRUE, force PCmd edge history to 0 - this lets a]]>
+<![CDATA[ELSIF Alm_DriveFault THEN]]>
 </Line>
 <Line Number="627">
-<![CDATA[still-held external PCmd be re-detected as a rising edge on the next]]>
+<![CDATA[    Val_NotifyAll := 18;]]>
 </Line>
 <Line Number="628">
-<![CDATA[scan after the not-ready condition clears. Avoids requiring the]]>
+<![CDATA[ELSIF Alm_FailToStop THEN]]>
 </Line>
 <Line Number="629">
-<![CDATA[external tag to toggle off-and-on after fault recovery.]]>
+<![CDATA[    Val_NotifyAll := 17;]]>
 </Line>
 <Line Number="630">
-<![CDATA[OCmd edge history is NOT cleared (operator buttons are momentary).]]>
+<![CDATA[ELSIF Alm_FailToStart THEN]]>
 </Line>
 <Line Number="631">
-<![CDATA[========================================]]>
+<![CDATA[    Val_NotifyAll := 16;]]>
 </Line>
 <Line Number="632">
-<![CDATA[*)]]>
+<![CDATA[ELSE]]>
 </Line>
 <Line Number="633">
-<![CDATA[Wrk_PrevModeAuto    := Wrk_ModeAuto;]]>
+<![CDATA[    Val_NotifyAll := 0;]]>
 </Line>
 <Line Number="634">
-<![CDATA[]]>
-</Line>
-<Line Number="635">
-<![CDATA[IF Wrk_NotRdy THEN]]>
-</Line>
-<Line Number="636">
-<![CDATA[    Wrk_PrevPCmdFwd  := 0;]]>
-</Line>
-<Line Number="637">
-<![CDATA[    Wrk_PrevPCmdRev  := 0;]]>
-</Line>
-<Line Number="638">
-<![CDATA[    Wrk_PrevPCmdStop := 0;]]>
-</Line>
-<Line Number="639">
 <![CDATA[END_IF;]]>
 </Line>
-<Line Number="640">
+<Line Number="635">
 <![CDATA[]]>
 </Line>
-<Line Number="641">
+<Line Number="636">
+<![CDATA[]]>
+</Line>
+<Line Number="637">
 <![CDATA[(*]]>
 </Line>
-<Line Number="642">
+<Line Number="638">
 <![CDATA[========================================]]>
+</Line>
+<Line Number="639">
+<![CDATA[Store previous-scan values for next-scan edge detection]]>
+</Line>
+<Line Number="640">
+<![CDATA[While NotRdy is TRUE, force PCmd edge history to 0 - this lets a]]>
+</Line>
+<Line Number="641">
+<![CDATA[still-held external PCmd be re-detected as a rising edge on the next]]>
+</Line>
+<Line Number="642">
+<![CDATA[scan after the not-ready condition clears. Avoids requiring the]]>
 </Line>
 <Line Number="643">
-<![CDATA[Reset edge history on mode change]]>
+<![CDATA[external tag to toggle off-and-on after fault recovery.]]>
 </Line>
 <Line Number="644">
-<![CDATA[A command already held TRUE on the side that just became active]]>
+<![CDATA[OCmd edge history is NOT cleared (operator buttons are momentary).]]>
 </Line>
 <Line Number="645">
-<![CDATA[(e.g. Auto's PCmd_Stop asserted before switching from Operator)]]>
-</Line>
-<Line Number="646">
-<![CDATA[would otherwise never see a 0->1 transition, since its edge]]>
-</Line>
-<Line Number="647">
-<![CDATA[history was kept in sync even while that side was inactive.]]>
-</Line>
-<Line Number="648">
-<![CDATA[Clearing both sides' history here lets it register as a fresh]]>
-</Line>
-<Line Number="649">
-<![CDATA[edge on the next scan, mirroring the NotRdy recovery above.]]>
-</Line>
-<Line Number="650">
 <![CDATA[========================================]]>
 </Line>
-<Line Number="651">
+<Line Number="646">
 <![CDATA[*)]]>
 </Line>
-<Line Number="652">
-<![CDATA[IF Wrk_ModeChange THEN]]>
+<Line Number="647">
+<![CDATA[Wrk_PrevModeAuto    := Wrk_ModeAuto;]]>
 </Line>
-<Line Number="653">
+<Line Number="648">
+<![CDATA[]]>
+</Line>
+<Line Number="649">
+<![CDATA[IF Wrk_NotRdy THEN]]>
+</Line>
+<Line Number="650">
 <![CDATA[    Wrk_PrevPCmdFwd  := 0;]]>
 </Line>
-<Line Number="654">
+<Line Number="651">
 <![CDATA[    Wrk_PrevPCmdRev  := 0;]]>
 </Line>
-<Line Number="655">
+<Line Number="652">
 <![CDATA[    Wrk_PrevPCmdStop := 0;]]>
 </Line>
+<Line Number="653">
+<![CDATA[END_IF;]]>
+</Line>
+<Line Number="654">
+<![CDATA[]]>
+</Line>
+<Line Number="655">
+<![CDATA[(*]]>
+</Line>
 <Line Number="656">
-<![CDATA[    Wrk_PrevOCmdFwd  := 0;]]>
+<![CDATA[========================================]]>
 </Line>
 <Line Number="657">
-<![CDATA[    Wrk_PrevOCmdRev  := 0;]]>
+<![CDATA[Reset edge history on mode change]]>
 </Line>
 <Line Number="658">
-<![CDATA[    Wrk_PrevOCmdStop := 0;]]>
+<![CDATA[A command already held TRUE on the side that just became active]]>
 </Line>
 <Line Number="659">
+<![CDATA[(e.g. Auto's PCmd_Stop asserted before switching from Operator)]]>
+</Line>
+<Line Number="660">
+<![CDATA[would otherwise never see a 0->1 transition, since its edge]]>
+</Line>
+<Line Number="661">
+<![CDATA[history was kept in sync even while that side was inactive.]]>
+</Line>
+<Line Number="662">
+<![CDATA[Clearing both sides' history here lets it register as a fresh]]>
+</Line>
+<Line Number="663">
+<![CDATA[edge on the next scan, mirroring the NotRdy recovery above.]]>
+</Line>
+<Line Number="664">
+<![CDATA[========================================]]>
+</Line>
+<Line Number="665">
+<![CDATA[*)]]>
+</Line>
+<Line Number="666">
+<![CDATA[IF Wrk_ModeChange THEN]]>
+</Line>
+<Line Number="667">
+<![CDATA[    Wrk_PrevPCmdFwd  := 0;]]>
+</Line>
+<Line Number="668">
+<![CDATA[    Wrk_PrevPCmdRev  := 0;]]>
+</Line>
+<Line Number="669">
+<![CDATA[    Wrk_PrevPCmdStop := 0;]]>
+</Line>
+<Line Number="670">
+<![CDATA[    Wrk_PrevOCmdFwd  := 0;]]>
+</Line>
+<Line Number="671">
+<![CDATA[    Wrk_PrevOCmdRev  := 0;]]>
+</Line>
+<Line Number="672">
+<![CDATA[    Wrk_PrevOCmdStop := 0;]]>
+</Line>
+<Line Number="673">
 <![CDATA[END_IF;]]>
 </Line>
 </STContent>
