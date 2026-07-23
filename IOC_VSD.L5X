@@ -3294,7 +3294,7 @@
 <![CDATA[Sts_RdyReset     :=]]>
 </Line>
 <Line Number="529">
-<![CDATA[    (Alm_FailToStart AND Inp_Running)]]>
+<![CDATA[    (Alm_FailToStart AND NOT Sts_FailToStart)]]>
 </Line>
 <Line Number="530">
 <![CDATA[    OR (Alm_FailToStop  AND NOT Inp_Running)]]>
